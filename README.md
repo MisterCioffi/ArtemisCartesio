@@ -47,7 +47,7 @@ Il sistema di affidabilità si basa sulla gestione delle **transazioni**, che so
 
 Per garantire un alto livello di affidabilità, il nostro sistema di database implementa la strategia di backup RAID 1, che offre una soluzione di mirroring. In un sistema RAID 1, ogni dato scritto sul disco primario viene duplicato in tempo reale su un disco secondario, chiamato "mirror". Questa tecnica garantisce che, in caso di guasto di uno dei dischi, i dati siano ancora disponibili sull'altro disco, riducendo il rischio di perdita di informazioni e migliorando la disponibilità del sistema.
 
-https://lh7-rt.googleusercontent.com/docsz/AD_4nXfQsnRyRqi-MqLuu07-KykmAtIMToMJTv4sR9Rt6yvvyYQpT_xHkRYXp51ukt57LvrvpfDb55AJUi_iNBOYnvjjPZxDDDXNKtgN-cXCkwVDDBT43D8tAmsKCTTcfmXKuKL10BeIlw?key=zpWpA_SGFML2QaTpf4B4-Q
+![alt text](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfQsnRyRqi-MqLuu07-KykmAtIMToMJTv4sR9Rt6yvvyYQpT_xHkRYXp51ukt57LvrvpfDb55AJUi_iNBOYnvjjPZxDDDXNKtgN-cXCkwVDDBT43D8tAmsKCTTcfmXKuKL10BeIlw?key=zpWpA_SGFML2QaTpf4B4-Q)
 
 ## Recovery
 
