@@ -57,7 +57,7 @@ Per poter effettuare ciò , il gestore deve possedere un file di log: un file pr
 
 Il log è quindi una sorta di “diario di bordo” che, in un qualsiasi istante, permette di ricostituire il contenuto corretto della base dei dati a seguito di malfunzionamenti.
 
-https://lh7-rt.googleusercontent.com/docsz/AD_4nXd5kwKmOV1RL7w-IP0nQWUTu4O3g1eMdf_y0RhazT8XB30HHWeefG7bIqj2loHXDZk--KX04cuFiQ95071jOXM0M-1MlqbZa5Ik5f8AS_j2Vb0oO34krX3BPPKcCrjtPKR3cVP1hA?key=tVx3FV0q7ixKVuwmv7Z3j0GJ
+![alt text](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd5kwKmOV1RL7w-IP0nQWUTu4O3g1eMdf_y0RhazT8XB30HHWeefG7bIqj2loHXDZk--KX04cuFiQ95071jOXM0M-1MlqbZa5Ik5f8AS_j2Vb0oO34krX3BPPKcCrjtPKR3cVP1hA?key=tVx3FV0q7ixKVuwmv7Z3j0GJ)
 
 ### Tecniche di recovery
 
