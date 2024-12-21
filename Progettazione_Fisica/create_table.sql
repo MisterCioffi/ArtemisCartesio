@@ -51,7 +51,7 @@ CREATE TABLE INTERVENTI (
 -- Tabella RISOLUZIONI
 CREATE TABLE RISOLUZIONI (
     Anomalia INT,
-    Interventa INT,
+    Intervento INT,
     Esito_Intervento VARCHAR2(255),
     Data_Intervento DATE
 );
