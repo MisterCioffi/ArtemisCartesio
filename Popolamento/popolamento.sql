@@ -84,9 +84,9 @@ INSERT INTO UTILIZZO_SENSORI (Sensore, Missione) VALUES (1, 5);
 INSERT INTO UTILIZZO_SENSORI (Sensore, Missione) VALUES (2, 6);
 INSERT INTO UTILIZZO_SENSORI (Sensore, Missione) VALUES (3, 7);
 INSERT INTO UTILIZZO_SENSORI (Sensore, Missione) VALUES (4, 8);
-INSERT INTO UTILIZZO_SENSORI (Sensore, Missione) VALUES (5, 9);
-INSERT INTO UTILIZZO_SENSORI (Sensore, Missione) VALUES (6, 10);
-INSERT INTO UTILIZZO_SENSORI (Sensore, Missione) VALUES (7, 11);
+INSERT INTO UTILIZZO_SENSORI (Sensore, Missione) VALUES (5, 7);
+INSERT INTO UTILIZZO_SENSORI (Sensore, Missione) VALUES (6, 2);
+INSERT INTO UTILIZZO_SENSORI (Sensore, Missione) VALUES (7, 4);
 
 
 -- Popolamento RILEVAZIONI per il sensore 1 (Temperatura)
@@ -244,25 +244,24 @@ INSERT INTO PARTECIPAZIONI (Membro, Missione) VALUES (15, 8);
 INSERT INTO PARTECIPAZIONI (Membro, Missione) VALUES (16, 8);
 INSERT INTO PARTECIPAZIONI (Membro, Missione) VALUES (1, 8);
 
--- Popolamento OPERAZIONI con stato operativo che può essere
-INSERT INTO OPERAZIONI (ID, Stato, Robot, Missione) VALUES (1, 'Attivo', 1, 1);
-INSERT INTO OPERAZIONI (ID, Stato, Robot, Missione) VALUES (2, 'Standby', 2, 2);
-INSERT INTO OPERAZIONI (ID, Stato, Robot, Missione) VALUES (3, 'Manutenzione', 3, 3);
-INSERT INTO OPERAZIONI (ID, Stato, Robot, Missione) VALUES (4, 'Malfunzionante', 4, 4);
-INSERT INTO OPERAZIONI (ID, Stato, Robot, Missione) VALUES (5, 'Attivo', 5, 5);
-INSERT INTO OPERAZIONI (ID, Stato, Robot, Missione) VALUES (6, 'Standby', 6, 6);
-INSERT INTO OPERAZIONI (ID, Stato, Robot, Missione) VALUES (7, 'Manutenzione', 7, 7);
-INSERT INTO OPERAZIONI (ID, Stato, Robot, Missione) VALUES (8, 'Malfunzionante', 8, 8);
+-- Popolamento OPERAZIONI con stato operativo ('Attivo', 'Standby', 'Manutenzione', 'Malfunzionante'));
+INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (1, 1, 'Attivo', 'Monitoraggio');
+INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (2, 2, 'Standby', 'Revisione');
+INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (3, 3, 'Manutenzione', 'Sostituzione');
+INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (4, 4, 'Malfunzionante', 'Pulizia');
+INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (5, 5, 'Attivo', 'Calibrazione');
+INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (6, 6, 'Standby', 'Riparazione');
+
 
 -- Popolamento COINVOLGIMENTI
 
-INSERT INTO COINVOLGIMENTI (Membri, Intervento) VALUES (1, 1);
-INSERT INTO COINVOLGIMENTI (Membri, Intervento) VALUES (2, 2);
-INSERT INTO COINVOLGIMENTI (Membri, Intervento) VALUES (3, 3);
-INSERT INTO COINVOLGIMENTI (Membri, Intervento) VALUES (4, 4);
-INSERT INTO COINVOLGIMENTI (Membri, Intervento) VALUES (5, 5);
-INSERT INTO COINVOLGIMENTI (Membri, Intervento) VALUES (6, 6);
-INSERT INTO COINVOLGIMENTI (Membri, Intervento) VALUES (7, 7);
+INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (1, 1);
+INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (2, 2);
+INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (3, 3);
+INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (4, 4);
+INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (5, 5);
+INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (6, 6);
+INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (7, 7);
 
 -- Popolamento RISOLUZIONI
 
