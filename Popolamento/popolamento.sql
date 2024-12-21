@@ -203,6 +203,21 @@ INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (16, 'Risoluzione problem
 INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (17, 'Fase di approvvigionamento', TO_DATE('2024-05-10', 'YYYY-MM-DD'), 4); 
 INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (18, 'Missione annullata', TO_DATE('2024-05-15', 'YYYY-MM-DD'), 4); 
 
+INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (19, 'Preparazione missione', TO_DATE('2025-01-01', 'YYYY-MM-DD'), 5);
+INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (20, 'Inizio esplorazione', TO_DATE('2025-01-05', 'YYYY-MM-DD'), 5);
+INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (21, 'Fase di raccolta campioni', TO_DATE('2025-01-10', 'YYYY-MM-DD'), 5);
+INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (22, 'Analisi campioni', TO_DATE('2025-01-15', 'YYYY-MM-DD'), 5);
+INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (23, 'Completamento missione', TO_DATE('2025-01-20', 'YYYY-MM-DD'), 5);
+
+INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (24, 'Preparazione missione', TO_DATE('2024-06-01', 'YYYY-MM-DD'), 6);
+INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (25, 'Inizio esplorazione', TO_DATE('2024-06-05', 'YYYY-MM-DD'), 6);
+INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (26, 'Fase di raccolta campioni', TO_DATE('2024-06-10', 'YYYY-MM-DD'), 6);
+
+INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (27, 'Preparazione missione', TO_DATE('2024-06-01', 'YYYY-MM-DD'), 7);
+INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (28, 'Inizio esplorazione', TO_DATE('2024-06-05', 'YYYY-MM-DD'), 7);
+
+INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES  (29, 'Preparazione missione', TO_DATE('2024-06-01', 'YYYY-MM-DD'), 8);
+
 -- Popolamento PARTECIPAZIONI
 INSERT INTO PARTECIPAZIONI (Membro, Missione) VALUES (11, 1); 
 INSERT INTO PARTECIPAZIONI (Membro, Missione) VALUES (12, 1); 
