@@ -9,15 +9,19 @@ BEGIN
     WHERE ID = :NEW.Sensori;
 END;
 
--- TRIGGER PER VERIFICARE CHE IL VALORE RILEVATO SIA MAGGIORE DI 0
+-- TRIGGER PER VERIFICARE CHE IL VALORE RILEVATO SIA MAGGIORE DI 0 A PATTO CHE NON SIA UN SESNSORE DI TIPO TEMPERATURA
 CREATE OR REPLACE TRIGGER verifica_valore_rilevato
 BEFORE INSERT ON RILEVAZIONI
 FOR EACH ROW
 BEGIN
-    IF :NEW.Valore <= 0 THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Il valore rilevato aggiunto è minore di 0. Deve essere maggiore di 0.');
+    IF :NEW.Valore <= 0 AND EXISTS (
+        SELECT 1 FROM SENSORI
+        WHERE ID = :NEW.Sensori AND Tipo != 'Temperatura'
+    ) THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Il valore rilevato aggiunto è minore o uguale a 0. Deve essere maggiore di 0 per sensori diversi da Temperatura.');
     END IF;
 END;
+
 
 -- TRIGGER PER IMPOSTARRE LA DATA_FINE AUTOMATICAMENTE QUANDO SI IMPOSTA CHE LO STATO DI UNA MISSIONE SIA COMPLETATA
 CREATE OR REPLACE TRIGGER aggiorna_data_fine_missione
