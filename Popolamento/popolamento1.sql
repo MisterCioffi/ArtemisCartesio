@@ -8,8 +8,6 @@ INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (5, '
 INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (6, 'Monitoraggio della pressione atmosferica', TO_DATE('2024-07-01', 'YYYY-MM-DD'), NULL, 'In corso'),
 INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (7, 'Ricerca perdite di gas', TO_DATE('2025-01-01', 'YYYY-MM-DD'), NULL, 'Pianificata');
 INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (8, 'Controllo radiazioni', TO_DATE('2025-07-01', 'YYYY-MM-DD'), NULL, 'Pianificata');
-INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (9, 'Esplorazione di un asteroide', TO_DATE('2026-01-01', 'YYYY-MM-DD'), NULL, 'Pianificata');
-INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (10, 'Ricerca di vita extraterrestre', TO_DATE('2026-07-01', 'YYYY-MM-DD'), NULL, 'Pianificata');
 
 -- Popolamento MEMBRI
 INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (1, 'Luca', 'Rossi', 'Comandante');
@@ -205,6 +203,59 @@ INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (16, 'Risoluzione problem
 INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (17, 'Fase di approvvigionamento', TO_DATE('2024-05-10', 'YYYY-MM-DD'), 4); -- Missione 4: Fase di approvvigionamento
 INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (18, 'Missione annullata', TO_DATE('2024-05-15', 'YYYY-MM-DD'), 4); -- Missione 4: Annullamento missione
 
+-- Popolamento PARTECIPAZIONI
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (11, 1); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (12, 1); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (13, 1); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (14, 2); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (15, 2); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (16, 2); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (16, 3); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (1, 3); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (2, 3); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (3, 4); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (4, 4); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (5, 4); 
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (6, 5);
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (7, 5);
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (8, 5);
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (9, 6);
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (10, 6);
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (11, 6);
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (12, 7);
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (13, 7);
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (14, 7);
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (15, 8);
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (16, 8);
+INSERT INTO PARTECIPAZIONI (Membri, Missioni) VALUES (1, 8);
+
+-- Popolamento OPERAZIONI con stato operativo che può essere
+INSERT INTO OPERAZIONI (ID, Stato, Robot, Missioni) VALUES (1, 'Attivo', 1, 1); -- Rover Esplorativo
+INSERT INTO OPERAZIONI (ID, Stato, Robot, Missioni) VALUES (2, 'Standby', 2, 2); -- Drone Aereo
+INSERT INTO OPERAZIONI (ID, Stato, Robot, Missioni) VALUES (3, 'Manutenzione', 3, 3); -- Robot Minatore
+INSERT INTO OPERAZIONI (ID, Stato, Robot, Missioni) VALUES (4, 'Malfunzionante', 4, 4); -- Robot Assistente
+INSERT INTO OPERAZIONI (ID, Stato, Robot, Missioni) VALUES (5, 'Attivo', 5, 5); -- Perforatore
+INSERT INTO OPERAZIONI (ID, Stato, Robot, Missioni) VALUES (6, 'Standby', 6, 6); -- Sonda Spaziale
+INSERT INTO OPERAZIONI (ID, Stato, Robot, Missioni) VALUES (7, 'Manutenzione', 7, 7); -- Veicolo Lunare
+INSERT INTO OPERAZIONI (ID, Stato, Robot, Missioni) VALUES (8, 'Malfunzionante', 8, 8); -- Crawler
+
+-- Popolamento COINVOLGIMENTI
+
+INSERT INTO COINVOLGIMENTI (Membri, INTERVENTI) VALUES (1, 1);
+INSERT INTO COINVOLGIMENTI (Membri, INTERVENTI) VALUES (2, 2);
+INSERT INTO COINVOLGIMENTI (Membri, INTERVENTI) VALUES (3, 3);
+INSERT INTO COINVOLGIMENTI (Membri, INTERVENTI) VALUES (4, 4);
+INSERT INTO COINVOLGIMENTI (Membri, INTERVENTI) VALUES (5, 5);
+INSERT INTO COINVOLGIMENTI (Membri, INTERVENTI) VALUES (6, 6);
+INSERT INTO COINVOLGIMENTI (Membri, INTERVENTI) VALUES (7, 7);
+
+-- Popolamento RISOLUZIONI
+
+INSERT INTO RISOLUZIONI (Anomalie, Interventi, Esito_Intervento, Data_Intervento) VALUES (1, 1, 'Sostituzione sensore', TO_DATE('2024-12-01', 'YYYY-MM-DD'));
+INSERT INTO RISOLUZIONI (Anomalie, Interventi, Esito_Intervento, Data_Intervento) VALUES (3, 3, 'Ricalibrazione sensore', TO_DATE('2024-10-20', 'YYYY-MM-DD'));
+INSERT INTO RISOLUZIONI (Anomalie, Interventi, Esito_Intervento, Data_Intervento) VALUES (6, 6, 'Ricalibrazione sensore', TO_DATE('2024-07-15', 'YYYY-MM-DD'));
+INSERT INTO RISOLUZIONI (Anomalie, Interventi, Esito_Intervento, Data_Intervento) VALUES (4, 4, 'Sostituzione sensore', TO_DATE('2024-09-10', 'YYYY-MM-DD'));
+INSERT INTO RISOLUZIONI (Anomalie, Interventi, Esito_Intervento, Data_Intervento) VALUES (2, 2, 'Riparazione connessione', TO_DATE('2024-11-15', 'YYYY-MM-DD'));
 
 
--- Mancano PARTECIPAZIONI, OPERAZIONI, COINVOLGIMENTI, RISOLUZIONI
+
