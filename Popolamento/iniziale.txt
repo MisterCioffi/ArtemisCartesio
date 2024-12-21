@@ -9,6 +9,8 @@ VALUES (3, 'Raccolta Campioni di Rocce', TO_DATE('2023-11-05', 'YYYY-MM-DD'), TO
 INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato)
 VALUES (4, 'Installazione Base Avanzata', TO_DATE('2024-05-01', 'YYYY-MM-DD'), NULL, 'Annullata');
 
+-- 
+
 -- Popolamento MEMBRI
 INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo)
 VALUES (1, 'Luca', 'Rossi', 'Comandante');
