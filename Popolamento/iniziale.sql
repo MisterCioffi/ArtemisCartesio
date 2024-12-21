@@ -4,20 +4,31 @@ INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (1, '
 INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (2, 'Studio Crateri Lunari', TO_DATE('2024-03-10', 'YYYY-MM-DD'), NULL, 'Pianificata');
 INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (3, 'Raccolta Campioni di Rocce', TO_DATE('2023-11-05', 'YYYY-MM-DD'), TO_DATE('2024-02-15', 'YYYY-MM-DD'), 'Completata');
 INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (4, 'Installazione Base Avanzata', TO_DATE('2024-05-01', 'YYYY-MM-DD'), NULL, 'Annullata');
+INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (5, 'Esplorazione del suolo marziano', TO_DATE('2024-01-01', 'YYYY-MM-DD'), TO_DATE('2024-06-30', 'YYYY-MM-DD'), 'Completata'),
+INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (6, 'Monitoraggio della pressione atmosferica', TO_DATE('2024-07-01', 'YYYY-MM-DD'), NULL, 'In corso'),
+INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (7, 'Ricerca perdite di gas', TO_DATE('2025-01-01', 'YYYY-MM-DD'), NULL, 'Pianificata');
 
 -- Popolamento MEMBRI
 INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (1, 'Luca', 'Rossi', 'Comandante');
-INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (2, 'Anna', 'Bianchi', 'Ingegnere');
+INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (2, 'Anna', 'Esposito', 'Ingegnere');
 INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (3, 'Marco', 'Verdi', 'Scienziato');
-INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (4, 'Elisa', 'Neri', 'Medico');
+INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (4, 'Elisa', 'Corsetti', 'Medico');
 INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (5, 'Giovanni', 'Ferri', 'Manutentore');
 INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (6, 'Sara', 'Russo', 'Manutentore');
+INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (7, 'Gianluca', 'Masotti', 'Ingegnere');
+INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (8, 'Greta', 'Di Toro', 'Tecnico');
+INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (9, 'Edoardo', 'Bianchi', 'Scienziato');
+INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (10, 'Matteo', 'Adaggio', 'Ingegnere');
+INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (11, 'Luigi', 'Cirillo', 'Ingegnere');
+
 
 -- Popolamento SENSORI
 INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (1, TO_DATE('2023-12-01', 'YYYY-MM-DD'), TO_DATE('2024-02-10', 'YYYY-MM-DD'), 'Temperatura', -85.0, 123.0, 500.0);
 INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (2, TO_DATE('2024-01-15', 'YYYY-MM-DD'), NULL, 'Pressione', -45.0, 67.5, 150.0);
 INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (3, TO_DATE('2022-08-20', 'YYYY-MM-DD'), TO_DATE('2023-11-25', 'YYYY-MM-DD'), 'Gas', -12.5, 34.6, 250.0);
 INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (4, TO_DATE('2024-06-10', 'YYYY-MM-DD'), NULL, 'Radiazioni', -65.4, 98.1, 300.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (5, TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2024-01-01', 'YYYY-MM-DD'), 'Temperatura', 45.0, 12.0, 100.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (6, TO_DATE('2023-06-01', 'YYYY-MM-DD'), NULL, 'Pressione', 46.0, 13.0, 200.0);
 
 -- Popolamento UTILIZZO_SENSORI
 INSERT INTO UTILIZZO_SENSORI (Sensori, Missioni) VALUES (1, 1); -- Sensore di Temperatura per esplorazione Polo Sud Lunare
