@@ -49,7 +49,6 @@ INSERT INTO RILEVAZIONI (ID, Data, Ora, Valore, Sensori) VALUES  (2, TO_DATE('20
 INSERT INTO RILEVAZIONI (ID, Data, Ora, Valore, Sensori) VALUES  (3, TO_DATE('2024-06-10', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-06-10 18:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0.09, 4);
 INSERT INTO RILEVAZIONI (ID, Data, Ora, Valore, Sensori) VALUES  (4, TO_DATE('2024-06-11', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-06-11 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0.11, 4);
 
-
 -- Popolamento ROBOT
 INSERT INTO ROBOT (ID, Tipo) VALUES (1, 'Rover Esplorativo');
 INSERT INTO ROBOT (ID, Tipo) VALUES (2, 'Drone Aereo');
@@ -93,5 +92,6 @@ INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (15, 'Preparazione missio
 INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (16, 'Risoluzione problemi logistici', TO_DATE('2024-05-05', 'YYYY-MM-DD'), 4); -- Missione 4: Problemi logistici
 INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (17, 'Fase di approvvigionamento', TO_DATE('2024-05-10', 'YYYY-MM-DD'), 4); -- Missione 4: Fase di approvvigionamento
 INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (18, 'Missione annullata', TO_DATE('2024-05-15', 'YYYY-MM-DD'), 4); -- Missione 4: Annullamento missione
+
 
 
