@@ -39,7 +39,7 @@ CREATE TABLE ANOMALIE (
     Ora TIMESTAMP NOT NULL,
     Livello VARCHAR2(50) NOT NULL,
     Causa VARCHAR2(255) NOT NULL,
-    Sensori INT
+    Sensore INT
 );
 
 -- Tabella INTERVENTI
@@ -50,8 +50,8 @@ CREATE TABLE INTERVENTI (
 
 -- Tabella RISOLUZIONI
 CREATE TABLE RISOLUZIONI (
-    Anomalie INT,
-    Interventi INT,
+    Anomalia INT,
+    Interventa INT,
     Esito_Intervento VARCHAR2(255),
     Data_Intervento DATE
 );
@@ -62,7 +62,7 @@ CREATE TABLE RILEVAZIONI (
     Data DATE NOT NULL,
     Ora TIMESTAMP NOT NULL,
     Valore FLOAT NOT NULL,
-    Sensori INT
+    Sensore INT
 );
 
 -- Tabella REPORT
@@ -70,37 +70,37 @@ CREATE TABLE REPORT (
     ID INT,
     Stato VARCHAR2(50) NOT NULL,
     Data DATE,
-    Missioni INT
+    Missione INT
 );
 
 -- Tabella UTILIZZO_ROBOT
 CREATE TABLE UTILIZZO_ROBOT (
     Robot INT,
-    Missioni INT
+    Missione INT
 );
 
 -- Tabella UTILIZZO_SENSORI
 CREATE TABLE UTILIZZO_SENSORI (
-    Sensori INT,
-    Missioni INT
+    Sensore INT,
+    Missione INT
 );
 
 -- Tabella COINVOLGIMENTI
 CREATE TABLE COINVOLGIMENTI (
-    Membri INT,
-    Interventi INT
+    Membro INT,
+    Intervento INT
 );
 
 -- Tabella OPERAZIONI
 CREATE TABLE OPERAZIONI (
-    Membri INT,
-    Sensori INT,
+    Membro INT,
+    Sensore INT,
     Stato_Operativo VARCHAR2(50) NOT NULL,
     Operazione VARCHAR2(255)
 );
 
 -- Tabella PARTECIPAZIONI
 CREATE TABLE PARTECIPAZIONI (
-    Missioni INT,
-    Membri INT
+    Missione INT,
+    Membro INT
 );
