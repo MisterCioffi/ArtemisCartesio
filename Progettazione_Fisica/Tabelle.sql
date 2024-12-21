@@ -101,6 +101,6 @@ CREATE TABLE OPERAZIONI (
 
 -- Tabella PARTECIPAZIONI
 CREATE TABLE PARTECIPAZIONI (
-    Missione INT,
+    Missioni INT,
     Membri INT
 );
