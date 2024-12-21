@@ -23,11 +23,17 @@ INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitu
 INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (4, TO_DATE('2024-06-10', 'YYYY-MM-DD'), NULL, 'Radiazioni', -65.4, 98.1, 300.0);
 
 -- Popolamento ROBOT
-INSERT INTO ROBOT (ID, Tipo)
-VALUES (1, 'Rover Esplorativo');
-INSERT INTO ROBOT (ID, Tipo)
-VALUES (2, 'Drone Aereo');
-INSERT INTO ROBOT (ID, Tipo)
-VALUES (3, 'Robot Minatore');
-INSERT INTO ROBOT (ID, Tipo)
-VALUES (4, 'Robot Assistente');
+INSERT INTO ROBOT (ID, Tipo) VALUES (1, 'Rover Esplorativo');
+INSERT INTO ROBOT (ID, Tipo) VALUES (2, 'Drone Aereo');
+INSERT INTO ROBOT (ID, Tipo) VALUES (3, 'Robot Minatore');
+INSERT INTO ROBOT (ID, Tipo) VALUES (4, 'Robot Assistente');
+
+-- Popolamento ANOMALIE
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensori) VALUES (1, TO_DATE('2024-12-01', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-12-01 10:15:00', 'YYYY-MM-DD HH24:MI:SS'), 'Alta', 'Errore di calibrazione', 1);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensori) VALUES (2, TO_DATE('2024-11-15', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-11-15 14:45:00', 'YYYY-MM-DD HH24:MI:SS'), 'Media', 'Sensore non risponde', 2);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensori) VALUES (3, TO_DATE('2024-10-20', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-10-20 08:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Critica', 'Guasto hardware', 3);
+
+-- Popolamento INTERVENTI
+INSERT INTO INTERVENTI (ID, Descrizione) VALUES (1, 'Sostituzione sensore di temperatura');
+INSERT INTO INTERVENTI (ID, Descrizione) VALUES (2, 'Riparazione connessione sensore di pressione');
+INSERT INTO INTERVENTI (ID, Descrizione) VALUES (3, 'Ricalibrazione sensore di gas');
