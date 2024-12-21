@@ -47,4 +47,26 @@ INSERT INTO INTERVENTI (ID, Descrizione) VALUES (1, 'Sostituzione sensore di tem
 INSERT INTO INTERVENTI (ID, Descrizione) VALUES (2, 'Riparazione connessione sensore di pressione');
 INSERT INTO INTERVENTI (ID, Descrizione) VALUES (3, 'Ricalibrazione sensore di gas');
 
+-- Popolamento REPORT con stati personalizzati e data
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES (2, 'Inizio missione', TO_DATE('2025-06-15', 'YYYY-MM-DD'), 1); -- Missione 1: Inizio esplorazione
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES (1, 'Verifica attrezzature', TO_DATE('2025-06-18', 'YYYY-MM-DD'), 1); -- Missione 1: Verifica attrezzature
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES (3, 'Fase finale esplorativa', TO_DATE('2025-12-01', 'YYYY-MM-DD'), 1); -- Missione 1: Ultima fase esplorativa
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES (4, 'Analisi dati', TO_DATE('2025-12-10', 'YYYY-MM-DD'), 1); -- Missione 1: Analisi dei dati raccolti
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES (5, 'Completamento missione', TO_DATE('2025-12-20', 'YYYY-MM-DD'), 1); -- Missione 1: Completamento
+
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES (6, 'Preparazione missione', TO_DATE('2024-03-10', 'YYYY-MM-DD'), 2); -- Missione 2: Preparazione
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES (7, 'Inizio studio crateri', TO_DATE('2024-03-15', 'YYYY-MM-DD'), 2); -- Missione 2: Inizio studio
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES (8, 'Fase di campionamento', TO_DATE('2024-04-05', 'YYYY-MM-DD'), 2); -- Missione 2: Campionamento
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES (9, 'Fase di analisi', TO_DATE('2024-05-01', 'YYYY-MM-DD'), 2); -- Missione 2: Analisi dei campioni
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES (10, 'Risoluzione problemi', TO_DATE('2024-05-10', 'YYYY-MM-DD'), 2); -- Missione 2: Risoluzione problemi tecnici
+
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (11, 'Raccolta campioni iniziale', TO_DATE('2023-11-05', 'YYYY-MM-DD'), 3); -- Missione 3: Inizio raccolta campioni
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (12, 'Fase di laboratorio', TO_DATE('2023-12-01', 'YYYY-MM-DD'), 3); -- Missione 3: Analisi in laboratorio
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (13, 'Completamento missione', TO_DATE('2024-02-15', 'YYYY-MM-DD'), 3); -- Missione 3: Completamento
+
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (15, 'Preparazione missione', TO_DATE('2024-05-01', 'YYYY-MM-DD'), 4); -- Missione 4: Preparazione iniziale
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (16, 'Risoluzione problemi logistici', TO_DATE('2024-05-05', 'YYYY-MM-DD'), 4); -- Missione 4: Problemi logistici
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (17, 'Fase di approvvigionamento', TO_DATE('2024-05-10', 'YYYY-MM-DD'), 4); -- Missione 4: Fase di approvvigionamento
+INSERT INTO REPORT (ID, Stato, Data, Missioni) VALUES  (18, 'Missione annullata', TO_DATE('2024-05-15', 'YYYY-MM-DD'), 4); -- Missione 4: Annullamento missione
+
 
