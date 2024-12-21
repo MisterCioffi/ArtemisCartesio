@@ -69,6 +69,7 @@ CREATE TABLE RILEVAZIONI (
 CREATE TABLE REPORT (
     ID INT,
     Stato VARCHAR2(50) NOT NULL,
+    Data DATE,
     Missioni INT
 );
 
