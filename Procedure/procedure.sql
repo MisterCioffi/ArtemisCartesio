@@ -52,3 +52,45 @@ END;
 EXECUTE AggiornareStatoSensore(p_Sensore_ID => 5, p_Nuovo_Stato => 'Manutenzione');
 
 
+--PROCEDURA CHE ESEGUE UNA OPERAZIONE DI MANUTENZIONE SE LA DATA DELL'ULTIMO CONTROLLO E' MAGGIORE DI 30 GIORNI
+CREATE OR REPLACE PROCEDURE controlla_manutenzione_sensori AS
+    CURSOR membri_cursor IS
+        SELECT ID
+        FROM MEMBRI
+        WHERE Ruolo = 'Manutentore'; -- Trova tutti i manutentori
+    v_membro_id INT;
+    v_membro_index INT := 0;
+    v_tot_membri INT := 0;
+    TYPE membri_table_type IS TABLE OF membri_cursor%ROWTYPE INDEX BY PLS_INTEGER;
+    membri_table membri_table_type;
+BEGIN
+    -- Inizializza la tabella con i membri
+    OPEN membri_cursor;
+    LOOP
+        FETCH membri_cursor INTO membri_table(v_tot_membri + 1);
+        EXIT WHEN membri_cursor%NOTFOUND;
+        v_tot_membri := v_tot_membri + 1;
+    END LOOP;
+    CLOSE membri_cursor;
+
+    -- Verifica per tutti i sensori se la data dell'ultimo controllo è più di 30 giorni fa
+    FOR sensore_rec IN (SELECT ID, Data_Ultimo_Controllo FROM SENSORI) LOOP
+        IF sensore_rec.Data_Ultimo_Controllo < (SYSDATE - 30) THEN
+            -- Assegna il prossimo membro disponibile in modo ciclico
+            v_membro_index := MOD(v_membro_index, v_tot_membri) + 1;
+            v_membro_id := membri_table(v_membro_index).ID;
+
+            -- Inserisce una nuova operazione di manutenzione
+            INSERT INTO OPERAZIONI (Membro, Sensore, Operazione, Data)
+            VALUES (v_membro_id, sensore_rec.ID, 'Manutenzione', SYSDATE);
+
+            -- Aggiorna la Data_Ultimo_Controllo del sensore
+            UPDATE SENSORI
+            SET Data_Ultimo_Controllo = SYSDATE
+            WHERE ID = sensore_rec.ID;
+        END IF;
+    END LOOP;
+END;
+/
+
+
