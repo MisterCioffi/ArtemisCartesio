@@ -43,7 +43,6 @@ BEGIN
     -- Verifica se la data dell'ultimo controllo è più di 30 giorni fa
     IF :NEW.Data_Ultimo_Controllo < (SYSDATE - 30) THEN
         -- Se la data è maggiore di 30 giorni, trovo il primo membro disponibile (es. con ruolo di manutenzione)
-        -- Qui sto assumendo che tu abbia un campo "Ruolo" in MEMBRI che indica se il membro è adatto alla manutenzione
         SELECT M.ID INTO v_membro_id
         FROM MEMBRI M
         WHERE M.Ruolo = 'Manutentore'
