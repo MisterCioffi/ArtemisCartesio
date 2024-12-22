@@ -7,8 +7,8 @@ SELECT
     MI.STATO AS STATO_MISSIONE
 FROM 
     (PARTECIPAZIONI P 
-    JOIN MEMBRI M ON P.MEMBRI = M.ID) 
-    JOIN MISSIONI MI ON P.MISSIONI = MI.ID;
+    JOIN MEMBRI M ON P.MEMBRO = M.ID) 
+    JOIN MISSIONI MI ON P.MISSIONe = MI.ID;
 
 
 -- View per la visualizzazione dei robot (tipo) e delle missioni a cui partecipano (obiettivo)
@@ -55,19 +55,22 @@ FROM
     JOIN SENSORI S ON A.SENSORE = S.ID);
 
 
--- View per la visualizzazione delle missioni completate da ciascun robot
-CREATE VIEW MISSIONI_COMPLETATE AS
+-- view per vedere il numero di volte che un membro partecipa ad una missione
+CREATE VIEW PARTECIPAZIONI_MEMBRI AS
 SELECT
-    R.ID AS ID_ROBOT,
-    R.TIPO AS TIPO_ROBOT,
-    M.ID AS ID_MISSIONE,
-    M.OBIETTIVO AS OBIETTIVO_MISSIONE,
-    UR.DATA_COMPLETAMENTO
-FROM 
-    (UTILIZZO_ROBOT UR 
-    JOIN ROBOT R ON UR.ROBOT = R.ID) 
-    JOIN MISSIONI M ON UR.MISSIONE = M.ID
-WHERE 
-    UR.STATO = 'COMPLETATA';
+    M.ID AS ID_MEMBRO,
+    M.NOME,
+    M.COGNOME,
+    COUNT(*) AS NUMERO_PARTECIPAZIONI
+FROM
+    (PARTECIPAZIONI P
+    JOIN MEMBRI M ON P.MEMBRO = M.ID)
+    JOIN MISSIONI MI ON P.MISSIONE = MI.ID
+GROUP BY
+    M.ID, M.NOME, M.COGNOME
+ORDER BY
+    M.ID ASC;
+    
+
 
 
