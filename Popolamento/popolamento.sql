@@ -1,4 +1,3 @@
-
 -- Popolamento MISSIONI
 INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (1, 'Esplorazione Polo Sud Lunare', TO_DATE('2025-06-15', 'YYYY-MM-DD'), TO_DATE('2025-12-20', 'YYYY-MM-DD'), 'In corso');
 INSERT INTO MISSIONI (ID, Obiettivo, Data_Inizio, Data_Fine, Stato) VALUES (2, 'Studio Crateri Lunari', TO_DATE('2024-03-10', 'YYYY-MM-DD'), NULL, 'Pianificata');
@@ -170,7 +169,6 @@ INSERT INTO UTILIZZO_ROBOT (Robot, Missione) VALUES (1, 8);
 INSERT INTO UTILIZZO_ROBOT (Robot, Missione) VALUES (2, 6);
 INSERT INTO UTILIZZO_ROBOT (Robot, Missione) VALUES (3, 5);
 
-
 -- Popolamento ANOMALIE
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (1, TO_DATE('2024-12-01', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-12-01 10:15:00', 'YYYY-MM-DD HH24:MI:SS'), 'Alta', 'Errore di calibrazione', 1);
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (2, TO_DATE('2024-11-15', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-11-15 14:45:00', 'YYYY-MM-DD HH24:MI:SS'), 'Media', 'Sensore non risponde', 3);
@@ -178,8 +176,6 @@ INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (3, TO_DATE
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (4, TO_DATE('2024-09-10', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-09-10 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Alta', 'Errore di calibrazione', 7);
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (5, TO_DATE('2024-08-01', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-08-01 09:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Media', 'Malfunzionamento', 9);
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (6, TO_DATE('2024-07-15', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-07-15 14:45:00', 'YYYY-MM-DD HH24:MI:SS'), 'Critica', 'Problemi di connessione', 11);
-
-
 
 -- Popolamento REPORT con stati personalizzati e data
 INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES (2, 'Inizio missione', TO_DATE('2025-06-15', 'YYYY-MM-DD'), 1); 
@@ -244,17 +240,15 @@ INSERT INTO PARTECIPAZIONI (Membro, Missione) VALUES (15, 8);
 INSERT INTO PARTECIPAZIONI (Membro, Missione) VALUES (16, 8);
 INSERT INTO PARTECIPAZIONI (Membro, Missione) VALUES (1, 8);
 
--- Popolamento OPERAZIONI con stato operativo ('Attivo', 'Standby', 'Manutenzione', 'Malfunzionante'));
-
-INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (1, 1, 'Monitoraggio');
-INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (2, 2, 'Revisione');
-INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (3, 3, 'Sostituzione');
-INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (4, 4, 'Pulizia');
-INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (5, 5, 'Calibrazione');
-INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (6, 6, 'Riparazione');
+-- Popolamento OPERAZIONI
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione, Data) VALUES (1, 1, 'Manutenzione', TO_DATE('2023-12-01', 'YYYY-MM-DD'));
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione, Data) VALUES (2, 2, 'Manutenzione', TO_DATE('2024-01-15', 'YYYY-MM-DD'));
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione, Data) VALUES (3, 3, 'Riparazione', TO_DATE('2023-11-25', 'YYYY-MM-DD'));
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione, Data) VALUES (4, 4, 'Manutenzione', TO_DATE('2024-06-10', 'YYYY-MM-DD'));
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione, Data) VALUES (5, 5, 'Manutenzione', TO_DATE('2024-01-01', 'YYYY-MM-DD'));
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione, Data) VALUES (6, 6, 'Riparazione', TO_DATE('2023-06-01', 'YYYY-MM-DD'));
 
 -- Popolamento COINVOLGIMENTI
-
 INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (1, 1);
 INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (2, 2);
 INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (3, 3);
@@ -264,7 +258,6 @@ INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (6, 6);
 INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (7, 7);
 
 -- Popolamento RISOLUZIONI
-
 INSERT INTO RISOLUZIONI (Anomalia, Intervento, Esito_Intervento, Data_Intervento) VALUES (1, 1, 'Sostituzione sensore', TO_DATE('2024-12-01', 'YYYY-MM-DD'));
 INSERT INTO RISOLUZIONI (Anomalia, Intervento, Esito_Intervento, Data_Intervento) VALUES (3, 3, 'Ricalibrazione sensore', TO_DATE('2024-10-20', 'YYYY-MM-DD'));
 INSERT INTO RISOLUZIONI (Anomalia, Intervento, Esito_Intervento, Data_Intervento) VALUES (6, 6, 'Ricalibrazione sensore', TO_DATE('2024-07-15', 'YYYY-MM-DD'));
