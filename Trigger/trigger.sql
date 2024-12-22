@@ -57,25 +57,5 @@ UPDATE MISSIONI SET STATO = 'Completata'
     WHERE ID = '6';
 
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
--- TRIGGER CHE GENERA UN INTERVENTO DI UN MANUTENZIONE SE LA DATA DELL'ULTIMO CONTROLLO SU UN SENSORE E' MAGGIORE DI 30 GIORNI 
-CREATE OR REPLACE TRIGGER trg_manutenzione_sensore
-AFTER UPDATE OF Data_Ultimo_Controllo ON SENSORI
-FOR EACH ROW
-DECLARE
-    v_membro_id NUMBER;
-BEGIN
-    -- Verifica se la data dell'ultimo controllo è più di 30 giorni fa
-    IF :NEW.Data_Ultimo_Controllo < (SYSDATE - 30) THEN
-        -- Se la data è maggiore di 30 giorni, trovo il primo membro disponibile (es. con ruolo di manutenzione)
-        SELECT M.ID INTO v_membro_id
-        FROM MEMBRI M
-        WHERE M.Ruolo = 'Manutentore'
-        AND ROWNUM = 1;  -- Limita a un solo membro
 
-        -- Inserisce una nuova operazione di manutenzione
-        INSERT INTO OPERAZIONI (Membri, Sensori, Stato_Operativo, Operazione)
-        VALUES (v_membro_id, :NEW.ID, 'Standby', 'Manutenzione');
-    END IF;
-END;
---NON FUNZIONA BENE IN QUESTO MODO
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
