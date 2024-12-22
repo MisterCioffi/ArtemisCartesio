@@ -14,15 +14,27 @@ END;
 CREATE OR REPLACE TRIGGER verifica_valore_rilevato
 BEFORE INSERT ON RILEVAZIONI
 FOR EACH ROW
+DECLARE
+    v_tipo_sensor VARCHAR2(50);
 BEGIN
-    IF :NEW.Valore <= 0 AND EXISTS (
-        SELECT 1 FROM SENSORI
-        WHERE ID = :NEW.Sensori AND Tipo != 'Temperatura'
-    ) THEN
+    -- Recupera il tipo del sensore associato alla rilevazione
+    SELECT Tipo 
+    INTO v_tipo_sensor
+    FROM SENSORI
+    WHERE ID = :NEW.Sensore;
+    
+    -- Se il valore è <= 0 e il sensore non è di tipo 'Temperatura', solleva un errore
+    IF :NEW.Valore <= 0 AND v_tipo_sensor != 'Temperatura' THEN
         RAISE_APPLICATION_ERROR(-20001, 'Il valore rilevato aggiunto è minore o uguale a 0. Deve essere maggiore di 0 per sensori diversi da Temperatura.');
     END IF;
 END;
+--FUNZIONA
 
+--INSERIMENTO DI UN VALORE NEGATIVO PER UN SENSORE DI TEMPERATURA
+INSERT INTO RILEVAZIONI (ID, DATA, ORA, VALORE, SENSORE) VALUES (7, SYSDATE, SYSTIMESTAMP, -5,1); 
+
+--INSERIMENTO DI UN VALORE NEGATIVO PER UN SENSORE DI DIVERSO DA TEMPERATURA--> GENERA ERRORE
+INSERT INTO RILEVAZIONI (ID, DATA, ORA, VALORE, SENSORE) VALUES (9, SYSDATE, SYSTIMESTAMP, -40,2); 
 
 -- TRIGGER PER IMPOSTARRE LA DATA_FINE AUTOMATICAMENTE QUANDO SI IMPOSTA CHE LO STATO DI UNA MISSIONE SIA COMPLETATA
 CREATE OR REPLACE TRIGGER aggiorna_data_fine_missione
