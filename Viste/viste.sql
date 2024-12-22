@@ -23,4 +23,18 @@ FROM
     JOIN ROBOT R ON UR.ROBOT = R.ID) 
     JOIN MISSIONI M ON UR.MISSIONE = M.ID;
 
+-- View per la visualizzazione dei sensori (tipo, stato operativo) e dei membri che effettuano operazioni su di essi (nome, cognome)
+CREATE VIEW SENSORI_MISSIONI AS
+SELECT
+    M.NOME,
+    M.COGNOME,
+    S.TIPO AS TIPO_SENSORE,
+    S.STATO_OPERATIVO AS STATO_SENSORE,
+    O.OPERAZIONE AS TIPO_OPERAZIONE,
+    O.DATA
+FROM 
+    (OPERAZIONI O
+    JOIN MEMBRI M ON O.MEMBRO = M.ID)
+	JOIN SENSORI S ON O.SENSORE = S.ID
+
 
