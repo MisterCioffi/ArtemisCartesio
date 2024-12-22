@@ -28,17 +28,17 @@ INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (15, 'Paolo', 'Frosti', 'Sc
 INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (16, 'Roberto', 'Corti', 'Medico');
 
 -- Popolamento SENSORI
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (1, TO_DATE('2023-12-01', 'YYYY-MM-DD'), TO_DATE('2024-02-10', 'YYYY-MM-DD'), 'Temperatura', -85.0, 123.0, 500.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (2, TO_DATE('2024-01-15', 'YYYY-MM-DD'), NULL, 'Pressione', -45.0, 67.5, 150.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (3, TO_DATE('2022-08-20', 'YYYY-MM-DD'), TO_DATE('2023-11-25', 'YYYY-MM-DD'), 'Gas', -12.5, 34.6, 250.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (4, TO_DATE('2024-06-10', 'YYYY-MM-DD'), NULL, 'Radiazioni', -65.4, 98.1, 300.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (5, TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2024-01-01', 'YYYY-MM-DD'), 'Temperatura', 45.0, 12.0, 100.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (6, TO_DATE('2023-06-01', 'YYYY-MM-DD'), NULL, 'Pressione', 46.0, 13.0, 200.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (7, TO_DATE('2023-12-01', 'YYYY-MM-DD'), TO_DATE('2024-02-10', 'YYYY-MM-DD'), 'Temperatura', -85.0, 123.0, 500.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (8, TO_DATE('2024-01-15', 'YYYY-MM-DD'), NULL, 'Pressione', -45.0, 67.5, 150.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (9, TO_DATE('2022-08-20', 'YYYY-MM-DD'), TO_DATE('2023-11-25', 'YYYY-MM-DD'), 'Gas', -12.5, 34.6, 250.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (10, TO_DATE('2024-06-10', 'YYYY-MM-DD'), NULL, 'Geologia', -65.4, 98.1, 300.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Latitudine, Longitudine, Altitudine) VALUES (11, TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2024-01-01', 'YYYY-MM-DD'), 'Temperatura', 45.0, 12.0, 100.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (1, TO_DATE('2023-12-01', 'YYYY-MM-DD'), TO_DATE('2024-02-10', 'YYYY-MM-DD'), 'Temperatura', 'Attivo', -85.0, 123.0, 500.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (2, TO_DATE('2024-01-15', 'YYYY-MM-DD'), NULL, 'Pressione', 'Standby', -45.0, 67.5, 150.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (3, TO_DATE('2022-08-20', 'YYYY-MM-DD'), TO_DATE('2023-11-25', 'YYYY-MM-DD'), 'Gas', 'Manutenzione', -12.5, 34.6, 250.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (4, TO_DATE('2024-06-10', 'YYYY-MM-DD'), NULL, 'Radiazioni', 'Malfunzionante', -65.4, 98.1, 300.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (5, TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2024-01-01', 'YYYY-MM-DD'), 'Temperatura', 'Attivo', 45.0, 12.0, 100.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (6, TO_DATE('2023-06-01', 'YYYY-MM-DD'), NULL, 'Pressione', 'Standby', 46.0, 13.0, 200.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (7, TO_DATE('2023-12-01', 'YYYY-MM-DD'), TO_DATE('2024-02-10', 'YYYY-MM-DD'), 'Temperatura', 'Attivo', -85.0, 123.0, 500.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (8, TO_DATE('2024-01-15', 'YYYY-MM-DD'), NULL, 'Pressione', 'Standby', -45.0, 67.5, 150.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (9, TO_DATE('2022-08-20', 'YYYY-MM-DD'), TO_DATE('2023-11-25', 'YYYY-MM-DD'), 'Gas', 'Manutenzione', -12.5, 34.6, 250.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (10, TO_DATE('2024-06-10', 'YYYY-MM-DD'), NULL, 'Geologia', 'Malfunzionante', -65.4, 98.1, 300.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (11, TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2024-01-01', 'YYYY-MM-DD'), 'Temperatura', 'Attivo', 45.0, 12.0, 100.0);
 
 -- Popolamento ROBOT
 INSERT INTO ROBOT (ID, Tipo) VALUES (1, 'Rover Esplorativo');
@@ -245,13 +245,13 @@ INSERT INTO PARTECIPAZIONI (Membro, Missione) VALUES (16, 8);
 INSERT INTO PARTECIPAZIONI (Membro, Missione) VALUES (1, 8);
 
 -- Popolamento OPERAZIONI con stato operativo ('Attivo', 'Standby', 'Manutenzione', 'Malfunzionante'));
-INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (1, 1, 'Attivo', 'Monitoraggio');
-INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (2, 2, 'Standby', 'Revisione');
-INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (3, 3, 'Manutenzione', 'Sostituzione');
-INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (4, 4, 'Malfunzionante', 'Pulizia');
-INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (5, 5, 'Attivo', 'Calibrazione');
-INSERT INTO OPERAZIONI (Membro, Sensore, Stato_Operativo, Operazione) VALUES (6, 6, 'Standby', 'Riparazione');
 
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (1, 1, 'Monitoraggio');
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (2, 2, 'Revisione');
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (3, 3, 'Sostituzione');
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (4, 4, 'Pulizia');
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (5, 5, 'Calibrazione');
+INSERT INTO OPERAZIONI (Membro, Sensore, Operazione) VALUES (6, 6, 'Riparazione');
 
 -- Popolamento COINVOLGIMENTI
 

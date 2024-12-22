@@ -21,6 +21,7 @@ CREATE TABLE SENSORI (
     Data_Installazione DATE NOT NULL,
     Data_Ultimo_Controllo DATE,
     Tipo VARCHAR2(100) NOT NULL,
+    Stato_Operativo VARCHAR2(50) NOT NULL,
     Latitudine FLOAT NOT NULL,
     Longitudine FLOAT NOT NULL,
     Altitudine FLOAT NOT NULL
@@ -95,7 +96,6 @@ CREATE TABLE COINVOLGIMENTI (
 CREATE TABLE OPERAZIONI (
     Membro INT,
     Sensore INT,
-    Stato_Operativo VARCHAR2(50) NOT NULL,
     Operazione VARCHAR2(255)
 );
 
