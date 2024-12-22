@@ -47,7 +47,14 @@ BEGIN
         :NEW.Data_Fine := SYSDATE;
     END IF;
 END;
+--FUNZIONA
+--ESEMPIO DI UTILIZZO
+SELECT *FROM MISSIONI;
 
+UPDATE MISSIONI SET STATO = 'Completata'
+    WHERE ID = '6';
+
+--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 -- TRIGGER CHE GENERA UN INTERVENTO DI UN MANUTENZIONE SE LA DATA DELL'ULTIMO CONTROLLO SU UN SENSORE E' MAGGIORE DI 30 GIORNI 
 CREATE OR REPLACE TRIGGER trg_manutenzione_sensore
 AFTER UPDATE OF Data_Ultimo_Controllo ON SENSORI
@@ -68,3 +75,5 @@ BEGIN
         VALUES (v_membro_id, :NEW.ID, 'Standby', 'Manutenzione');
     END IF;
 END;
+
+--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
