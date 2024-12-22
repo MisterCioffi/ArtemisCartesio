@@ -96,7 +96,8 @@ CREATE TABLE COINVOLGIMENTI (
 CREATE TABLE OPERAZIONI (
     Membro INT,
     Sensore INT,
-    Operazione VARCHAR2(255)
+    Operazione VARCHAR2(255),
+    Data DATE NOT NULL
 );
 
 -- Tabella PARTECIPAZIONI
