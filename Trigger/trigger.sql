@@ -6,9 +6,11 @@ FOR EACH ROW
 BEGIN
     UPDATE SENSORI
     SET Stato_Operativo = 'Malfunzionante'
-    WHERE ID = :NEW.Sensori;
+    WHERE ID = :NEW.Sensore;
 END;
---DA VERIFICARE DOPO AVER CAMBIATO STATO OPERATIVO
+--TESTATO
+INSERT INTO SENSORI (ID, Data_Installazione, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (20, TO_DATE('2023-01-01', 'YYYY-MM-DD'), 'Temperatura', 'Attivo', 45.0, 9.0, 100.0);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (20, TO_DATE('2024-12-22', 'YYYY-MM-DD'), SYSTIMESTAMP, 'Critica', 'Sovraccarico termico', 20);
 
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 -- TRIGGER PER VERIFICARE CHE IL VALORE RILEVATO SIA MAGGIORE DI 0 A PATTO CHE NON SIA UN SENSORE DI TIPO TEMPERATURA
