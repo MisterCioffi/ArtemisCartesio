@@ -57,5 +57,24 @@ UPDATE MISSIONI SET STATO = 'Completata'
     WHERE ID = '6';
 
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--TRIGGER CHE IMPEDISCE L'INSERIMENTO DI UNA RILEVAZIONE SE IL SENSORE SI TROVA IN UNO STATO MALFUNZIONANTE
+CREATE OR REPLACE TRIGGER trg_block_malfunzionante_rilevazioni
+BEFORE INSERT ON RILEVAZIONI
+FOR EACH ROW
+DECLARE
+    v_stato_operativo SENSORI.Stato_Operativo%TYPE;
+BEGIN
+    -- Recupera lo stato operativo del sensore
+    SELECT Stato_Operativo
+    INTO v_stato_operativo
+    FROM SENSORI
+    WHERE ID = :NEW.Sensore;
 
+    -- Verifica se lo stato è "Malfunzionante"
+    IF v_stato_operativo = 'Malfunzionante' THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Impossibile registrare una rilevazione: il sensore è in stato operativo "Malfunzionante".');
+    END IF;
+END;
+/
+INSERT INTO RILEVAZIONI (ID, Data, Ora, Valore, Sensore) VALUES (5, SYSDATE, SYSTIMESTAMP, 23.5, 4);
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
