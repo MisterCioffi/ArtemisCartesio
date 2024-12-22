@@ -12,6 +12,8 @@ END;
 --FUNZIONA, ESEMPIO SOTTO:
 EXECUTE AssegnareSensoreAMissione(p_Sensore_ID => 11, p_Missione_ID => 1);
 
+
+
 -- INSERIRE UN MEMBRO NELLA TABELLA COINVOLGIMENTI RELATIVAMENTE AD UN INTERVENTO
 CREATE OR REPLACE PROCEDURE InserireMembroInCoinvolgimento(
     p_Membro_ID IN NUMBER,
@@ -31,3 +33,22 @@ EXCEPTION
 END InserireMembroInCoinvolgimento;
 --FUNZIONA, ESEMPIO SOTTO
 EXECUTE InserireMembroInCoinvolgimento(p_Membro_ID => 15, p_Intervento_ID => 10);
+
+
+
+-- PROCEDURA PER AGGIORNARE LO STATO OPERATIVO DI UN SENSORE
+CREATE OR REPLACE PROCEDURE AggiornareStatoSensore(
+    p_Sensore_ID IN NUMBER,
+    p_Nuovo_Stato IN VARCHAR2
+) AS
+BEGIN
+    UPDATE SENSORI
+    SET Stato_Operativo = p_Nuovo_Stato
+    WHERE ID = p_Sensore_ID;
+    
+    DBMS_OUTPUT.PUT_LINE('Stato del sensore ' || p_Sensore_ID || ' aggiornato a ' || p_Nuovo_Stato);
+END;
+--FUNZIONA, ESEMPIO SOTTO:
+EXECUTE AggiornareStatoSensore(p_Sensore_ID => 5, p_Nuovo_Stato => 'Manutenzione');
+
+
