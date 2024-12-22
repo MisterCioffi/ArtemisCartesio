@@ -195,6 +195,20 @@ INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (3, TO_DATE
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (4, TO_DATE('2024-09-10', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-09-10 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Alta', 'Errore di calibrazione', 7);
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (5, TO_DATE('2024-08-01', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-08-01 09:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Media', 'Malfunzionamento', 9);
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (6, TO_DATE('2024-07-15', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-07-15 14:45:00', 'YYYY-MM-DD HH24:MI:SS'), 'Critica', 'Problemi di connessione', 11);
+--DA AGGIUNGERE
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (7, TO_DATE('2024-12-12', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-12-12 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Media', 'Errore di calibrazione', 1);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (8, TO_DATE('2024-11-18', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-11-18 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Alta', 'Problemi di connessione', 2);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (9, TO_DATE('2024-10-30', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-10-30 12:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Critica', 'Sensore non risponde', 3);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (10, TO_DATE('2024-10-01', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-10-01 09:15:00', 'YYYY-MM-DD HH24:MI:SS'), 'Alta', 'Errore di calibrazione', 4);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (11, TO_DATE('2024-09-22', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-09-22 14:20:00', 'YYYY-MM-DD HH24:MI:SS'), 'Media', 'Guasto hardware', 5);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (12, TO_DATE('2024-08-15', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-08-15 18:45:00', 'YYYY-MM-DD HH24:MI:SS'), 'Bassa', 'Problemi di connessione', 6);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (13, TO_DATE('2024-07-01', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-07-01 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Critica', 'Sensore non risponde', 7);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (14, TO_DATE('2024-06-10', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-06-10 10:15:00', 'YYYY-MM-DD HH24:MI:SS'), 'Alta', 'Malfunzionamento', 8);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (15, TO_DATE('2024-05-25', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-05-25 15:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Media', 'Errore di calibrazione', 9);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (16, TO_DATE('2024-04-20', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-04-20 13:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Critica', 'Guasto hardware', 10);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (17, TO_DATE('2024-03-10', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-03-10 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Alta', 'Sensore non risponde', 11);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (18, TO_DATE('2024-02-01', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-02-01 08:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Media', 'Errore di calibrazione', 1);
+INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (19, TO_DATE('2024-01-15', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-01-15 09:45:00', 'YYYY-MM-DD HH24:MI:SS'), 'Critica', 'Malfunzionamento', 2);
 
 -- Popolamento REPORT con stati personalizzati e data
 INSERT INTO REPORT (ID, Stato, Data, Missione) VALUES (2, 'Inizio missione', TO_DATE('2025-06-15', 'YYYY-MM-DD'), 1); 
