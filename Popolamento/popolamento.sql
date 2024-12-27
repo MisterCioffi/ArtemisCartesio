@@ -27,9 +27,9 @@ INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (15, 'Paolo', 'Frosti', 'Sc
 INSERT INTO MEMBRI (ID, Nome, Cognome, Ruolo) VALUES (16, 'Roberto', 'Corti', 'Medico');
 
 -- Popolamento SENSORI
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (1, TO_DATE('2023-12-01', 'YYYY-MM-DD'), TO_DATE('2024-02-10', 'YYYY-MM-DD'), 'Temperatura', 'Attivo', -85.0, 123.0, 500.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (2, TO_DATE('2024-01-15', 'YYYY-MM-DD'), NULL, 'Pressione', 'Standby', -45.0, 67.5, 150.0);
-INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (3, TO_DATE('2022-08-20', 'YYYY-MM-DD'), TO_DATE('2023-11-25', 'YYYY-MM-DD'), 'Gas', 'Manutenzione', -12.5, 34.6, 250.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (1, TO_DATE('2023-12-01', 'YYYY-MM-DD'), TO_DATE('2024-02-10', 'YYYY-MM-DD'), 'Temperatura', 'Attivo', -85.0, 80.0, 500.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (2, TO_DATE('2024-01-15', 'YYYY-MM-DD'), NULL, 'Pressione', 'Standby', -20.0, 100, 150.0);
+INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (3, TO_DATE('2022-08-20', 'YYYY-MM-DD'), TO_DATE('2023-11-25', 'YYYY-MM-DD'), 'Gas', 'Manutenzione', -0, 62.5, 250.0);
 INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (4, TO_DATE('2024-06-10', 'YYYY-MM-DD'), NULL, 'Radiazioni', 'Malfunzionante', -80.4, 40.1, 300.0);
 INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (5, TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2024-01-01', 'YYYY-MM-DD'), 'Temperatura', 'Attivo', 44.0, 30.0, 100.0);
 INSERT INTO SENSORI (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine) VALUES (6, TO_DATE('2023-06-01', 'YYYY-MM-DD'), NULL, 'Pressione', 'Standby', 20.0, 10.0, 200.0);
