@@ -4,23 +4,43 @@
 \usepackage{geometry}
 \usepackage{listings}
 
+
 % Configurazione margini
-\geometry{top=2cm, bottom=2cm, left=2cm, right=2cm}
+\usepackage[a4paper, top=3cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
+
 
 % Configurazione codice SQL
-\lstset{
-  language=SQL,
-  basicstyle=\ttfamily\footnotesize,
-  keywordstyle=\color{blue},
-  commentstyle=\color{gray},
-  stringstyle=\color{red},
-  frame=single,
-  breaklines=true
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Configurazione listings per SQL
+\lstdefinelanguage{SQL}{
+    keywords={SELECT, FROM, WHERE, ALTER, ADD, CONSTRAINT, CHECK, FOREIGN, KEY, REFERENCES, CREATE, TABLE, PRIMARY},
+    % keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    % stringstyle=\color{red},
+    identifierstyle=\color{black},
+    basicstyle=\ttfamily\footnotesize,
+    morecomment=[l]{--},     % Commenti con --
+    morestring=[b]',         % Stringhe delimitate da '
+    morestring=[b]"          % Stringhe delimitate da "
 }
+
+\lstset{
+    language=SQL,
+    basicstyle=\ttfamily\footnotesize,
+    %keywordstyle=\color{blue},
+    %stringstyle=\color{red},
+    commentstyle=\color{gray},
+    frame=single,
+    breaklines=true,
+    tabsize=2
+}
+
 
 \begin{document}
 
-% Inserisci la pagina introduttiva
+% Pagina introduttiva
 \input{introduzione}
 
 % Indice
@@ -30,5 +50,11 @@
 % Capitoli
 \newpage
 \input{capitolo1}
+\newpage
+\input{capitolo2}
+\newpage
+\input{capitolo3}
+\newpage
+\input{capitolo4}
 
 \end{document}

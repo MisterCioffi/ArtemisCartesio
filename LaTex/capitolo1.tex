@@ -1,26 +1,45 @@
-\documentclass{article}
-\usepackage{graphicx}
-
-\begin{document}
-
-\section{Introduzione}
-
-
-...
+\section{Creazione DB}
+In questa sezione verrà descritta la progettazione e la creazione del database. Il database è stato progettato per soddisfare i requisiti del sistema di monitoraggio e controllo di missioni spaziali e in modo da garantire la corretta memorizzazione e gestione dei dati relativi a missioni, membri dell'equipaggio, sensori, robot, anomalie, rilevazioni e report.
 
 \subsection{Progettazione Concettuale}
 
-...
+La progettazione concettuale è la fase iniziale del processo di progettazione di un database, in cui si definiscono i requisiti del sistema e si identificano le entità coinvolte, le relazioni tra di esse e gli attributi che le caratterizzano. Questa fase è indipendente dal modello logico e si concentra sulla rappresentazione dei dati in modo astratto, senza considerare i dettagli implementativi. \\
+La progettazione concettuale è stata realizzata attraverso la modellazione del sistema tramite il modello Entità/Relazione (E/R). Questo modello consente di rappresentare in modo chiaro e intuitivo le entità coinvolte, le relazioni tra di esse e gli attributi che le caratterizzano.
 
 \subsubsection{Modello E/R portante}
 
-...
-\includegraphics[width=\textwidth]{Media/schema_portante.png}
+Come prima fase della progettazione concettuale, è stato realizzato uno schema E/R portante. Lo schema portante rappresenta il nucleo centrale del modello Entità-Relazione (E/R) per il sistema in esame. Esso evidenzia le principali entità coinvolte: \textbf{RISORSA}, \textbf{MISSIONE} e \textbf{MEMBRO EQUIPAGGIO}, connesse tra loro tramite relazioni chiave.
+
+\begin{itemize}
+    \item La \textbf{RISORSA} rappresenta gli strumenti o gli elementi utilizzati nelle missioni.
+    \item La \textbf{MISSIONE} è il fulcro operativo, dove vengono assegnate risorse e membri dell'equipaggio.
+    \item Il \textbf{MEMBRO EQUIPAGGIO} indica le persone coinvolte nelle missioni, con specifici ruoli e compiti.
+\end{itemize}
+
+Le relazioni descrivono i collegamenti logici tra queste entità, evidenziando l'assegnazione e l'utilizzo di risorse e personale in contesto missione. Questo schema costituisce la base per la progettazione logica e fisica del sistema.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{Media/schema_portante.png}
+    \caption{Schema portante del modello E/R}
+    \label{fig:schema_portante}
+\end{figure}
+
 
 \subsubsection{Modello E/R completo}
 
-...
-\includegraphics[width=\textwidth]{Media/ER_Completo.png}
+A partire dallo schema portante descritto in precedenza, è stato realizzato uno schema E/R completo che include tutte le entità e le relazioni coinvolte nel sistema. Lo schema completo rappresenta in modo esaustivo tutte le entità, le relazioni e gli attributi che caratterizzano il sistema di monitoraggio e controllo di missioni spaziali.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Media/ER_Completo.png}
+    \caption{Modello E/R completo}
+    \label{fig:schema_portante}
+\end{figure}
+
+\paragraph{Specifiche di Progettazione}
+
+TODO
 
 \subsection{Progettazione Logica}
 
@@ -40,11 +59,14 @@ Durante la fase di trasformazione, vengono eliminati tutti gli attributi che non
     \item \textbf{Attributi composti}: l'unico attributo composto identificato è \textbf{Coordinate}, associato all'entità \textit{SENSORE}. Per conformarsi ai requisiti del modello logico, questo attributo è stato scomposto nei suoi componenti: \textbf{Latitudine}, \textbf{Longitudine} e \textbf{Altitudine}. Tali componenti sono stati direttamente associati all’entità di partenza senza creare una nuova entità.
 \end{itemize}
 
-Di seguito è riportato lo schema trasformato per l'entità \textit{SENSORI}:
+Di seguito è riportato lo schema trasformato per l'entità \textit{SENSORE}:\\
 
-\includegraphics[width=\textwidth]{Media/Trasformazione_Sensore.png}
-
-\textbf{SENSORI} (ID, Data Installazione, Data ultimo controllo, Tipo, \textbf{Latitudine}, \textbf{Longitudine}, \textbf{Altitudine})
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Media/Trasformazione_Sensore.png}
+    \caption{Entità \textit{SENSORE} trasformata}
+    \label{fig:schema_portante}
+\end{figure}
 
 \subsubsection{Traduzione}
 
@@ -59,7 +81,7 @@ Ogni entità del modello E/R diventa una relazione/tabella.
 \end{itemize}
 
 Risultato della Traduzione delle Entità:
-\begin{verbatim}
+\begin{lstlisting}
 MISSIONI(ID, Obiettivo, Data_Inizio, Data_Fine, Stato);
 MEMBI(ID, Nome, Cognome, Ruolo);
 REPORT(ID, Stato);
@@ -68,17 +90,9 @@ ANOMALIE(ID, Data, Ora, Livello, Causa);
 RILEVAZIONI(ID, Data, Ora, Valore);
 ROBOT(ID, Tipo);
 SENSORI(ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine)
-\end{verbatim}
+\end{lstlisting}
 
 \paragraph{Traduzione Relazioni}
-
-\textbf{Specifiche di progettazione}
-\begin{itemize}
-    \item Per le relazioni N a N ogni associazione diventa una tabella con nome quello dell’associazione al plurale ed ha come campi gli identificatori delle due entità che unisce più gli eventuali attributi dell’associazione stessa. La chiave primaria è data dalla coppia dei due identificatori (che hanno anche un vincolo di integrità referenziale).
-    \item Per le relazioni 1 a N agli attributi dell’entità zero si aggiungono quelli dell’entità uno e della relazione (gli attributi della relazione, compreso l’identificatore, vanno nell’entità lato 1). La chiave primaria è quella dell’entità 0 (risparmiamo una tabella, per evitare join a 3 tabelle).
-    \item Per le relazioni 1 a 1 ogni associazione diventa una tabella che ha come campi gli identificatori delle entità che correla più gli eventuali attributi. Gli identificatori possono essere entrambi chiavi primarie ma si sceglie quello con cardinalità minore (con partecipazione obbligatoria alla relazione) per evitare valori NULL.
-\end{itemize}
-
 \begin{enumerate}
     \item Relazioni \textbf{N a N}
     \begin{itemize}
@@ -90,13 +104,13 @@ SENSORI(ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, La
             \item \textbf{Vincoli di integrità referenziale}: garantiscono la consistenza con le entità collegate.
         \end{itemize}
     \end{itemize}
-    \begin{verbatim}
+    \begin{lstlisting}
     UTILIZZO_SENSORI (Sensore: Sensori, Missione: Missioni);
     UTILIZZO_ROBOT (Robot: Robot, Missione: Missioni);
     PARTECIPAZIONI (Missione: Missioni, Membro_Equipaggio: Membri_Equipaggio);
     OPERAZIONI (Membro_Equipaggio: Membri_Equipaggio, Sensore: Sensori, Operazione, Data);
     COINVOLGIMENTI (Membro_Equipaggio: Membri_Equipaggio, Intervento: Interventi)
-    \end{verbatim}
+    \end{lstlisting}
 
     \item Relazioni \textbf{1 a N}
     \begin{itemize}
@@ -104,11 +118,11 @@ SENSORI(ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, La
         \item \textbf{Chiave primaria}: rimane quella dell’entità lato N.
         \item Questa scelta consente di ridurre il numero di tabelle, evitando join complessi a 3 tabelle.
     \end{itemize}
-    \begin{verbatim}
+    \begin{lstlisting}
     REPORT (ID, Stato, Data, Missione: Missioni);
     RILEVAZIONI (ID, Data, Ora, Valore, Sensore: Sensori);
     ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore: Sensori);
-    \end{verbatim}
+    \end{lstlisting}
 
     \item Relazioni \textbf{1 a 1}
     \begin{itemize}
@@ -118,18 +132,17 @@ SENSORI(ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, La
             \item \textbf{Chiave primaria}: si sceglie l’identificatore dell’entità con cardinalità minima e partecipazione obbligatoria, per evitare valori NULL.
         \end{itemize}
     \end{itemize}
-    \begin{verbatim}
+    \begin{lstlisting}
     RISOLUZIONI (Intervento: Interventi, Anomalia: Anomalie, Esito_Intervento, Data_Intervento)
-    \end{verbatim}
+    \end{lstlisting}
 \end{enumerate}
 
 \subsubsection{Modello E/R avanzato}
 
-Le gerarchie di generalizzazione/specializzazione non possono essere direttamente rappresentate nel modello logico relazionale, poiché quest'ultimo non prevede un costrutto equivalente. Per superare questa limitazione, il modello E/R è stato esteso con l'introduzione del costrutto di \textbf{generalizzazione/specializzazione}.
+Le gerarchie di generalizzazione/specializzazione non possono essere direttamente rappresentate nel modello logico relazionale, poiché quest'ultimo non prevede un costrutto equivalente. Per superare questa limitazione, il modello E/R è stato esteso con l'introduzione del costrutto di \textbf{generalizzazione/specializzazione}. \\
 
-Il costrutto di generalizzazione può essere trasformato in schemi traducibili nel modello logico seguendo tre modalità principali.
+Il costrutto di generalizzazione può essere trasformato in schemi traducibili nel modello logico seguendo tre modalità principali.\\
 
-\paragraph{Scelta Progettuale}
 Per questo progetto è stata adottata la modalità di \textbf{accorpamento della superclasse nelle sottoclassi}:
 \begin{itemize}
     \item \textbf{Eliminazione dell’entità padre}: l'entità padre (superclasse) viene eliminata dallo schema.
@@ -138,21 +151,26 @@ Per questo progetto è stata adottata la modalità di \textbf{accorpamento della
 
 Di seguito è riportato il risultato dell'accorpamento relativo alla superclasse \textit{RISORSA} e alle sottoclassi \textit{ROBOT} e \textit{SENSORE}
 
-\includegraphics[width=\textwidth]{Media/Generalizzazione_Specializzazione.png}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Media/Generalizzazione_Specializzazione.png}
+    \caption{accorpamento di \textit{RISORSA} in \textit{ROBOT} e \textit{SENSORE}}
+    \label{fig:schema_portante}
+\end{figure}
 
 \subsection{Progettazione Fisica}
 
 I tipi di dato utilizzati per la realizzazione di questo progetto sono:
 
 \begin{itemize}
-    \item \textbf{DATE} —> Utilizzato per tutte le date presenti.
-    \item \textbf{INTEGER} —> per tutti gli ID che quindi sono formati esclusivamente da numeri e non da lettere;
-    \item \textbf{VARCHAR2(N)} —> per tutti gli attributi di tipo testuali, come per esempio nome, cognome, descrizione, ecc..
+    \item \textbf{DATE}: Utilizzato per tutte le date presenti.
+    \item \textbf{INTEGER}: per tutti gli ID che quindi sono formati esclusivamente da numeri e non da lettere;
+    \item \textbf{VARCHAR2(N)}: per tutti gli attributi di tipo testuali, come per esempio nome, cognome, descrizione, ecc..
 \end{itemize}
 
 \subsubsection{Tabelle}
 
-\begin{verbatim}
+\begin{lstlisting}
 -- Tabella MISSIONI
 CREATE TABLE MISSIONI (
     ID INT,
@@ -276,12 +294,11 @@ CREATE TABLE MEMBRI_MISSIONI (
     FOREIGN KEY (Membro_ID) REFERENCES MEMBRI(ID),
     FOREIGN KEY (Missione_ID) REFERENCES MISSIONI(ID)
 );
-\end{verbatim}
+\end{lstlisting}
 
 \subsubsection{Chiavi primarie}
 
-\begin{verbatim}
---AGGIUNTA CHIAVI PRIMARIE
+\begin{lstlisting}
 ALTER TABLE MISSIONI ADD CONSTRAINT PK_MISSIONI PRIMARY KEY (ID);
 ALTER TABLE MEMBRI ADD CONSTRAINT PK_MEMBRI PRIMARY KEY (ID);
 ALTER TABLE SENSORI ADD CONSTRAINT PK_SENSORI PRIMARY KEY (ID);
@@ -296,12 +313,11 @@ ALTER TABLE UTILIZZO_SENSORI ADD CONSTRAINT PK_UTILIZZO_SENSORI PRIMARY KEY (Sen
 ALTER TABLE COINVOLGIMENTI ADD CONSTRAINT PK_COINVOLGIMENTI PRIMARY KEY (Membri, Interventi);
 ALTER TABLE OPERAZIONI ADD CONSTRAINT PK_OPERAZIONI PRIMARY KEY (Membri, Sensori);
 ALTER TABLE PARTECIPAZIONI ADD CONSTRAINT PK_PARTECIPAZIONI PRIMARY KEY (Missione, Membri);
-\end{verbatim}
+\end{lstlisting}
 
 \subsubsection{Chiavi esterne}
 
-\begin{verbatim}
---AGGIUNTE CHIAVI ESTERNE
+\begin{lstlisting}
 ALTER TABLE ANOMALIE ADD CONSTRAINT FK_ANOMALIE_SENSORI FOREIGN KEY (Sensori) REFERENCES SENSORI(ID);
 ALTER TABLE RISOLUZIONI ADD CONSTRAINT FK_RISOLUZIONI_ANOMALIE FOREIGN KEY (Anomalie) REFERENCES ANOMALIE(ID);
 ALTER TABLE RISOLUZIONI ADD CONSTRAINT FK_RISOLUZIONI_INTERVENTI FOREIGN KEY (Interventi) REFERENCES INTERVENTI(ID);
@@ -314,25 +330,23 @@ ALTER TABLE UTILIZZO_SENSORI ADD CONSTRAINT FK_UTILIZZO_SENSORI_MISSIONI FOREIGN
 ALTER TABLE COINVOLGIMENTI ADD CONSTRAINT FK_COINVOLGIMENTI_MEMBRI FOREIGN KEY (Membri) REFERENCES MEMBRI(ID);
 ALTER TABLE COINVOLGIMENTI ADD CONSTRAINT FK_COINVOLGIMENTI_INTERVENTI FOREIGN KEY (Interventi) REFERENCES INTERVENTI(ID);
 ALTER TABLE OPERAZIONI ADD CONSTRAINT FK_OPERAZIONI_MEMBRI FOREIGN KEY (Membri) REFERENCES MEMBRI(ID);
+
 ALTER TABLE OPERAZIONI ADD CONSTRAINT FK_OPERAZIONI_SENSORI FOREIGN KEY (Sensori) REFERENCES SENSORI(ID);
+
 ALTER TABLE PARTECIPAZIONI ADD CONSTRAINT FK_PARTECIPAZIONI_MISSIONE FOREIGN KEY (Missione) REFERENCES MISSIONI(ID);
+
 ALTER TABLE PARTECIPAZIONI ADD CONSTRAINT FK_PARTECIPAZIONI_MEMBRI FOREIGN KEY (Membri) REFERENCES MEMBRI(ID);
-\end{verbatim}
+\end{lstlisting}
 
 \subsubsection{Vincoli di check}
 
-\begin{verbatim}
--- Vincoli per SENSORI
-ALTER TABLE SENSORI ADD CONSTRAINT CK_SENSORI_TIPO CHECK (Tipo IN ('Temperatura', 'Pressione', 'Gas', 'Radiazioni', 'Geologia'));
+\begin{lstlisting}
+    ALTER TABLE SENSORI ADD CONSTRAINT CK_SENSORI_TIPO CHECK (Tipo IN ('Temperatura', 'Pressione', 'Gas', 'Radiazioni', 'Geologia'));
+    
+    ALTER TABLE OPERAZIONI ADD CONSTRAINT CK_OPERAZIONI_STATO CHECK (Stato_Operativo IN ('Attivo', 'Standby', 'Manutenzione', 'Malfunzionante'));
+    
+    ALTER TABLE ANOMALIE ADD CONSTRAINT CK_ANOMALIE_LIVELLO CHECK (Livello IN ('Bassa', 'Media', 'Alta', 'Critica'));
+    
+    ALTER TABLE MISSIONI ADD CONSTRAINT CK_MISSIONI_STATO CHECK (Stato IN ('Pianificata', 'In corso', 'Completata', 'Annullata'));
+\end{lstlisting}
 
--- Vincoli per OPERAZIONI
-ALTER TABLE OPERAZIONI ADD CONSTRAINT CK_OPERAZIONI_STATO CHECK (Stato_Operativo IN ('Attivo', 'Standby', 'Manutenzione', 'Malfunzionante'));
-
--- Vincoli per ANOMALIE
-ALTER TABLE ANOMALIE ADD CONSTRAINT CK_ANOMALIE_LIVELLO CHECK (Livello IN ('Bassa', 'Media', 'Alta', 'Critica'));
-
--- Vincoli per MISSIONI
-ALTER TABLE MISSIONI ADD CONSTRAINT CK_MISSIONI_STATO CHECK (Stato IN ('Pianificata', 'In corso', 'Completata', 'Annullata'));
-\end{verbatim}
-
-\end{document}
