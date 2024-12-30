@@ -50,14 +50,14 @@ Ogni entità del modello E/R diventa una relazione/tabella.
 
 Risultato della Traduzione delle Entità:
 ```sql
-**MISSIONI**(ID, Obiettivo, Data_Inizio, Data_Fine, Stato);
-**MEMBI**(ID, Nome, Cognome, Ruolo);
-**REPORT**(ID, Stato);
-**INTERVENTI**(ID, Descrizione);
-**ANOMALIE**(ID, Data, Ora, Livello, Causa);
-**RILEVAZIONI**(ID, Data, Ora, Valore);
-**ROBOT** (ID, Tipo);
-*SENSORI* (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine)
+MISSIONI(ID, Obiettivo, Data_Inizio, Data_Fine, Stato);
+MEMBI(ID, Nome, Cognome, Ruolo);
+REPORT(ID, Stato);
+INTERVENTI(ID, Descrizione);
+ANOMALIE(ID, Data, Ora, Livello, Causa);
+RILEVAZIONI(ID, Data, Ora, Valore);
+ROBOT(ID, Tipo);
+SENSORI(ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine)
 ```
 
 ### Traduzione Relazioni
@@ -75,11 +75,11 @@ Risultato della Traduzione delle Entità:
     - **Chiave primaria**: composta dalla coppia dei due identificatori.
     - **Vincoli di integrità referenziale**: garantiscono la consistenza con le entità collegate.
 ```sql
-**UTILIZZO_SENSORI** (Sensore: Sensori, Missione: Missioni);
-**UTILIZZO_ROBOT** (Robot: Robot, Missione: Missioni);
-**PARTECIPAZIONI** (Missione: Missioni, Membro_Equipaggio: Membri_Equipaggio);
-**OPERAZIONI** (Membro_Equipaggio: Membri_Equipaggio, Sensore: Sensori, Operazione, Data);
-**COINVOLGIMENTI** (Membro_Equipaggio: Membri_Equipaggio, Intervento: Interventi)
+UTILIZZO_SENSORI (Sensore: Sensori, Missione: Missioni);
+UTILIZZO_ROBOT (Robot: Robot, Missione: Missioni);
+PARTECIPAZIONI (Missione: Missioni, Membro_Equipaggio: Membri_Equipaggio);
+OPERAZIONI (Membro_Equipaggio: Membri_Equipaggio, Sensore: Sensori, Operazione, Data);
+COINVOLGIMENTI (Membro_Equipaggio: Membri_Equipaggio, Intervento: Interventi)
 ```
 
 2. Relazioni **1 a N**
@@ -87,10 +87,9 @@ Risultato della Traduzione delle Entità:
     - **Chiave primaria**: rimane quella dell’entità lato N.
     - Questa scelta consente di ridurre il numero di tabelle, evitando join complessi a 3 tabelle.
 ```sql
-**REPORT** (ID, Stato, Data, Missione: Missioni);
-**RILEVAZIONI**(ID, Data, Ora, Valore, Sensore: Sensori);
-**ANOMALIE**(ID, Data, Ora, Livello, Causa, Sensore: Sensori);
-
+REPORT (ID, Stato, Data, Missione: Missioni);
+RILEVAZIONI (ID, Data, Ora, Valore, Sensore: Sensori);
+ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore: Sensori);
 ```
 
 3. Relazioni **1 a 1**
@@ -98,7 +97,7 @@ Risultato della Traduzione delle Entità:
     - **Campi**: includono gli identificatori delle entità che collega, più eventuali attributi.
     - **Chiave primaria**: si sceglie l’identificatore dell’entità con cardinalità minima e partecipazione obbligatoria, per evitare valori NULL.
 ```sql
-**RISOLUZIONI** (Intervento: Interventi, Anomalia: Anomalie, Esito_Intervento, Data_Intervento)
+RISOLUZIONI (Intervento: Interventi, Anomalia: Anomalie, Esito_Intervento, Data_Intervento)
 ```
 
 ## 1.3.3 Modello E/R avanzato
