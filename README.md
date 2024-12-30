@@ -20,20 +20,23 @@
 
 ## 1.3 Progettazione Logica
 
-La progettazione logica Si articola in due fasi:
-1. Trasformazione: vengono eliminati dallo schema E/R tutti i costrutti che non sono direttamente traducibili nel modello logico (attributi composti e attributi multi valore). L’eliminazione avviene associando direttamente all’entità di partenza gli attributi multi valore e associando gli attributi composti ad una nuova entità in relazione con quella di partenza;
-2. Traduzione: una serie di regole (che possono anche essere automatizzate da un software, non si guarda alla semantica).
+La progettazione logica si articola in due fasi:
+
+1. **Trasformazione**: n questa fase, vengono rimossi tutti i costrutti del modello Entità/Relazione (E/R) che non sono direttamente traducibili nel modello logico, come gli attributi composti e gli attributi multi-valore. Gli attributi multi-valore vengono associati direttamente all’entità di partenza, mentre gli attributi composti vengono scomposti nei loro componenti e, se necessario, trasferiti a una nuova entità collegata all’entità originale.
+2. **Traduzione**: lo schema risultante dalla trasformazione viene convertito nel modello logico attraverso un insieme di regole predeterminate, che possono essere implementate anche tramite strumenti automatizzati. Questa fase non considera direttamente la semantica dei dati, ma si concentra sulla loro struttura.
 
 ### 1.3.1 Trasformazione
 
-In questa fase vengono eliminati tutti gli attributi che non sono traducibili nel modello logico, in particolare:
+Durante la fase di trasformazione, vengono eliminati tutti gli attributi che non sono direttamente traducibili nel modello logico. Di seguito vengono descritti i casi specifici presenti nello schema:
 
-- ATTRIBUTI MULTI VALORE: NON presnti in questo caso.
-- ATTRIBUTI COMPOSTI: L’unico attributo composto è **Coordinate**, relativo all'entità *SENSORE*. Per eliminarlo associamo direttamente i suoi attributi componenti all’entità di partenza.
+- **Attributi multi-valore**: non sono presenti in questo caso, quindi non si rende necessaria alcuna operazione di trasformazione relativa a questa tipologia di attributi.
+- **Attributi composti**: l'unico attributo composto identificato è **Coordinate**, associato all'entità *SENSORE*. Per conformarsi ai requisiti del modello logico, questo attributo è stato scomposto nei suoi componenti: **Latitudine**, **Longitudine** e **Altitudine**. Tali componenti sono stati direttamente associati all’entità di partenza senza creare una nuova entità.
+
+Di seguito è riportato lo schema trasformato per l'entità *SENSORI*:
 
 ![alt text](/Media/Trasformazione_Sensore.png)    
 
-**SENSORI** (ID, Data Installazione, Data ultimo controllo, Tipo, Latitudine, Longitudine, Altitudine**)**
+**SENSORI** (ID, Data Installazione, Data ultimo controllo, Tipo, Latitudine, **Longitudine**, **Altitudine**)
 
 ### 1.3.2 Traduzione
 
