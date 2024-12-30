@@ -271,7 +271,7 @@ Il sistema di affidabilità si basa sulla gestione delle **transazioni**, che so
 
 Per garantire un alto livello di affidabilità, il nostro sistema di database implementa la strategia di backup RAID 1, che offre una soluzione di mirroring. In un sistema RAID 1, ogni dato scritto sul disco primario viene duplicato in tempo reale su un disco secondario, chiamato "mirror". Questa tecnica garantisce che, in caso di guasto di uno dei dischi, i dati siano ancora disponibili sull'altro disco, riducendo il rischio di perdita di informazioni e migliorando la disponibilità del sistema.
 
-![alt text](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfQsnRyRqi-MqLuu07-KykmAtIMToMJTv4sR9Rt6yvvyYQpT_xHkRYXp51ukt57LvrvpfDb55AJUi_iNBOYnvjjPZxDDDXNKtgN-cXCkwVDDBT43D8tAmsKCTTcfmXKuKL10BeIlw?key=zpWpA_SGFML2QaTpf4B4-Q)
+![alt text](/Media/raid.png)
 
 ### 2.3.2 Recovery
 
@@ -281,7 +281,7 @@ Per poter effettuare ciò , il gestore deve possedere un file di log: un file pr
 
 Il log è quindi una sorta di “diario di bordo” che, in un qualsiasi istante, permette di ricostituire il contenuto corretto della base dei dati a seguito di malfunzionamenti.
 
-![alt text](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd5kwKmOV1RL7w-IP0nQWUTu4O3g1eMdf_y0RhazT8XB30HHWeefG7bIqj2loHXDZk--KX04cuFiQ95071jOXM0M-1MlqbZa5Ik5f8AS_j2Vb0oO34krX3BPPKcCrjtPKR3cVP1hA?key=tVx3FV0q7ixKVuwmv7Z3j0GJ)
+![alt text](/Media/log.png)
 
 #### 2.3.3 Tecniche di recovery
 
