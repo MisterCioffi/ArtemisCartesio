@@ -22,7 +22,7 @@
 
 La progettazione logica si articola in due fasi:
 
-1. **Trasformazione**: n questa fase, vengono rimossi tutti i costrutti del modello Entità/Relazione (E/R) che non sono direttamente traducibili nel modello logico, come gli attributi composti e gli attributi multi-valore. Gli attributi multi-valore vengono associati direttamente all’entità di partenza, mentre gli attributi composti vengono scomposti nei loro componenti e, se necessario, trasferiti a una nuova entità collegata all’entità originale.
+1. **Trasformazione**: in questa fase, vengono rimossi tutti i costrutti del modello Entità/Relazione (E/R) che non sono direttamente traducibili nel modello logico, come gli attributi composti e gli attributi multi-valore. Gli attributi multi-valore vengono associati direttamente all’entità di partenza, mentre gli attributi composti vengono scomposti nei loro componenti e, se necessario, trasferiti a una nuova entità collegata all’entità originale.
 2. **Traduzione**: lo schema risultante dalla trasformazione viene convertito nel modello logico attraverso un insieme di regole predeterminate, che possono essere implementate anche tramite strumenti automatizzati. Questa fase non considera direttamente la semantica dei dati, ma si concentra sulla loro struttura.
 
 ### 1.3.1 Trasformazione
@@ -40,6 +40,33 @@ Di seguito è riportato lo schema trasformato per l'entità *SENSORI*:
 
 ### 1.3.2 Traduzione
 
+TODO: DESCRIZIONE FASE TRADUZIONE
+
+### Traduzione Entità
+
+In questa fase ogni entità diventa una relazione/tabella che ha come nome il nome dell’entità e come campi della tabella ci sono gli attributi dell’entità. 
+
+```sql
+MISSIONI( ID, Obiettivo, Data Inizio, Data Fine, Stato);
+MEMBI(ID, Nome,Cognome, Ruolo);
+REPORT(ID, Stato);
+INTERVENTI(ID, Descrizione);
+ANOMALIE(ID, Data, Ora, Livello, Causa);
+RILEVAZIONI(ID, Data, Ora, Valore);
+ROBOT (ID, Tipo);
+SENSORI (ID, Data Installazione, Data ultimo controllo, Tipo Stato Operativo, Latitudine, Longitudine, Altitudine**)
+```
+
+### Traduzione Relazioni
+
+**Specifiche di progettazione**
+- Per le relazioni N a N ogni associazione diventa una tabella con nome quello dell’associazione al plurale ed ha come campi gli identificatori delle due entità che unisce più gli eventuali attributi dell’associazione stessa. La chiave primaria è data dalla coppia dei due identificatori (che hanno anche un vincolo di integrità referenziale).
+- Per le relazioni 1 a N agli attributi dell’entità zero si aggiungono quelli dell’entità uno e della relazione (gli attributi della relazione, compreso l’identificatore, vanno nell’entità lato 1). La chiave primaria è quella dell’entità 0 (risparmiamo una tabella, per evitare join a 3 tabelle).
+- Per le relazioni 1 a 1 ogni associazione diventa una tabella che ha come campi gli identificatori delle entità che correla più gli eventuali attributi. Gli identificatori possono essere entrambi chiavi primarie ma si sceglie quello con cardinalità minore (con partecipazione obbligatoria alla relazione) per evitare valori NULL.
+
+```sql
+
+```
 
 ![alt text](/Media/Generalizzazione_Specializzazione.png)
 
