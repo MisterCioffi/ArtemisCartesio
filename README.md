@@ -1,3 +1,23 @@
+# Creazione DB
+
+## Introduzione
+
+...
+
+## Progettazione Concettuale
+
+...
+
+### Modello E/R portante
+
+...
+
+### Modello E/R completo
+
+...
+
+## Progettazione Logica
+
 
 # Ottimizzazione DB
 
