@@ -50,14 +50,14 @@ Ogni entità del modello E/R diventa una relazione/tabella.
 
 Risultato della Traduzione delle Entità:
 ```sql
-MISSIONI(ID, Obiettivo, Data Inizio, Data Fine, Stato);
-MEMBI(ID, Nome,Cognome, Ruolo);
-REPORT(ID, Stato);
-INTERVENTI(ID, Descrizione);
-ANOMALIE(ID, Data, Ora, Livello, Causa);
-RILEVAZIONI(ID, Data, Ora, Valore);
-ROBOT (ID, Tipo);
-SENSORI (ID, Data Installazione, Data ultimo controllo, Tipo Stato Operativo, Latitudine, Longitudine, Altitudine**)
+**MISSIONI**(ID, Obiettivo, Data_Inizio, Data_Fine, Stato);
+**MEMBI**(ID, Nome, Cognome, Ruolo);
+**REPORT**(ID, Stato);
+**INTERVENTI**(ID, Descrizione);
+**ANOMALIE**(ID, Data, Ora, Livello, Causa);
+**RILEVAZIONI**(ID, Data, Ora, Valore);
+**ROBOT** (ID, Tipo);
+*SENSORI* (ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, Latitudine, Longitudine, Altitudine)
 ```
 
 ### Traduzione Relazioni
@@ -68,29 +68,37 @@ SENSORI (ID, Data Installazione, Data ultimo controllo, Tipo Stato Operativo, La
 - Per le relazioni 1 a 1 ogni associazione diventa una tabella che ha come campi gli identificatori delle entità che correla più gli eventuali attributi. Gli identificatori possono essere entrambi chiavi primarie ma si sceglie quello con cardinalità minore (con partecipazione obbligatoria alla relazione) per evitare valori NULL.
 
 
-1. Ogni associazione N a N diventa una tabella con:
-    - Nome: corrisponde al nome dell’associazione, al plurale.
-    - Campi: includono gli identificatori delle due entità che collega, più eventuali attributi dell’associazione.
-    - Chiave primaria: composta dalla coppia dei due identificatori.
-    - Vincoli di integrità referenziale: garantiscono la consistenza con le entità collegate.
-    
+1. Relazioni **N a N**
+- Ogni associazione N a N diventa una tabella con:
+    - **Nome**: corrisponde al nome dell’associazione, al plurale.
+    - **Campi**: includono gli identificatori delle due entità che collega, più eventuali attributi dell’associazione.
+    - **Chiave primaria**: composta dalla coppia dei due identificatori.
+    - **Vincoli di integrità referenziale**: garantiscono la consistenza con le entità collegate.
 ```sql
-ANOMALIE(ID, Data, Ora, Livello, Causa, Sensori:Sensori);
-INTERVENTI(ID, Descrizione);
-RISOLUZIONI(Anomalie:Anomalie, Interventi:Interventi, Esito Intervento, Data Intervento);
-SENSORI ****(ID, Data Installazione, Data ultimo controllo, Tipo, Stato Operativo, Latitudine, Longitudine, Altitudine**);**
-ANOMALIE(ID, Data, Ora, Livello, Causa, Sensori:Sensori);
-RILEVAZIONI(ID, Data, Ora, Valore, Sensori:Sensori);
-MEMBRI(ID, Nome,Cognome, Ruolo);
-REPORT(ID, Stato, Missioni:Missioni);
-MISSIONI( ID, Obiettivo, Data Inizio, Data Fine, Stato);
-ROBOT (ID, Tipo);
-UTILIZZO_ROBOT_MISSIONI(Robot:Robot, Missioni:Missioni);
-SENSORI ****(ID, Data Installazione, Data ultimo controllo, Tipo, Latitudine, Longitudine, Altitudine**);**
-UTILIZZO_SENSORI_MISSIONI(Sensori:Sensori, Missioni:Missioni);
-COINVOLGIMENTI(Membri: Membri, Interventi:Interventi );
-OPERAZIONI(Membri:Membri, Sensori: Sensori, Operazione);
-PARTECIPAZIONI(Missione: Missione, Membri: membri);
+**UTILIZZO_SENSORI** (Sensore: Sensori, Missione: Missioni);
+**UTILIZZO_ROBOT** (Robot: Robot, Missione: Missioni);
+**PARTECIPAZIONI** (Missione: Missioni, Membro_Equipaggio: Membri_Equipaggio);
+**OPERAZIONI** (Membro_Equipaggio: Membri_Equipaggio, Sensore: Sensori, Operazione, Data);
+**COINVOLGIMENTI** (Membro_Equipaggio: Membri_Equipaggio, Intervento: Interventi)
+```
+
+2. Relazioni **1 a N**
+    - Gli **attributi dell’entità lato 1** e gli **attributi della relazione** vengono aggiunti come campi all’entità lato N.
+    - **Chiave primaria**: rimane quella dell’entità lato N.
+    - Questa scelta consente di ridurre il numero di tabelle, evitando join complessi a 3 tabelle.
+```sql
+**REPORT** (ID, Stato, Data, Missione: Missioni);
+**RILEVAZIONI**(ID, Data, Ora, Valore, Sensore: Sensori);
+**ANOMALIE**(ID, Data, Ora, Livello, Causa, Sensore: Sensori);
+
+```
+
+3. Relazioni **1 a 1**
+- Ogni associazione 1 a 1 diventa una tabella con:
+    - **Campi**: includono gli identificatori delle entità che collega, più eventuali attributi.
+    - **Chiave primaria**: si sceglie l’identificatore dell’entità con cardinalità minima e partecipazione obbligatoria, per evitare valori NULL.
+```sql
+**RISOLUZIONI** (Intervento: Interventi, Anomalia: Anomalie, Esito_Intervento, Data_Intervento)
 ```
 
 ## 1.3.3 Modello E/R avanzato
