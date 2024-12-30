@@ -20,6 +20,9 @@
 
 ## Progettazione Logica
 
+![alt text](/Media/Trasformazione_Sensore.png)
+![alt text](/Media/Generalizzazione_Specializzazione.png)
+
 
 # Ottimizzazione DB
 
