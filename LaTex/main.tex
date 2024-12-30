@@ -4,6 +4,7 @@
 \usepackage{geometry}
 \usepackage{listings}
 \usepackage{float}
+\usepackage{amsmath}
 
 
 % Configurazione margini
@@ -41,14 +42,16 @@
 
 \begin{document}
 
-% Pagina introduttiva
-\input{introduzione}
+% Copertina
+\input{titlepage}
 
 % Indice
 \newpage
 \tableofcontents
 
 % Capitoli
+\newpage
+\input{introduzione}
 \newpage
 \input{capitolo1}
 \newpage

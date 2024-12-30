@@ -39,7 +39,20 @@ A partire dallo schema portante descritto in precedenza, è stato realizzato uno
 
 \paragraph{Specifiche di Progettazione}
 
-TODO
+\begin{itemize}
+    \item \textbf{MISSIONE}: L'entità \textbf{MISSIONE} è identificata da un \textit{ID} e caratterizzata dagli attributi: \textit{Obiettivo}, \textit{Data di inizio}, \textit{Data di fine} e \textit{Stato}. Ogni \textbf{MISSIONE} è in relazione con i \textbf{MEMBRI DELL'EQUIPAGGIO} tramite l'associazione \textbf{PARTECIPAZIONE} con cardinalità $(1,N)$, poiché una missione può coinvolgere uno o più membri dell'equipaggio, mentre un membro può partecipare a zero o più missioni $(0,N)$. L'associazione è di tipo molti-a-molti. Ogni \textbf{MISSIONE} è anche in una relazione di \textbf{UTILIZZO} con \textbf{RISORSA}. Una \textbf{MISSIONE} può utilizzare $(1,N)$ risorse (non $(0,N)$ in quanto una missione non avrebbe senso di esistere se non vi fosse associata almeno una risorsa) e una \textbf{RISORSA} può essere usata da $(0,N)$ missioni.
+    
+    \item \textbf{MEMBRO DELL'EQUIPAGGIO}: L'entità \textbf{MEMBRO DELL'EQUIPAGGIO} è identificata da un \textit{Codice univoco} e caratterizzata dagli attributi: \textit{Nome}, \textit{Cognome} e \textit{Ruolo}. Ogni membro dell'equipaggio è responsabile della manutenzione e riparazione dei sensori, partecipando all'associazione \textbf{OPERAZIONE} con i \textbf{SENSORI} secondo cardinalità $(0,N)$ da parte dell'equipaggio e $(1,N)$ da parte dei sensori. Il tipo di operazione è specificato tramite l'attributo \textit{Operazione} della relazione \textbf{OPERAZIONE}. L'attributo \textit{Data} fa sì che un \textbf{MEMBRO DELL'EQUIPAGGIO} possa effettuare più operazioni dello stesso tipo sullo stesso sensore nel tempo. Un \textbf{MEMBRO DELL'EQUIPAGGIO} può inoltre essere coinvolto tramite la relazione \textbf{COINVOLGIMENTO} in $(0,N)$  \textbf{INTERVENTO}. Ogni \textbf{INTERVENTO} può coinvolgere $(1,N)$ membri.
+    
+    \item \textbf{INTERVENTO}: Ogni \textbf{INTERVENTO} è avviato per risolvere una specifica \textbf{ANOMALIA}. Gli attributi chiave di \textbf{INTERVENTO} includono un \textit{ID}, una \textit{Descrizione}, l'\textit{Esito dell'intervento} e la \textit{Data dell'intervento}. La relazione tra \textbf{ANOMALIA} e \textbf{INTERVENTO}, denominata \textbf{RISOLUZIONE}, ha cardinalità $(1,1)$ su entrambi i lati, garantendo che ogni \textbf{INTERVENTO} risolva un'unica \textbf{ANOMALIA} e che ogni \textbf{ANOMALIA} sia risolta da un unico \textbf{INTERVENTO}.
+    
+    \item \textbf{REPORT}: Ad ogni \textbf{MISSIONE} possono essere associati $(0,N)$ \textbf{REPORT} tramite la relazione \textbf{ANDAMENTO}. Un \textbf{REPORT} è relativo a un'unica \textbf{MISSIONE} ed ha dunque cardinalità $(1,1)$. Gli attributi di \textbf{REPORT} includono un \textit{ID} ed uno \textit{Stato}.
+    
+    \item \textbf{RILEVAZIONE}: Ogni \textbf{RILEVAZIONE} è associata esattamente a un $(1,1)$ \textbf{SENSORE} tramite la relazione denominata \textbf{MISURAZIONE}. Un \textbf{SENSORE}, tuttavia, può effettuare più rilevazioni, con una cardinalità pari a $(0,N)$. L'entità \textbf{RILEVAZIONE} include una chiave esterna che la collega all'entità \textbf{SENSORE} tramite la relazione \textbf{MISURAZIONE}, basandosi sugli attributi \textit{Data} e \textit{Ora}. Questi attributi, combinati con l'\textit{ID} del sensore, garantiscono l’identificazione univoca di ciascuna \textbf{RILEVAZIONE} effettuata da un determinato \textbf{SENSORE}. Si assume che un \textbf{SENSORE} non possa eseguire più rilevazioni nello stesso istante temporale definito dalla coppia (\textit{Data}, \textit{Ora}).
+    
+    \item \textbf{ANOMALIA}: Ogni \textbf{ANOMALIA} è associata esattamente a un $(1,1)$ \textbf{SENSORE} tramite la relazione denominata \textbf{STATO}. Un \textbf{SENSORE}, tuttavia, può presentare più anomalie, con una cardinalità pari a $(0,N)$. L'entità \textbf{ANOMALIA} include una chiave esterna che la collega all'entità \textbf{SENSORE} tramite la relazione \textbf{STATO}, basandosi sugli attributi \textit{Data} e \textit{Ora}. Questi attributi, combinati con l'\textit{ID} del sensore, garantiscono l’identificazione univoca di ciascuna \textbf{ANOMALIA} verificatasi in un determinato \textbf{SENSORE}. Si assume che in un \textbf{SENSORE} non possano verificarsi più anomalie nello stesso istante temporale definito dalla coppia (\textit{Data}, \textit{Ora}).
+\end{itemize}
+
 
 \subsection{Progettazione Logica}
 
@@ -70,7 +83,7 @@ Di seguito è riportato lo schema trasformato per l'entità \textit{SENSORE}:\\
 
 \subsubsection{Traduzione}
 
-TODO: DESCRIZIONE FASE TRADUZIONE
+La fase di traduzione consiste nella conversione dello schema Entità/Relazione (E/R), risultato della trasformazione, in uno schema relazionale conforme al modello logico relazionale. Questa operazione garantisce la corretta implementazione delle entità, delle relazioni e degli attributi all'interno del database relazionale.
 
 \paragraph{Traduzione Entità}
 
@@ -141,21 +154,31 @@ SENSORI(ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, La
 
 Le gerarchie di generalizzazione/specializzazione non possono essere direttamente rappresentate nel modello logico relazionale, poiché quest'ultimo non prevede un costrutto equivalente. Per superare questa limitazione, il modello E/R è stato esteso con l'introduzione del costrutto di \textbf{generalizzazione/specializzazione}. \\
 
+\noindent
 Il costrutto di generalizzazione può essere trasformato in schemi traducibili nel modello logico seguendo tre modalità principali.\\
 
+\noindent
 Per questo progetto è stata adottata la modalità di \textbf{accorpamento della superclasse nelle sottoclassi}:
 \begin{itemize}
     \item \textbf{Eliminazione dell’entità padre}: l'entità padre (superclasse) viene eliminata dallo schema.
     \item \textbf{Eredità degli attributi e delle relazioni}: grazie alla proprietà dell’eredità, gli attributi, l’identificatore e le relazioni a cui partecipava l’entità padre vengono trasferiti integralmente alle entità figlie (sottoclassi).
 \end{itemize}
 
-Di seguito è riportato il risultato dell'accorpamento relativo alla superclasse \textit{RISORSA} e alle sottoclassi \textit{ROBOT} e \textit{SENSORE}
+\noindent
+In particolare la specializzazione è di tipo totale-disgiunta:
+\begin{itemize}
+    \item \textbf{Totale}: Ogni istanza della superclasse deve appartenere ad almeno una sottoclasse. Ogni risorsa deve essere necessariamente o un "sensore" o "robot".
+    \item \textbf{Disgiunta}: Un'istanza della superclasse può appartenere a una sola sottoclasse alla volta. Una risorsa può essere un "sensore" o "robot", ma non entrambi contemporaneamente.
+\end{itemize}
+
+\noindent
+In figura (Figura \ref{fig:specializzazione}) è riportato il risultato dell'accorpamento relativo alla superclasse \textit{RISORSA} e alle sottoclassi \textit{ROBOT} e \textit{SENSORE}.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{Media/Generalizzazione_Specializzazione.png}
+    \includegraphics[width=0.4\textwidth]{Media/Generalizzazione_Specializzazione.png}
     \caption{accorpamento di \textit{RISORSA} in \textit{ROBOT} e \textit{SENSORE}}
-    \label{fig:schema_portante}
+    \label{fig:specializzazione}
 \end{figure}
 
 \subsection{Progettazione Fisica}
@@ -166,7 +189,45 @@ I tipi di dato utilizzati per la realizzazione di questo progetto sono:
     \item \textbf{DATE}: Utilizzato per tutte le date presenti.
     \item \textbf{INTEGER}: per tutti gli ID che quindi sono formati esclusivamente da numeri e non da lettere;
     \item \textbf{VARCHAR2(N)}: per tutti gli attributi di tipo testuali, come per esempio nome, cognome, descrizione, ecc..
+    \item \textbf{FLOAT}: Utilizzato per rappresentare valori numerici con la necessità di precisione decimale, ad esempio coordinate geografiche (latitudine, longitudine, altitudine) o valori rilevati dai sensori.
+    \item \textbf{TIMESTAMP}: Utilizzato per rappresentare data e ora in modo dettagliato, includendo secondi e frazioni di secondo, ad esempio per registrare eventi come rilevazioni o anomalie con un’accurata marcatura temporale.
 \end{itemize}
+
+\subsection{Occupazione tabelle}
+Viene ora presentata una stima dell'occupazione in byte per le tabelle di un database progettato per un DBMS Oracle. Ogni tabella è analizzata in base ai tipi di dati delle sue colonne.
+
+\paragraph{Tipi di Dati e Dimensioni}
+\begin{itemize}
+    \item \texttt{INT}: 4 byte
+    \item \texttt{VARCHAR2(n)}: fino a $n$ byte
+    \item \texttt{DATE}: 7 byte
+    \item \texttt{TIMESTAMP}: 11 byte
+    \item \texttt{FLOAT}: 8 byte
+\end{itemize}
+
+\noindent
+Le dimensioni calcolate sono espresse in byte per riga e in MB per il numero stimato di righe.
+
+\begin{itemize}
+    \item \textbf{MISSIONI}: $4 + 255 + 7 + 7 + 50 = 323$ byte, 1.000 righe \(\approx 0,31\,\text{MB}\)
+    \item \textbf{MEMBRI}: $4 + 100 + 100 + 100 = 304$ byte, 500 righe \(\approx 0,14\,\text{MB}\)
+    \item \textbf{SENSORI}: $4 + 7 + 7 + 100 + 50 + 8 + 8 + 8 = 192$ byte, 300 righe \(\approx 0,05\,\text{MB}\)
+    \item \textbf{ROBOT}: $4 + 100 = 104$ byte, 100 righe \(\approx 0,01\,\text{MB}\)
+    \item \textbf{ANOMALIE}: $4 + 7 + 11 + 50 + 255 + 4 = 331$ byte, 2.000 righe \(\approx 0,63\,\text{MB}\)
+    \item \textbf{INTERVENTI}: $4 + 255 = 259$ byte, 1.000 righe \(\approx 0,25\,\text{MB}\)
+    \item \textbf{RISOLUZIONI}: $4 + 4 + 255 + 7 = 270$ byte, 1.000 righe \(\approx 0,26\,\text{MB}\)
+    \item \textbf{RILEVAZIONI}: $4 + 7 + 11 + 8 + 4 = 34$ byte, 10.000 righe \(\approx 0,32\,\text{MB}\)
+    \item \textbf{REPORT}: $4 + 50 + 7 + 4 = 65$ byte, 500 righe \(\approx 0,03\,\text{MB}\)
+    \item \textbf{UTILIZZO\_ROBOT}: $4 + 4 = 8$ byte, 1.000 righe \(\approx 0,01\,\text{MB}\)
+    \item \textbf{UTILIZZO\_SENSORI}: $4 + 4 = 8$ byte, 1.000 righe \(\approx 0,01\,\text{MB}\)
+    \item \textbf{COINVOLGIMENTI}: $4 + 4 = 8$ byte, 500 righe \(\approx 0,004\,\text{MB}\)
+    \item \textbf{OPERAZIONI}: $4 + 4 + 255 + 7 = 270$ byte, 2.000 righe \(\approx 0,51\,\text{MB}\)
+    \item \textbf{PARTECIPAZIONI}: $4 + 4 = 8$ byte, 1.000 righe \(\approx 0,01\,\text{MB}\)
+\end{itemize}
+
+\noindent
+Le dimensioni teoriche sono calcolate considerando i tipi di dati e ignorando eventuali overhead di gestione. Per una stima complessiva, è necessario moltiplicare queste dimensioni per il numero di righe previste in ciascuna tabella, includendo un margine del 10-20\% per l'indicizzazione e altri metadati.
+
 
 \subsubsection{Tabelle}
 

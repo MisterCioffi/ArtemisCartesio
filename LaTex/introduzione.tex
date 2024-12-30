@@ -1,39 +1,57 @@
-\begin{titlepage}
-    \begin{center}
-        % Titolo
-        \Large
-        \textbf{Elaborato di Basi di Dati} \\
-        \vspace{0.5cm}
-        \Huge
-        \textit{``Artemis Cartesio''} \\
-    
-        \vspace{2cm}
-    
-        % Logo
-        % Loghi affiancati
-        \begin{minipage}{0.4\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{Media/logo_unina.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.4\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{Media/logo_g.png}
-        \end{minipage}
-        
-        \vspace{2cm}
-    
-        % Informazioni
-        % Informazioni allineate con tabular
-        \Large
-        \begin{tabular}{l l}
-            \textbf{Professore:} & Vincenzo Moscato \\\\
-            \textbf{Autori:} & Alessandro Cioffi \hfill N46006940 \\
-                             & Antonio Cirino \hfill N46006930 \\
-        \end{tabular}
-    
-        \vfill
-    
-        \textbf{a.a. 2024/2025}
-    \end{center}
-\end{titlepage}
+\section{Introduzione}
+
+\subsection{ArtemisCartesio}
+
+ArtemisCartesio rappresenta un'iniziativa pionieristica nel campo dell'esplorazione spaziale, sviluppata da un'agenzia spaziale internazionale per supportare missioni lunari avanzate. L'obiettivo principale è sfruttare tecnologie all'avanguardia per raccogliere, analizzare e gestire i dati provenienti da sensori, robot autonomi e membri dell'equipaggio impegnati in operazioni sulla superficie lunare. Questa piattaforma è progettata per affrontare le complessità logistiche e tecniche di missioni scientifiche, garantendo al contempo efficienza, sicurezza e affidabilità.\\
+
+\noindent
+Il nome \textbf{Artemis Cartesio} unisce il simbolismo della dea Artemide, legata alla luna e all’esplorazione, con il razionalismo scientifico di Cartesio, rappresentando così l’equilibrio tra avventura e metodo. Inoltre, le iniziali \textbf{A.C.} omaggiano i creatori del progetto, conferendo un tocco personale al nome.
+
+\subsection{Specifiche del Sistema}
+
+Il progetto prevede lo sviluppo di una piattaforma informatica che integri:
+\begin{itemize}
+    \item \textbf{Gestione delle missioni}: Archiviazione di dettagli quali obiettivo, stato, data di inizio e fine, e gestione delle risorse coinvolte.
+    \item \textbf{Monitoraggio dei sensori}: Registrazione delle informazioni relative ai sensori (coordinate, tipo, stato operativo) e delle rilevazioni effettuate.
+    \item \textbf{Gestione delle anomalie}: Identificazione e registrazione di anomalie, con dati relativi a data, ora, livello di priorità e causa.
+    \item \textbf{Interventi e manutenzione}: Programmazione e tracciamento degli interventi per risolvere anomalie, con dettagli quali esito e descrizione delle operazioni effettuate.
+    \item \textbf{Reportistica e analisi statistiche}: Compilazione di report da parte dei membri dell'equipaggio e analisi statistiche per ottimizzare le operazioni.
+\end{itemize}
+
+\subsection{Struttura del Progetto}
+
+Per implementare il sistema, il progetto include le seguenti fasi principali:
+\begin{itemize}
+    \item \textbf{Progettazione della base di dati}:
+    \begin{itemize}
+        \item \textit{Concettuale}: Definizione delle entità, delle relazioni e degli attributi principali.
+        \item \textit{Logica}: Traduzione dello schema concettuale in un modello relazionale.
+        \item \textit{Fisica}: Ottimizzazione dello schema logico per l'implementazione in Oracle DBMS.
+    \end{itemize}
+    \item \textbf{Ottimizzazione delle prestazioni}:
+    \begin{itemize}
+        \item Creazione di indici per velocizzare le operazioni.
+        \item Progettazione di strategie di backup, recovery e replicazione per garantire l'affidabilità.
+    \end{itemize}
+    \item \textbf{Implementazione SQL}:
+    \begin{itemize}
+        \item Creazione di stored procedure, trigger, query e viste per gestire le operazioni e supportare l'automazione.
+    \end{itemize}
+    \item \textbf{Interfaccia web-based}:
+    \begin{itemize}
+        \item Sviluppo di un'interfaccia utente tramite Oracle APEX per semplificare l'interazione con il sistema.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Obiettivi}
+
+Il sistema è progettato per:
+\begin{itemize}
+    \item Migliorare la gestione e il coordinamento delle missioni lunari.
+    \item Consentire un monitoraggio avanzato e in tempo reale delle operazioni.
+    \item Supportare l'analisi statistica dei dati raccolti per prendere decisioni informate.
+\end{itemize}
+
+\subsection*{Conclusione}
+
+Questo progetto non solo rappresenta un passo avanti nella gestione delle missioni spaziali, ma si pone come esempio di integrazione tra tecnologie avanzate e necessità operative. L'approccio metodologico adottato garantisce una base solida per affrontare sfide future nell'esplorazione lunare e spaziale.
