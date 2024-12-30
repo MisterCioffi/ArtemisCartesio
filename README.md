@@ -36,7 +36,7 @@ Di seguito è riportato lo schema trasformato per l'entità *SENSORI*:
 
 ![alt text](/Media/Trasformazione_Sensore.png)    
 
-**SENSORI** (ID, Data Installazione, Data ultimo controllo, Tipo, Latitudine, **Longitudine**, **Altitudine**)
+**SENSORI** (ID, Data Installazione, Data ultimo controllo, Tipo, **Latitudine**, **Longitudine**, **Altitudine**)
 
 ### 1.3.2 Traduzione
 
