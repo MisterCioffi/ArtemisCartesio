@@ -20,7 +20,24 @@
 
 ## 1.3 Progettazione Logica
 
-![alt text](/Media/Trasformazione_Sensore.png)
+La progettazione logica Si articola in due fasi:
+1. Trasformazione: vengono eliminati dallo schema E/R tutti i costrutti che non sono direttamente traducibili nel modello logico (attributi composti e attributi multi valore). L’eliminazione avviene associando direttamente all’entità di partenza gli attributi multi valore e associando gli attributi composti ad una nuova entità in relazione con quella di partenza;
+2. Traduzione: una serie di regole (che possono anche essere automatizzate da un software, non si guarda alla semantica).
+
+### 1.3.1 Trasformazione
+
+In questa fase vengono eliminati tutti gli attributi che non sono traducibili nel modello logico, in particolare:
+
+- ATTRIBUTI MULTI VALORE: NON presnti in questo caso.
+- ATTRIBUTI COMPOSTI: L’unico attributo composto è **Coordinate**, relativo all'entità *SENSORE*. Per eliminarlo associamo direttamente i suoi attributi componenti all’entità di partenza.
+
+![alt text](/Media/Trasformazione_Sensore.png)    
+
+**SENSORI** (ID, Data Installazione, Data ultimo controllo, Tipo, Latitudine, Longitudine, Altitudine**)**
+
+### 1.3.2 Traduzione
+
+
 ![alt text](/Media/Generalizzazione_Specializzazione.png)
 
 ## 1.4 Progettazione Fisica
@@ -33,6 +50,7 @@ I tipi di dato utilizzati per la realizzazione di questo progetto sono:
 
 
 ### 1.4.1 Tabelle
+
 
 
 ```sql
