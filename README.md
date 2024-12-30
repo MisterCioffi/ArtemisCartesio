@@ -11,10 +11,12 @@
 ### Modello E/R portante
 
 ...
+![alt text](/Media/schema_portante.png)
 
 ### Modello E/R completo
 
 ...
+![alt text](/Media/ER_Completo.png)
 
 ## Progettazione Logica
 
