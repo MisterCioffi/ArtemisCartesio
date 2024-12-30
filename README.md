@@ -44,8 +44,11 @@ TODO: DESCRIZIONE FASE TRADUZIONE
 
 ### Traduzione Entità
 
-In questa fase ogni entità diventa una relazione/tabella che ha come nome il nome dell’entità e come campi della tabella ci sono gli attributi dell’entità. 
+Ogni entità del modello E/R diventa una relazione/tabella.
+- **Nome della tabella**: corrisponde al nome dell’entità.
+- **Campi della tabella**: corrispondono agli attributi dell’entità.
 
+Risultato della Traduzione delle Entità:
 ```sql
 MISSIONI(ID, Obiettivo, Data Inizio, Data Fine, Stato);
 MEMBI(ID, Nome,Cognome, Ruolo);
@@ -64,6 +67,13 @@ SENSORI (ID, Data Installazione, Data ultimo controllo, Tipo Stato Operativo, La
 - Per le relazioni 1 a N agli attributi dell’entità zero si aggiungono quelli dell’entità uno e della relazione (gli attributi della relazione, compreso l’identificatore, vanno nell’entità lato 1). La chiave primaria è quella dell’entità 0 (risparmiamo una tabella, per evitare join a 3 tabelle).
 - Per le relazioni 1 a 1 ogni associazione diventa una tabella che ha come campi gli identificatori delle entità che correla più gli eventuali attributi. Gli identificatori possono essere entrambi chiavi primarie ma si sceglie quello con cardinalità minore (con partecipazione obbligatoria alla relazione) per evitare valori NULL.
 
+
+1. Ogni associazione N a N diventa una tabella con:
+    - Nome: corrisponde al nome dell’associazione, al plurale.
+    - Campi: includono gli identificatori delle due entità che collega, più eventuali attributi dell’associazione.
+    - Chiave primaria: composta dalla coppia dei due identificatori.
+    - Vincoli di integrità referenziale: garantiscono la consistenza con le entità collegate.
+    
 ```sql
 ANOMALIE(ID, Data, Ora, Livello, Causa, Sensori:Sensori);
 INTERVENTI(ID, Descrizione);
