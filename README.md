@@ -23,6 +23,142 @@
 ![alt text](/Media/Trasformazione_Sensore.png)
 ![alt text](/Media/Generalizzazione_Specializzazione.png)
 
+## Progettazione Fisica
+
+I tipi di dato utilizzati per la realizzazione di questo progetto sono:
+
+- ***DATE*** —> Utilizzato per tutte le date presenti.
+- ***INTEGER*** —> per tutti gli ID che quindi sono formati esclusivamente da numeri e non da lettere;
+- ***VARCHAR2(N)*** —> per tutti gli attributi di tipo testuali,  come per esempio nome, cognome, descrizione, ecc..
+
+### Tabelle
+
+```sql
+-- Tabella MISSIONI
+CREATE TABLE MISSIONI (
+    ID INT,
+    Obiettivo VARCHAR2(255) NOT NULL,
+    Data_Inizio DATE NOT NULL, --NOT NULL o no ?
+    Data_Fine DATE,
+    Stato VARCHAR2(50) NOT NULL
+);
+
+-- Tabella MEMBRI
+CREATE TABLE MEMBRI (
+    ID INT,
+    Nome VARCHAR2(100) NOT NULL,
+    Cognome VARCHAR2(100) NOT NULL,
+    Ruolo VARCHAR2(100) NOT NULL
+);
+
+-- Tabella SENSORI
+CREATE TABLE SENSORI (
+    ID INT,
+    Data_Installazione DATE NOT NULL,
+    Data_Ultimo_Controllo DATE,
+    Tipo VARCHAR2(100) NOT NULL,
+    Latitudine FLOAT NOT NULL,
+    Longitudine FLOAT NOT NULL,
+    Altitudine FLOAT NOT NULL
+);
+
+-- Tabella ROBOT
+CREATE TABLE ROBOT (
+    ID INT,
+    Tipo VARCHAR2(100) NOT NULL
+);
+
+-- Tabella ANOMALIE
+CREATE TABLE ANOMALIE (
+    ID INT,
+    Data DATE NOT NULL,
+    Ora TIMESTAMP NOT NULL,
+    Livello VARCHAR2(50) NOT NULL,
+    Causa VARCHAR2(255) NOT NULL,
+    Sensori INT
+);
+
+-- Tabella INTERVENTI
+CREATE TABLE INTERVENTI (
+    ID INT,
+    Descrizione VARCHAR2(255) NOT NULL
+);
+
+-- Tabella RISOLUZIONI
+CREATE TABLE RISOLUZIONI (
+    Anomalie INT,
+    Interventi INT,
+    Esito_Intervento VARCHAR2(255),
+    Data_Intervento DATE
+);
+
+-- Tabella RILEVAZIONI
+CREATE TABLE RILEVAZIONI (
+    ID INT,
+    Data DATE NOT NULL,
+    Ora TIMESTAMP NOT NULL,
+    Valore FLOAT NOT NULL,
+    Sensori INT
+);
+
+-- Tabella REPORT
+CREATE TABLE REPORT (
+    ID INT,
+    Stato VARCHAR2(50) NOT NULL,
+    Missioni INT
+);
+
+-- Tabella UTILIZZO_ROBOT
+CREATE TABLE UTILIZZO_ROBOT (
+    Robot INT,
+    Missioni INT
+);
+
+-- Tabella UTILIZZO_SENSORI
+CREATE TABLE UTILIZZO_SENSORI (
+    Sensori INT,
+    Missioni INT
+);
+
+-- Tabella COINVOLGIMENTI
+CREATE TABLE COINVOLGIMENTI (
+    Membri INT,
+    Interventi INT
+);
+
+-- Tabella OPERAZIONI
+CREATE TABLE OPERAZIONI (
+    Membri INT,
+    Sensori INT,
+    Stato_Operativo VARCHAR2(50) NOT NULL,
+    Operazione VARCHAR2(255)
+);
+
+-- Tabella PARTECIPAZIONI
+CREATE TABLE PARTECIPAZIONI (
+    Missione INT,
+    Membri INT
+);
+
+-- Tabella SENSORI_MISSIONI
+CREATE TABLE SENSORI_MISSIONI (
+    Sensore_ID INT,
+    Missione_ID INT,
+    PRIMARY KEY (Sensore_ID, Missione_ID),
+    FOREIGN KEY (Sensore_ID) REFERENCES SENSORI(ID),
+    FOREIGN KEY (Missione_ID) REFERENCES MISSIONI(ID)
+);
+
+-- Tabella MEMBRI_MISSIONI
+CREATE TABLE MEMBRI_MISSIONI (
+    Membro_ID INT,
+    Missione_ID INT,
+    PRIMARY KEY (Membro_ID, Missione_ID),
+    FOREIGN KEY (Membro_ID) REFERENCES MEMBRI(ID),
+    FOREIGN KEY (Missione_ID) REFERENCES MISSIONI(ID)
+);
+```
+
 
 # Ottimizzazione DB
 
