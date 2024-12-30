@@ -32,7 +32,7 @@ I tipi di dato utilizzati per la realizzazione di questo progetto sono:
 - ***VARCHAR2(N)*** —> per tutti gli attributi di tipo testuali,  come per esempio nome, cognome, descrizione, ecc..
 
 
-## Tabelle
+### Tabelle
 
 
 ```sql
