@@ -47,7 +47,7 @@ TODO: DESCRIZIONE FASE TRADUZIONE
 In questa fase ogni entità diventa una relazione/tabella che ha come nome il nome dell’entità e come campi della tabella ci sono gli attributi dell’entità. 
 
 ```sql
-MISSIONI( ID, Obiettivo, Data Inizio, Data Fine, Stato);
+MISSIONI(ID, Obiettivo, Data Inizio, Data Fine, Stato);
 MEMBI(ID, Nome,Cognome, Ruolo);
 REPORT(ID, Stato);
 INTERVENTI(ID, Descrizione);
@@ -65,8 +65,36 @@ SENSORI (ID, Data Installazione, Data ultimo controllo, Tipo Stato Operativo, La
 - Per le relazioni 1 a 1 ogni associazione diventa una tabella che ha come campi gli identificatori delle entità che correla più gli eventuali attributi. Gli identificatori possono essere entrambi chiavi primarie ma si sceglie quello con cardinalità minore (con partecipazione obbligatoria alla relazione) per evitare valori NULL.
 
 ```sql
-
+ANOMALIE(ID, Data, Ora, Livello, Causa, Sensori:Sensori);
+INTERVENTI(ID, Descrizione);
+RISOLUZIONI(Anomalie:Anomalie, Interventi:Interventi, Esito Intervento, Data Intervento);
+SENSORI ****(ID, Data Installazione, Data ultimo controllo, Tipo, Stato Operativo, Latitudine, Longitudine, Altitudine**);**
+ANOMALIE(ID, Data, Ora, Livello, Causa, Sensori:Sensori);
+RILEVAZIONI(ID, Data, Ora, Valore, Sensori:Sensori);
+MEMBRI(ID, Nome,Cognome, Ruolo);
+REPORT(ID, Stato, Missioni:Missioni);
+MISSIONI( ID, Obiettivo, Data Inizio, Data Fine, Stato);
+ROBOT (ID, Tipo);
+UTILIZZO_ROBOT_MISSIONI(Robot:Robot, Missioni:Missioni);
+SENSORI ****(ID, Data Installazione, Data ultimo controllo, Tipo, Latitudine, Longitudine, Altitudine**);**
+UTILIZZO_SENSORI_MISSIONI(Sensori:Sensori, Missioni:Missioni);
+COINVOLGIMENTI(Membri: Membri, Interventi:Interventi );
+OPERAZIONI(Membri:Membri, Sensori: Sensori, Operazione);
+PARTECIPAZIONI(Missione: Missione, Membri: membri);
 ```
+
+## 1.3.3 Modello E/R avanzato
+
+Le gerarchie di generalizzazione/specializzazione non possono essere direttamente rappresentate nel modello logico relazionale, poiché quest'ultimo non prevede un costrutto equivalente. Per superare questa limitazione, il modello E/R è stato esteso con l'introduzione del costrutto di **generalizzazione/specializzazione**.
+
+Il costrutto di generalizzazione può essere trasformato in schemi traducibili nel modello logico seguendo tre modalità principali.
+
+### Scelta Progettuale 
+Per questo progetto è stata adottata la modalità di **accorpamento della superclasse nelle sottoclassi**:
+- **Eliminazione dell’entità padre**: l'entità padre (superclasse) viene eliminata dallo schema.
+- **Eredità degli attributi e delle relazioni**: grazie alla proprietà dell’eredità, gli attributi, l’identificatore e le relazioni a cui partecipava l’entità padre vengono trasferiti integralmente alle entità figlie (sottoclassi).
+
+Di seguito è riportato il risultato dell'accorpamento relativo alla superclasse *RISORSA* e alle sottoclassi *ROBOT* e *SENSORE*
 
 ![alt text](/Media/Generalizzazione_Specializzazione.png)
 
