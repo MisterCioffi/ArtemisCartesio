@@ -25,6 +25,10 @@ Il database deve essere in grado di:
 - **[Alessandro Cioffi](https://github.com/MisterCioffi)**
 - **[Antonio Cirino](https://github.com/antocirino)**
 
+## Elaborato Finale
+
+Il documento finale dell'elaborato può essere trovato [qui](/Elaborato%20Finale%20Basi%20di%20Dati.pdf). Questo documento include una descrizione dettagliata del progetto, il modello ER, lo schema del database, le query SQL utilizzate e i risultati ottenuti.
+
 ## Licenza
 
 Questo progetto è distribuito sotto la licenza [NomeLicenza]. Vedi il file `LICENSE` per ulteriori dettagli.
