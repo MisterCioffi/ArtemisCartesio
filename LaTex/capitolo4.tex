@@ -110,6 +110,7 @@ Di seguito sono riportate altre sezioni presenti nell'applicazione:
 
 \newpage
 \subsection{Gestione della sicurezza}
+\label{gestione-sicurezza}
 Grazie alla sua profonda integrazione con il database Oracle, APEX garantisce sicurezza, affidabilità e un'elevata scalabilità, rendendolo ideale per progetti di qualsiasi dimensione, dalle piccole imprese alle grandi organizzazioni. \\
 
 \begin{figure}[ht!]
@@ -122,8 +123,17 @@ Grazie alla sua profonda integrazione con il database Oracle, APEX garantisce si
 \noindent
 L'immagine (Figura~\ref{fig:login}) mostra la schermata di login dell'applicazione che implementa le best practice per garantire la sicurezza e la protezione dei dati. Questa schermata rappresenta il primo livello di sicurezza dell'applicazione, garantendo che solo utenti autorizzati possano accedere alle funzionalità e ai dati critici del sistema.
 L'accesso all'applicazione è protetto da un sistema di login che richiede l'inserimento di username e password.\\
-Oracle APEX utilizza inoltre meccanismi di crittografia per garantire la protezione delle credenziali durante la trasmissione dei dati e il sistema è progettato per prevenire vulnerabilità come SQL injection e brute force.
+Oracle APEX utilizza inoltre meccanismi di crittografia per garantire la protezione delle credenziali durante la trasmissione dei dati e il sistema è progettato per prevenire vulnerabilità come SQL injection e brute force.\\
 
+\noindent
+Inoltre, la schermata Procedure (Figura~\ref{fig:procedure}) è accessibile solo agli utenti con ruolo \textit{UfficialeDiBordo} (vedi Capitolo~\ref{ruoli}). Se un utente con ruolo \textit{MembroEquipaggio} provasse ad accedere a questa sezione, andrebbe incontro ad un errore (Figura~\ref{fig:errore_atuh}).
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Media/App/errore_auth.png}
+    \caption{Errore nell'accesso a Procedure}
+    \label{fig:errore_atuh}
+\end{figure}
 
 
 

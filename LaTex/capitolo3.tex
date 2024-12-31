@@ -390,13 +390,14 @@ END;
 \end{lstlisting}
 
 \subsection{Ruoli}
+\label{ruoli}
 La gestione degli utenti e dei ruoli è un aspetto cruciale nei sistemi di gestione di basi di dati (DBMS), poiché garantisce il controllo degli accessi e la sicurezza delle informazioni. L'assegnazione di permessi specifici agli utenti e ai ruoli permette di definire con precisione chi può accedere a determinati dati e quali operazioni può eseguire su di essi. Questa suddivisione migliora non solo la protezione del database, ma anche la gestione e la manutenzione complessiva del sistema. \\
 
 \noindent
 Per la corretta realizzazione del progetto sono stati creati due ruoli: \textit{MembroEquipaggio} e \textit{UfficialeDiBordo}.
 \begin{lstlisting}
-CREATE ROLE MembroEquipaggio
-CREATE ROLE UfficialeDiBordo
+CREATE ROLE MembroEquipaggio;
+CREATE ROLE UfficialeDiBordo;
 \end{lstlisting}
 
 \subsubsection{Membro dell'Equipaggio}
@@ -436,3 +437,5 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON COINVOLGIMENTI TO UfficialeDiBordo;
 GRANT SELECT, INSERT, UPDATE, DELETE ON OPERAZIONI TO UfficialeDiBordo;
 GRANT SELECT, INSERT, UPDATE, DELETE ON PARTECIPAZIONI TO UfficialeDiBordo;
 \end{lstlisting}
+\noindent
+Come vedremo nel Capitolo~\ref{gestione-sicurezza} l'\textit{UfficialeDiBordo} avrà accesso anche ad aree riservate all'interno dell'applicazione a cui il \textit{MembroEquipaggio} non potrà accedere.
