@@ -11,4 +11,4 @@ CREATE INDEX idx_robot_tipo ON ROBOT(Tipo);
 CREATE INDEX idx_report_data ON REPORT(Data);
 
 -- utile per filtrare sulla coppia sensore-data di una rilevazione
-CREATE INDEX idx_rilevazioni_sensori_data ON RILEVAZIONI(Sensori, Data);
+CREATE INDEX idx_rilevazioni_sensori_data ON RILEVAZIONI(Sensore, Data);
