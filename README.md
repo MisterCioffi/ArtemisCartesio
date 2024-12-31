@@ -27,7 +27,7 @@ Il database deve essere in grado di:
 
 ## Elaborato Finale
 
-Il documento finale dell'elaborato può essere trovato [qui](/Elaborato%20Finale%20Basi%20di%20Dati.pdf). Questo documento include una descrizione dettagliata del progetto, il modello ER, lo schema del database, le query SQL utilizzate e i risultati ottenuti.
+Il documento finale dell'elaborato può essere trovato [qui](/Elaborato_Basi_di_Dati.pdf). Questo documento include una descrizione dettagliata del progetto, il modello ER, lo schema del database, le query SQL utilizzate e i risultati ottenuti.
 
 ## Licenza
 
