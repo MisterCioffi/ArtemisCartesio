@@ -1,9 +1,438 @@
-\section{Stored Procedures}
+\section{Meccanismi avanzati}
+
+I moderni sistemi di gestione di basi di dati (DBMS) offrono una vasta gamma di strumenti e funzionalità avanzate progettate per migliorare l'efficienza, l'automazione e la personalizzazione nella gestione e nell'elaborazione dei dati. Questi meccanismi avanzati rappresentano componenti fondamentali per lo sviluppo di applicazioni scalabili, sicure e performanti, in grado di rispondere alle esigenze sempre più complesse degli ambienti operativi.
+
+In questo capitolo verrò approfondito l'uso, relativo al progetto, di:
+\begin{itemize}
+    \item \textbf{Query}: tecniche per ottimizzare l'interrogazione e la manipolazione dei dati, sfruttando funzionalità avanzate del linguaggio SQL.
+    \item \textbf{View}: viste logiche che permettono di semplificare l'accesso ai dati e migliorare la sicurezza;
+    \item \textbf{Stored Procedures}: programmi precompilati memorizzati nel database, utili per eseguire operazioni complesse in modo efficiente;
+    \item \textbf{Trigger}: meccanismi che consentono di automatizzare l'esecuzione di azioni in risposta a eventi specifici nel database;
+\end{itemize}
 
 \subsection{Query}
 
-\subsection{Views}
+\paragraph{Query N.1}Anomalie con livello 'CRITICO'
+\begin{lstlisting}
+SELECT 
+    A.ID, 
+    A.CAUSA, 
+    S.TIPO AS TIPO_SENSORE
+FROM 
+    ANOMALIE A JOIN SENSORI S ON A.SENSORE = S.ID
+WHERE 
+    A.LIVELLO = 'Critica';
+\end{lstlisting}
 
-\subsection{Procedures}
+\paragraph{Query N.2}Numero di robot utilizzati da ogni missione
+\begin{lstlisting}
+SELECT 
+    M.ID AS ID_MISSIONE,
+    M.OBIETTIVO AS OBIETTIVO_MISSIONE,
+    COUNT(*) AS NUMERO_ROBOT_MISSIONE
+FROM 
+    UTILIZZO_ROBOT UR 
+JOIN 
+    ROBOT R ON UR.ROBOT = R.ID
+JOIN 
+    MISSIONI M ON M.ID = UR.MISSIONE
+GROUP BY 
+    M.ID, M.OBIETTIVO
+ORDER BY 
+    M.ID ASC;
+\end{lstlisting}
+
+\paragraph{Query N.3}Causa principale di anomalie
+\begin{lstlisting}
+SELECT 
+    A.CAUSA, 
+    COUNT(*) AS NUM_VOLTE
+FROM 
+    ANOMALIE A
+GROUP BY 
+    A.CAUSA
+HAVING 
+    COUNT(*) = (
+        SELECT MAX(NUM_CAUSE)
+        FROM (
+            SELECT A.CAUSA, COUNT(*) AS NUM_CAUSE
+            FROM ANOMALIE A
+            GROUP BY A.CAUSA
+        ) 
+);
+\end{lstlisting}
+
+\paragraph{Query N.4} Il numero di membri coinvolto in ciascuna operazione attiva, per ogni sensore
+\begin{lstlisting}
+SELECT 
+    S.ID AS ID_SENSORE, 
+    O.OPERAZIONE, 
+    COUNT(O.MEMBRO) AS NUM_MEMBRI
+FROM 
+    OPERAZIONI O
+JOIN 
+    MEMBRI M ON O.MEMBRO = M.ID
+JOIN 
+    SENSORI S ON O.SENSOR = S.ID
+WHERE 
+    S.STATO_OPERATIVO = 'Attivo'
+GROUP BY 
+    S.ID, 
+    O.OPERAZIONE;
+\end{lstlisting}
+
+\paragraph{Query N.5} Il numero di interventi effettuati da ogni membro dell'equipaggio
+\begin{lstlisting}
+SELECT 
+    M.ID, 
+    M.NOME, 
+    M.COGNOME, 
+    COUNT(*) AS NUM_INTERVENTI_EFFETTUATI
+FROM 
+    COINVOLGIMENTI C
+JOIN 
+    MEMBRI M ON C.MEMBRO = M.ID
+GROUP BY 
+    M.ID, 
+    M.NOME, 
+    M.COGNOME
+ORDER BY 
+    M.ID ASC;
+\end{lstlisting}
+
+\paragraph{Query N.6} Sensori che non hanno mai avuto anomalie
+\begin{lstlisting}
+SELECT 
+    ID
+FROM 
+    SENSORI
+WHERE 
+    ID NOT IN
+        (SELECT S.ID 
+        FROM SENSORI S JOIN ANOMALIE A ON S.ID = A.SENSORE
+        GROUP BY S.ID);
+\end{lstlisting}
+
+\subsection{View}
+\paragraph{View N.1}Per la visualizzazione dei membri (nome, cognome) e delle missioni a cui partecipano (obiettivo, stato)
+\begin{lstlisting}
+CREATE VIEW MEMBRI_MISSIONI AS
+SELECT 
+    M.NOME, 
+    M.COGNOME, 
+    MI.OBIETTIVO AS OBIETTIVO_MISSIONE, 
+    MI.STATO AS STATO_MISSIONE
+FROM 
+    (PARTECIPAZIONI P 
+    JOIN MEMBRI M ON P.MEMBRO = M.ID) 
+    JOIN MISSIONI MI ON P.MISSIONe = MI.ID;
+\end{lstlisting}
+
+\paragraph{View N.2} Per la visualizzazione dei robot (tipo) e delle missioni a cui partecipano (obiettivo)
+\begin{lstlisting}
+CREATE VIEW ROBOT_MISSIONI AS
+SELECT 
+    R.ID AS ID_ROBOT, 
+    R.TIPO AS TIPO_ROBOT, 
+    M.ID AS ID_MISSIONE, 
+    M.OBIETTIVO AS OBIETTIVO_MISSIONE
+FROM 
+    (UTILIZZO_ROBOT UR 
+    JOIN ROBOT R ON UR.ROBOT = R.ID) 
+    JOIN MISSIONI M ON UR.MISSIONE = M.ID;
+\end{lstlisting}
+
+\paragraph{View N.3} Per la visualizzazione dei sensori (tipo, stato operativo) e dei membri (nome, cognome) che effettuano operazioni (tipo, data) su di essi
+\begin{lstlisting}
+CREATE VIEW SENSORI_MISSIONI AS
+SELECT
+    M.NOME,
+    M.COGNOME,
+    S.TIPO AS TIPO_SENSORE,
+    S.STATO_OPERATIVO AS STATO_SENSORE,
+    O.OPERAZIONE AS TIPO_OPERAZIONE,
+    O.DATA
+FROM 
+    (OPERAZIONI O
+    JOIN MEMBRI M ON O.MEMBRO = M.ID)
+	JOIN SENSORI S ON O.SENSORE = S.ID;
+\end{lstlisting}
+
+\paragraph{View N.4} Per la visualizzazione delle anomalie rilevate per ciascun sensore
+\begin{lstlisting}
+CREATE VIEW ANOMALIE_SENSORI AS
+SELECT
+    S.ID AS ID_SENSORE,
+    S.TIPO AS TIPO_SENSORE,
+    S.STATO_OPERATIVO AS STATO_SENSORE,
+    A.ID AS ID_ANOMALIA,
+    A.LIVELLO AS LIVELLO_ANOMALIA,
+    A.CAUSA AS CAUSA_ANOMALIA,
+    A.DATA,
+    A.ORA
+FROM 
+    (ANOMALIE A
+    JOIN SENSORI S ON A.SENSORE = S.ID);
+\end{lstlisting}
+
+\paragraph{View N.5} Per vedere il numero di missione a cui un membro partecipa
+\begin{lstlisting}
+CREATE VIEW PARTECIPAZIONI_MEMBRI AS
+SELECT
+    M.ID AS ID_MEMBRO,
+    CONCAT(M.NOME, ' ', M.COGNOME) AS NOME_COMPLETO,
+    COUNT(*) AS NUMERO_PARTECIPAZIONI
+FROM
+    (PARTECIPAZIONI P
+    JOIN MEMBRI M ON P.MEMBRO = M.ID)
+    JOIN MISSIONI MI ON P.MISSIONE = MI.ID
+GROUP BY
+    M.ID, M.NOME, M.COGNOME
+ORDER BY
+    M.ID ASC;
+\end{lstlisting}
+
+\paragraph{View N.6} Per vedere i report di ogni missione
+\begin{lstlisting}
+CREATE VIEW ANDAMENTO_MISSIONI AS
+SELECT
+    M.ID AS ID_MISSIONE,
+    M.OBIETTIVO AS OBIETTIVO_MISSIONE,
+    M.STATO AS STATO_MISSIONE,
+    R.ID AS ID_REPORT,
+    R.STATO AS STATO_REPORT,
+    R.DATA AS DATA_REPORT
+FROM
+    REPORT R
+    JOIN MISSIONI M ON R.MISSIONE = M.ID
+ORDER BY 
+    M.ID ASC;
+\end{lstlisting}
+
+\subsection{Stored Procedures}
+Le \textbf{stored procedures} rappresentano uno degli strumenti più potenti e versatili messi a disposizione dai moderni sistemi di gestione di basi di dati (DBMS). Si tratta di programmi precompilati e memorizzati direttamente nel database, che consentono di eseguire operazioni complesse in modo efficiente e sicuro. Grazie alla loro capacità di combinare logica applicativa e accesso ai dati, le stored procedures sono ampiamente utilizzate in ambiti che richiedono elevati livelli di prestazioni, sicurezza e manutenzione centralizzata del codice.
+\newline
+\\Di seguito sono riportate le stored procedures adottate per il progetto.
+\newline
+\paragraph{Procedure N.1} Per inserire un sensore in una missione
+\begin{lstlisting}
+CREATE OR REPLACE PROCEDURE AssegnareSensoreAMissione(
+    p_Sensore_ID IN NUMBER,
+    p_Missione_ID IN NUMBER
+) AS
+BEGIN
+    INSERT INTO UTILIZZO_SENSORI (Sensore, Missione)
+    VALUES (p_Sensore_ID, p_Missione_ID);
+    
+    DBMS_OUTPUT.PUT_LINE('Sensore ' || p_Sensore_ID || ' assegnato alla missione ' || p_Missione_ID);
+END;
+
+-- ESEMPIO
+EXECUTE AssegnareSensoreAMissione(p_Sensore_ID => 11, p_Missione_ID => 1);
+\end{lstlisting}
+
+\paragraph{Procedure N.2} Per inserire un membro nella tabella coinvolgimenti relativamente ad un intervento
+\begin{lstlisting}
+CREATE OR REPLACE PROCEDURE InserireMembroInCoinvolgimento(
+    p_Membro_ID IN NUMBER,
+    p_Intervento_ID IN NUMBER
+) AS
+BEGIN
+    -- Inserisce il membro nell'intervento in corso
+    INSERT INTO COINVOLGIMENTI (Membro, Intervento)
+    VALUES (p_Membro_ID, p_Intervento_ID);
+    
+    DBMS_OUTPUT.PUT_LINE('Membro con ID ' || p_Membro_ID || ' aggiunto all''intervento con ID ' || p_Intervento_ID);
+EXCEPTION
+    WHEN DUP_VAL_ON_INDEX THEN
+        DBMS_OUTPUT.PUT_LINE('Errore: il membro con ID ' || p_Membro_ID || ' è già coinvolto nell''intervento con ID ' || p_Intervento_ID);
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Errore imprevisto: ' || SQLERRM);
+END InserireMembroInCoinvolgimento;
+
+
+-- ESEMPIO
+EXECUTE InserireMembroInCoinvolgimento(p_Membro_ID => 15, p_Intervento_ID => 10);    
+\end{lstlisting} 
+\vspace{1cm}
+
+\paragraph{Procedure N.3} Per aggiornare lo stato operativo di un sensore
+\begin{lstlisting}
+CREATE OR REPLACE PROCEDURE AggiornareStatoSensore(
+    p_Sensore_ID IN NUMBER,
+    p_Nuovo_Stato IN VARCHAR2
+) AS
+BEGIN
+    UPDATE SENSORI
+    SET Stato_Operativo = p_Nuovo_Stato
+    WHERE ID = p_Sensore_ID;
+    
+    DBMS_OUTPUT.PUT_LINE('Stato del sensore ' || p_Sensore_ID || ' aggiornato a ' || p_Nuovo_Stato);
+END;
+
+-- ESEMPIO
+EXECUTE AggiornareStatoSensore(p_Sensore_ID => 5, p_Nuovo_Stato => 'Manutenzione');
+\end{lstlisting}
+
+\paragraph{Procedure N.4} Per eseguire un \textbf{OPERAZIONE} di \textit{Manutenzione} se \textit{Data\_Ultimo\_Controllo} è maggiore di 30
+\begin{lstlisting}
+CREATE OR REPLACE PROCEDURE controlla_manutenzione_sensori AS
+    CURSOR membri_cursor IS
+        SELECT ID
+        FROM MEMBRI
+        WHERE Ruolo = 'Manutentore'; -- Trova tutti i manutentori
+    v_membro_id INT;
+    v_membro_index INT := 0;
+    v_tot_membri INT := 0;
+    TYPE membri_table_type IS TABLE OF membri_cursor%ROWTYPE INDEX BY PLS_INTEGER;
+    membri_table membri_table_type;
+BEGIN
+    -- Inizializza la tabella con i membri
+    OPEN membri_cursor;
+    LOOP
+        FETCH membri_cursor INTO membri_table(v_tot_membri + 1);
+        EXIT WHEN membri_cursor%NOTFOUND;
+        v_tot_membri := v_tot_membri + 1;
+    END LOOP;
+    CLOSE membri_cursor;
+
+    -- Verifica per tutti i sensori se la data dell'ultimo controllo è più di 30 giorni fa
+    FOR sensore_rec IN (SELECT ID, Data_Ultimo_Controllo FROM SENSORI) LOOP
+        IF sensore_rec.Data_Ultimo_Controllo < (SYSDATE - 30) THEN
+            -- Assegna il prossimo membro disponibile in modo ciclico
+            v_membro_index := MOD(v_membro_index, v_tot_membri) + 1;
+            v_membro_id := membri_table(v_membro_index).ID;
+
+            -- Inserisce una nuova operazione di manutenzione
+            INSERT INTO OPERAZIONI (Membro, Sensore, Operazione, Data)
+            VALUES (v_membro_id, sensore_rec.ID, 'Manutenzione', SYSDATE);
+
+            -- Aggiorna la Data_Ultimo_Controllo del sensore
+            UPDATE SENSORI
+            SET Data_Ultimo_Controllo = SYSDATE
+            WHERE ID = sensore_rec.ID;
+        END IF;
+    END LOOP;
+END;
+\end{lstlisting}
+
+\vspace{0,4cm}
+
+\noindent
+Nel Capitolo~\ref{procedure-apex} approfondiremo come le procedures precedentemente definite siano state integrate nell'applicazione attraverso l'uso di interfacce semplici ed intuitive, progettate per facilitarne l'utilizzo e garantirne l'efficienza operativa.
 
 \subsection{Triggers}
+
+\paragraph{Trigger N.1} Per aggiornare lo stato di un \textbf{SENSORE} in '\textit{Malfunzionante}' in caso di anomalia
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER aggiorna_stato_sensore
+AFTER INSERT ON ANOMALIE
+FOR EACH ROW
+BEGIN
+    UPDATE SENSORI
+    SET Stato_Operativo = 'Malfunzionante'
+    WHERE ID = :NEW.Sensore;
+END;
+\end{lstlisting}
+
+\paragraph{Trigger N.2} Per verificare che il valore rilevato da un \textbf{SENSORE} sia maggiore di zero, a eccezione dei sensori di temperatura
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER verifica_valore_rilevato
+BEFORE INSERT ON RILEVAZIONI
+FOR EACH ROW
+DECLARE
+    v_tipo_sensor VARCHAR2(50);
+BEGIN
+    -- Recupera il tipo del sensore associato alla rilevazione
+    SELECT Tipo 
+    INTO v_tipo_sensor
+    FROM SENSORI
+    WHERE ID = :NEW.Sensore;
+    
+    -- Se il valore e' <= 0 e il sensore non e' di tipo 'Temperatura', solleva un errore
+    IF :NEW.Valore <= 0 AND v_tipo_sensor != 'Temperatura' THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Il valore rilevato aggiunto e' minore o uguale a 0. Deve essere maggiore di 0 per sensori diversi da Temperatura.');
+    END IF;
+END;
+\end{lstlisting}
+
+\paragraph{Trigger N.3} Per impostare automaticamente l'attributo \textit{Data\_Fine} di una \textbf{MISSIONE} quando lo \textit{Stato} di quest'ultima risulta \textit{Completata}
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER aggiorna_data_fine_missione
+BEFORE UPDATE ON MISSIONI
+FOR EACH ROW
+BEGIN
+    IF :NEW.Stato = 'Completata' AND :OLD.Stato <> 'Completata' THEN
+        :NEW.Data_Fine := SYSDATE;
+    END IF;
+END;
+\end{lstlisting}
+
+\paragraph{Trigger N.4} Per impedire l'inserimento di una \textbf{RILEVZIONE} se il \textbf{SENSORE} si trova in \textit{Stato} \textit{Malfunzionante}
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER trg_block_malfunzionante_rilevazioni
+BEFORE INSERT ON RILEVAZIONI
+FOR EACH ROW
+DECLARE
+    v_stato_operativo SENSORI.Stato_Operativo%TYPE;
+BEGIN
+    -- Recupera lo stato operativo del sensore
+    SELECT Stato_Operativo
+    INTO v_stato_operativo
+    FROM SENSORI
+    WHERE ID = :NEW.Sensore;
+
+    -- Verifica se lo stato e' "Malfunzionante"
+    IF v_stato_operativo = 'Malfunzionante' THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Impossibile registrare una rilevazione: il sensore e' in stato operativo "Malfunzionante".');
+    END IF;
+END;
+\end{lstlisting}
+
+\subsection{Ruoli}
+La gestione degli utenti e dei ruoli è un aspetto cruciale nei sistemi di gestione di basi di dati (DBMS), poiché garantisce il controllo degli accessi e la sicurezza delle informazioni. L'assegnazione di permessi specifici agli utenti e ai ruoli permette di definire con precisione chi può accedere a determinati dati e quali operazioni può eseguire su di essi. Questa suddivisione migliora non solo la protezione del database, ma anche la gestione e la manutenzione complessiva del sistema. \\
+
+\noindent
+Per la corretta realizzazione del progetto sono stati creati due ruoli: \textit{MembroEquipaggio} e \textit{UfficialeDiBordo}.
+\begin{lstlisting}
+CREATE ROLE MembroEquipaggio
+CREATE ROLE UfficialeDiBordo
+\end{lstlisting}
+
+\subsubsection{Membro dell'Equipaggio}
+Il ruolo \textit{MembroEquipaggio} è pensato per gli utenti che necessitano di accedere ai dati relativi a missioni, membri, sensori, robot, anomalie, rilevazioni, report, utilizzo di robot e sensori, coinvolgimenti, operazioni e partecipazioni.
+Questo ruolo è utile per garantire che i membri dell'equipaggio possano consultare le informazioni necessarie senza avere permessi di modifica.
+
+\begin{lstlisting}
+GRANT SELECT ON MISSIONI TO MembroEquipaggio;
+GRANT SELECT ON MEMBRI TO MembroEquipaggio;
+GRANT SELECT ON SENSORI TO MembroEquipaggio;
+GRANT SELECT ON ROBOT TO MembroEquipaggio;
+GRANT SELECT ON ANOMALIE TO MembroEquipaggio;
+GRANT SELECT ON RILEVAZIONI TO MembroEquipaggio;
+GRANT SELECT ON REPORT TO MembroEquipaggio;
+GRANT SELECT ON UTILIZZO_ROBOT TO MembroEquipaggio;
+GRANT SELECT ON UTILIZZO_SENSORI TO MembroEquipaggio;
+GRANT SELECT ON COINVOLGIMENTI TO MembroEquipaggio;
+GRANT SELECT ON OPERAZIONI TO MembroEquipaggio;
+GRANT SELECT ON PARTECIPAZIONI TO MembroEquipaggio;
+\end{lstlisting}
+
+\subsubsection{Ufficiale di Bordo}
+Il ruolo \textit{UfficialeDiBordo} ha i permessi di \texttt{SELECT}, \texttt{INSERT}, \texttt{UPDATE} e \texttt{DELETE} su tutte le tabelle.
+Questo ruolo è pensato per un utente che necessita di accesso completo per gestire e operare su tutte le informazioni relative alle missioni e ai loro componenti.
+
+\begin{lstlisting}
+GRANT SELECT, INSERT, UPDATE, DELETE ON MISSIONI TO UfficialeDiBordo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON MEMBRI TO UfficialeDiBordo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON SENSORI TO UfficialeDiBordo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ROBOT TO UfficialeDiBordo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ANOMALIE TO UfficialeDiBordo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON RILEVAZIONI TO UfficialeDiBordo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON REPORT TO UfficialeDiBordo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON UTILIZZO_ROBOT TO UfficialeDiBordo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON UTILIZZO_SENSORI TO UfficialeDiBordo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON COINVOLGIMENTI TO UfficialeDiBordo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON OPERAZIONI TO UfficialeDiBordo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON PARTECIPAZIONI TO UfficialeDiBordo;
+\end{lstlisting}

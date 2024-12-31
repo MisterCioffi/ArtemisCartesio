@@ -24,7 +24,7 @@ FROM
     JOIN MISSIONI M ON UR.MISSIONE = M.ID;
 
 
--- View per la visualizzazione dei sensori (tipo, stato operativo) e dei membri che effettuano operazioni su di essi (nome, cognome)
+-- View per la visualizzazione dei sensori (tipo, stato operativo) e dei membri (nome, cognome) che effettuano operazioni (tipo, data) su di essi
 CREATE VIEW SENSORI_MISSIONI AS
 SELECT
     M.NOME,
@@ -55,7 +55,7 @@ FROM
     JOIN SENSORI S ON A.SENSORE = S.ID);
 
 
--- view per vedere il numero di volte che un membro partecipa ad una missione
+-- view per vedere il numero di missione a cui un membro partecipa
 CREATE VIEW PARTECIPAZIONI_MEMBRI AS
 SELECT
     M.ID AS ID_MEMBRO,
@@ -70,6 +70,7 @@ GROUP BY
 ORDER BY
     M.ID ASC;
 
+-- view per vedere i report di ogni missione
 CREATE VIEW ANDAMENTO_MISSIONI AS
 SELECT
     M.ID AS ID_MISSIONE,

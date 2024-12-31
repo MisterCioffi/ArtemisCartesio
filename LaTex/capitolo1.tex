@@ -1,22 +1,23 @@
 \section{Creazione DB}
-In questa sezione verrà descritta la progettazione e la creazione del database. Il database è stato progettato per soddisfare i requisiti del sistema di monitoraggio e controllo di missioni spaziali e in modo da garantire la corretta memorizzazione e gestione dei dati relativi a missioni, membri dell'equipaggio, sensori, robot, anomalie, rilevazioni e report.
+In questa sezione si illustra il processo di progettazione e sviluppo del database realizzato dall'Agenzia Spaziale Internazionale ArtemisCartesio. L'architettura del database è stata concepita con l'obiettivo di soddisfare i requisiti operativi del sistema di monitoraggio e controllo delle missioni spaziali, garantendo al contempo una gestione efficiente e una memorizzazione accurata dei dati. Tale sistema comprende informazioni relative alle missioni, ai membri dell'equipaggio, ai sensori, ai robot, alle anomalie, alle rilevazioni e ai report, assicurando una struttura ottimizzata per la loro archiviazione e consultazione.
 
 \subsection{Progettazione Concettuale}
 
-La progettazione concettuale è la fase iniziale del processo di progettazione di un database, in cui si definiscono i requisiti del sistema e si identificano le entità coinvolte, le relazioni tra di esse e gli attributi che le caratterizzano. Questa fase è indipendente dal modello logico e si concentra sulla rappresentazione dei dati in modo astratto, senza considerare i dettagli implementativi. \\
-La progettazione concettuale è stata realizzata attraverso la modellazione del sistema tramite il modello Entità/Relazione (E/R). Questo modello consente di rappresentare in modo chiaro e intuitivo le entità coinvolte, le relazioni tra di esse e gli attributi che le caratterizzano.
+La \textbf{progettazione concettuale} rappresenta la fase iniziale e fondamentale nel processo di progettazione di un database. Durante questa fase, vengono definiti i requisiti del sistema, identificando le entità coinvolte, le relazioni che intercorrono tra di esse e gli attributi che le descrivono. Questo approccio si caratterizza per la sua indipendenza dal modello logico e si focalizza esclusivamente sulla rappresentazione astratta dei dati, senza considerare i dettagli implementativi o tecnologici.\\
+Nel contesto di questo progetto, la progettazione concettuale è stata realizzata adottando il \textbf{modello Entità/Relazione (E/R)}. Tale modello, grazie alla sua struttura chiara e intuitiva, ha consentito di rappresentare in maniera efficace le entità del sistema, le loro relazioni e i rispettivi attributi, costituendo così una solida base per le fasi successive di progettazione e implementazione del database.
 
 \subsubsection{Modello E/R portante}
 
-Come prima fase della progettazione concettuale, è stato realizzato uno schema E/R portante. Lo schema portante rappresenta il nucleo centrale del modello Entità-Relazione (E/R) per il sistema in esame. Esso evidenzia le principali entità coinvolte: \textbf{RISORSA}, \textbf{MISSIONE} e \textbf{MEMBRO EQUIPAGGIO}, connesse tra loro tramite relazioni chiave.
+Come prima fase della progettazione concettuale, è stato realizzato uno schema E/R portante. Lo schema portante rappresenta il \textbf{nucleo centrale del modello Entità-Relazione (E/R)} per il sistema in esame. Esso evidenzia le principali entità coinvolte: \textbf{RISORSA}, \textbf{MISSIONE} e \textbf{MEMBRO EQUIPAGGIO}, connesse tra loro tramite relazioni chiave.
 
 \begin{itemize}
-    \item La \textbf{RISORSA} rappresenta gli strumenti o gli elementi utilizzati nelle missioni.
-    \item La \textbf{MISSIONE} è il fulcro operativo, dove vengono assegnate risorse e membri dell'equipaggio.
-    \item Il \textbf{MEMBRO EQUIPAGGIO} indica le persone coinvolte nelle missioni, con specifici ruoli e compiti.
+    \item La \textbf{RISORSA} rappresenta gli strumenti, le tecnologie o gli elementi utilizzati nelle missioni spaziali, essenziali per il loro svolgimento.
+    \item La \textbf{MISSIONE} costituisce il fulcro operativo del sistema, in cui le risorse vengono assegnate e gestite, e i membri dell'equipaggio collaborano per il raggiungimento degli obiettivi prefissati
+    \item Il \textbf{MEMBRO EQUIPAGGIO} indica le persone coinvolte nelle missioni, caratterizzate da ruoli specifici e responsabilità ben definite.
 \end{itemize}
-
-Le relazioni descrivono i collegamenti logici tra queste entità, evidenziando l'assegnazione e l'utilizzo di risorse e personale in contesto missione. Questo schema costituisce la base per la progettazione logica e fisica del sistema.
+\noindent
+Le relazioni delineano i collegamenti logici tra le entità principali, evidenziando i meccanismi di assegnazione e utilizzo delle risorse e del personale nel contesto delle missioni. Questi collegamenti definiscono in modo chiaro e strutturato come le entità interagiscono tra loro, garantendo la coerenza e l'integrità dei dati all'interno del sistema.\\
+Lo schema E/R così elaborato rappresenta una base fondamentale per le successive fasi di progettazione, sia logica che fisica, fornendo una struttura solida e ben definita per l’implementazione del database.
 
 \begin{figure}[h!]
     \centering
@@ -28,11 +29,11 @@ Le relazioni descrivono i collegamenti logici tra queste entità, evidenziando l
 
 \subsubsection{Modello E/R completo}
 
-A partire dallo schema portante descritto in precedenza, è stato realizzato uno schema E/R completo che include tutte le entità e le relazioni coinvolte nel sistema. Lo schema completo rappresenta in modo esaustivo tutte le entità, le relazioni e gli attributi che caratterizzano il sistema di monitoraggio e controllo di missioni spaziali.
+A partire dallo schema portante precedentemente descritto, è stato sviluppato uno schema Entità-Relazione (E/R) completo, che integra tutte le entità e le relazioni coinvolte nel sistema. Questo schema fornisce una rappresentazione esaustiva della struttura del sistema, includendo non solo le principali entità e relazioni, ma anche gli attributi che ne caratterizzano il comportamento e le proprietà.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{Media/ER_Completo.png}
+    \includegraphics[width=\textwidth]{Media/ER_Completo.png}
     \caption{Modello E/R completo}
     \label{fig:schema_portante}
 \end{figure}
@@ -42,15 +43,15 @@ A partire dallo schema portante descritto in precedenza, è stato realizzato uno
 \begin{itemize}
     \item \textbf{MISSIONE}: L'entità \textbf{MISSIONE} è identificata da un \textit{ID} e caratterizzata dagli attributi: \textit{Obiettivo}, \textit{Data di inizio}, \textit{Data di fine} e \textit{Stato}. Ogni \textbf{MISSIONE} è in relazione con i \textbf{MEMBRI DELL'EQUIPAGGIO} tramite l'associazione \textbf{PARTECIPAZIONE} con cardinalità $(1,N)$, poiché una missione può coinvolgere uno o più membri dell'equipaggio, mentre un membro può partecipare a zero o più missioni $(0,N)$. L'associazione è di tipo molti-a-molti. Ogni \textbf{MISSIONE} è anche in una relazione di \textbf{UTILIZZO} con \textbf{RISORSA}. Una \textbf{MISSIONE} può utilizzare $(1,N)$ risorse (non $(0,N)$ in quanto una missione non avrebbe senso di esistere se non vi fosse associata almeno una risorsa) e una \textbf{RISORSA} può essere usata da $(0,N)$ missioni.
     
-    \item \textbf{MEMBRO DELL'EQUIPAGGIO}: L'entità \textbf{MEMBRO DELL'EQUIPAGGIO} è identificata da un \textit{Codice univoco} e caratterizzata dagli attributi: \textit{Nome}, \textit{Cognome} e \textit{Ruolo}. Ogni membro dell'equipaggio è responsabile della manutenzione e riparazione dei sensori, partecipando all'associazione \textbf{OPERAZIONE} con i \textbf{SENSORI} secondo cardinalità $(0,N)$ da parte dell'equipaggio e $(1,N)$ da parte dei sensori. Il tipo di operazione è specificato tramite l'attributo \textit{Operazione} della relazione \textbf{OPERAZIONE}. L'attributo \textit{Data} fa sì che un \textbf{MEMBRO DELL'EQUIPAGGIO} possa effettuare più operazioni dello stesso tipo sullo stesso sensore nel tempo. Un \textbf{MEMBRO DELL'EQUIPAGGIO} può inoltre essere coinvolto tramite la relazione \textbf{COINVOLGIMENTO} in $(0,N)$  \textbf{INTERVENTO}. Ogni \textbf{INTERVENTO} può coinvolgere $(1,N)$ membri.
+    \item \textbf{MEMBRO DELL'EQUIPAGGIO}: L'entità \textbf{MEMBRO DELL'EQUI-\\PAGGIO} è identificata da un \textit{Codice univoco} e caratterizzata dagli attributi: \textit{Nome}, \textit{Cognome} e \textit{Ruolo}. Ogni membro dell'equipaggio è responsabile della manutenzione e riparazione dei sensori, partecipando all'associazione \textbf{OPERAZIONE} con i \textbf{SENSORI} secondo cardinalità $(0,N)$ da parte dell'equi-\\paggio e $(1,N)$ da parte dei sensori. Il tipo di operazione è specificato tramite l'attributo \textit{Operazione} della relazione \textbf{OPERAZIONE}. L'attributo \textit{Data} fa sì che un \textbf{MEMBRO DELL'EQUIPAGGIO} possa effettuare più operazioni dello stesso tipo sullo stesso sensore nel tempo. Un \textbf{MEMBRO DELL'EQUIPAGGIO} può inoltre essere coinvolto tramite la relazione \textbf{COINVOLGIMENTO} in $(0,N)$  \textbf{INTERVENTO}. Ogni \textbf{INTERVENTO} può coinvolgere $(1,N)$ membri.
     
-    \item \textbf{INTERVENTO}: Ogni \textbf{INTERVENTO} è avviato per risolvere una specifica \textbf{ANOMALIA}. Gli attributi chiave di \textbf{INTERVENTO} includono un \textit{ID}, una \textit{Descrizione}, l'\textit{Esito dell'intervento} e la \textit{Data dell'intervento}. La relazione tra \textbf{ANOMALIA} e \textbf{INTERVENTO}, denominata \textbf{RISOLUZIONE}, ha cardinalità $(1,1)$ su entrambi i lati, garantendo che ogni \textbf{INTERVENTO} risolva un'unica \textbf{ANOMALIA} e che ogni \textbf{ANOMALIA} sia risolta da un unico \textbf{INTERVENTO}.
+    \item \textbf{INTERVENTO}: Ogni \textbf{INTERVENTO} è avviato per risolvere una specifica \textbf{ANOMALIA}. Gli attributi chiave di \textbf{INTERVENTO} includono un \textit{ID}, una \textit{Descrizione}, l'\textit{Esito dell'intervento} e la \textit{Data dell'intervento}. La relazione tra \textbf{ANOMALIA} e \textbf{INTERVENTO}, denominata \textbf{RISOLUZIO-\\NE}, ha cardinalità $(1,1)$ su entrambi i lati, garantendo che ogni \textbf{INTERVENTO} risolva un'unica \textbf{ANOMALIA} e che ogni \textbf{ANOMALIA} sia risolta da un unico \textbf{INTERVENTO}.
     
     \item \textbf{REPORT}: Ad ogni \textbf{MISSIONE} possono essere associati $(0,N)$ \textbf{REPORT} tramite la relazione \textbf{ANDAMENTO}. Un \textbf{REPORT} è relativo a un'unica \textbf{MISSIONE} ed ha dunque cardinalità $(1,1)$. Gli attributi di \textbf{REPORT} includono un \textit{ID} ed uno \textit{Stato}.
     
     \item \textbf{RILEVAZIONE}: Ogni \textbf{RILEVAZIONE} è associata esattamente a un $(1,1)$ \textbf{SENSORE} tramite la relazione denominata \textbf{MISURAZIONE}. Un \textbf{SENSORE}, tuttavia, può effettuare più rilevazioni, con una cardinalità pari a $(0,N)$. L'entità \textbf{RILEVAZIONE} include una chiave esterna che la collega all'entità \textbf{SENSORE} tramite la relazione \textbf{MISURAZIONE}, basandosi sugli attributi \textit{Data} e \textit{Ora}. Questi attributi, combinati con l'\textit{ID} del sensore, garantiscono l’identificazione univoca di ciascuna \textbf{RILEVAZIONE} effettuata da un determinato \textbf{SENSORE}. Si assume che un \textbf{SENSORE} non possa eseguire più rilevazioni nello stesso istante temporale definito dalla coppia (\textit{Data}, \textit{Ora}).
     
-    \item \textbf{ANOMALIA}: Ogni \textbf{ANOMALIA} è associata esattamente a un $(1,1)$ \textbf{SENSORE} tramite la relazione denominata \textbf{STATO}. Un \textbf{SENSORE}, tuttavia, può presentare più anomalie, con una cardinalità pari a $(0,N)$. L'entità \textbf{ANOMALIA} include una chiave esterna che la collega all'entità \textbf{SENSORE} tramite la relazione \textbf{STATO}, basandosi sugli attributi \textit{Data} e \textit{Ora}. Questi attributi, combinati con l'\textit{ID} del sensore, garantiscono l’identificazione univoca di ciascuna \textbf{ANOMALIA} verificatasi in un determinato \textbf{SENSORE}. Si assume che in un \textbf{SENSORE} non possano verificarsi più anomalie nello stesso istante temporale definito dalla coppia (\textit{Data}, \textit{Ora}).
+    \item \textbf{ANOMALIA}: Ogni \textbf{ANOMALIA} è associata esattamente a un $(1,1)$ \textbf{SENSORE} tramite la relazione denominata \textbf{STATO}. Un \textbf{SENSORE}, tuttavia, può presentare più anomalie, con una cardinalità pari a $(0,N)$. L'entità \textbf{ANOMALIA} include una chiave esterna che la collega all'entità \textbf{SENSORE} tramite la relazione \textbf{STATO}, basandosi sugli attributi \textit{Data} e \textit{Ora}. Questi attributi, combinati con l'\textit{ID} del sensore, garantiscono l'identifica-zione univoca di ciascuna \textbf{ANOMALIA} verificatasi in un determinato \textbf{SENSORE}. Si assume che in un \textbf{SENSORE} non possano verificarsi più anomalie nello stesso istante temporale definito dalla coppia (\textit{Data}, \textit{Ora}).
 \end{itemize}
 
 
@@ -89,10 +90,10 @@ La fase di traduzione consiste nella conversione dello schema Entità/Relazione 
 
 Ogni entità del modello E/R diventa una relazione/tabella.
 \begin{itemize}
-    \item \textbf{Nome della tabella}: corrisponde al nome dell’entità.
+    \item \textbf{Nome della tabella}: corrisponde al nome dell’entità al plurale.
     \item \textbf{Campi della tabella}: corrispondono agli attributi dell’entità.
 \end{itemize}
-
+\noindent
 Risultato della Traduzione delle Entità:
 \begin{lstlisting}
 MISSIONI(ID, Obiettivo, Data_Inizio, Data_Fine, Stato);
@@ -106,6 +107,7 @@ SENSORI(ID, Data_Installazione, Data_Ultimo_Controllo, Tipo, Stato_Operativo, La
 \end{lstlisting}
 
 \paragraph{Traduzione Relazioni}
+La traduzione delle relazioni tra le entità può essere effettuata attraverso diverse modalità, a seconda delle specifiche esigenze del sistema e delle caratteristiche del modello utilizzato. Di seguito si illustrano le modalità adottate per la progettazione del sistema in esame, con l'obiettivo di garantire una rappresentazione accurata e coerente delle interazioni tra le entità.
 \begin{enumerate}
     \item Relazioni \textbf{N a N}
     \begin{itemize}
@@ -176,7 +178,7 @@ In figura (Figura \ref{fig:specializzazione}) è riportato il risultato dell'acc
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.4\textwidth]{Media/Generalizzazione_Specializzazione.png}
+    \includegraphics[width=0.8\textwidth]{Media/Generalizzazione_Specializzazione.png}
     \caption{accorpamento di \textit{RISORSA} in \textit{ROBOT} e \textit{SENSORE}}
     \label{fig:specializzazione}
 \end{figure}
@@ -186,11 +188,11 @@ In figura (Figura \ref{fig:specializzazione}) è riportato il risultato dell'acc
 I tipi di dato utilizzati per la realizzazione di questo progetto sono:
 
 \begin{itemize}
-    \item \textbf{DATE}: Utilizzato per tutte le date presenti.
-    \item \textbf{INTEGER}: per tutti gli ID che quindi sono formati esclusivamente da numeri e non da lettere;
-    \item \textbf{VARCHAR2(N)}: per tutti gli attributi di tipo testuali, come per esempio nome, cognome, descrizione, ecc..
-    \item \textbf{FLOAT}: Utilizzato per rappresentare valori numerici con la necessità di precisione decimale, ad esempio coordinate geografiche (latitudine, longitudine, altitudine) o valori rilevati dai sensori.
-    \item \textbf{TIMESTAMP}: Utilizzato per rappresentare data e ora in modo dettagliato, includendo secondi e frazioni di secondo, ad esempio per registrare eventi come rilevazioni o anomalie con un’accurata marcatura temporale.
+    \item \textbf{DATE}: Utilizzato per tutte le date presenti;
+    \item \textbf{INTEGER}: per tutti gli ID, formati esclusivamente da numeri e non da lettere;
+    \item \textbf{VARCHAR2(N)}: per tutti gli attributi di tipo testuali, ad esempio nome, cognome, descrizione, ecc.;
+    \item \textbf{FLOAT}: Utilizzato per rappresentare valori numerici con la necessità di precisione decimale, ad esempio coordinate geografiche (latitudine, longitudine, altitudine) o valori rilevati dai sensori;
+    \item \textbf{TIMESTAMP}: Utilizzato per rappresentare data e ora in modo dettagliato, includendo secondi e frazioni di secondo, ad esempio per registrare eventi come rilevazioni o anomalie con un'accurata marcatura temporale.
 \end{itemize}
 
 \subsubsection{Occupazione tabelle}
@@ -230,7 +232,7 @@ Le dimensioni teoriche sono calcolate considerando i tipi di dati e ignorando ev
 
 
 \subsubsection{Tabelle}
-
+Di seguito viene presentato il codice SQL necessario per la creazione delle tabelle del database, come descritto nelle fasi precedenti.
 \begin{lstlisting}
 -- Tabella MISSIONI
 CREATE TABLE MISSIONI (
@@ -359,6 +361,8 @@ CREATE TABLE MEMBRI_MISSIONI (
 
 \subsubsection{Chiavi primarie}
 
+Di seguito viene riportato il codice SQL necessario  per la creazione dei vincoli di chiave primaria utilizzando la notazione "\texttt{PK\_NomeTabella}" per una maggiore chiarezza e standardizzazione e per aiutare l'individuazione di eventuali errori.
+
 \begin{lstlisting}
 ALTER TABLE MISSIONI ADD CONSTRAINT PK_MISSIONI PRIMARY KEY (ID);
 ALTER TABLE MEMBRI ADD CONSTRAINT PK_MEMBRI PRIMARY KEY (ID);
@@ -377,7 +381,7 @@ ALTER TABLE PARTECIPAZIONI ADD CONSTRAINT PK_PARTECIPAZIONI PRIMARY KEY (Mission
 \end{lstlisting}
 
 \subsubsection{Chiavi esterne}
-
+Di seguito viene riportato il codice SQL necessario  per la creazione dei vincoli di chiave esterna utilizzando la notazione "\texttt{FK\_TabellaReferenziante\_TabellaRefe-\\renziata}".
 \begin{lstlisting}
 ALTER TABLE ANOMALIE ADD CONSTRAINT FK_ANOMALIE_SENSORI FOREIGN KEY (Sensori) REFERENCES SENSORI(ID);
 ALTER TABLE RISOLUZIONI ADD CONSTRAINT FK_RISOLUZIONI_ANOMALIE FOREIGN KEY (Anomalie) REFERENCES ANOMALIE(ID);
@@ -391,15 +395,13 @@ ALTER TABLE UTILIZZO_SENSORI ADD CONSTRAINT FK_UTILIZZO_SENSORI_MISSIONI FOREIGN
 ALTER TABLE COINVOLGIMENTI ADD CONSTRAINT FK_COINVOLGIMENTI_MEMBRI FOREIGN KEY (Membri) REFERENCES MEMBRI(ID);
 ALTER TABLE COINVOLGIMENTI ADD CONSTRAINT FK_COINVOLGIMENTI_INTERVENTI FOREIGN KEY (Interventi) REFERENCES INTERVENTI(ID);
 ALTER TABLE OPERAZIONI ADD CONSTRAINT FK_OPERAZIONI_MEMBRI FOREIGN KEY (Membri) REFERENCES MEMBRI(ID);
-
 ALTER TABLE OPERAZIONI ADD CONSTRAINT FK_OPERAZIONI_SENSORI FOREIGN KEY (Sensori) REFERENCES SENSORI(ID);
-
 ALTER TABLE PARTECIPAZIONI ADD CONSTRAINT FK_PARTECIPAZIONI_MISSIONE FOREIGN KEY (Missione) REFERENCES MISSIONI(ID);
-
 ALTER TABLE PARTECIPAZIONI ADD CONSTRAINT FK_PARTECIPAZIONI_MEMBRI FOREIGN KEY (Membri) REFERENCES MEMBRI(ID);
 \end{lstlisting}
 
 \subsubsection{Vincoli di check}
+In fine, si riportano i comandi SQL per la creazione di vincoli di check utilizzando la notazione "\texttt{CK\_Tabella\_Campo}". Questo approccio consente di garantire che i valori di determinati campi rispettino i criteri specificati, fornendo così un ulteriore livello di controllo sull'integrità dei dati.
 
 \begin{lstlisting}
     ALTER TABLE SENSORI ADD CONSTRAINT CK_SENSORI_TIPO CHECK (Tipo IN ('Temperatura', 'Pressione', 'Gas', 'Radiazioni', 'Geologia'));
@@ -410,4 +412,12 @@ ALTER TABLE PARTECIPAZIONI ADD CONSTRAINT FK_PARTECIPAZIONI_MEMBRI FOREIGN KEY (
     
     ALTER TABLE MISSIONI ADD CONSTRAINT CK_MISSIONI_STATO CHECK (Stato IN ('Pianificata', 'In corso', 'Completata', 'Annullata'));
 \end{lstlisting}
+
+
+
+\renewcommand{\thefootnote}{}
+\noindent
+\footnote{\textbf{N.B.}: I quattro snippet di codice SQL mostrati verranno implementati nel DBMS tramite appositi script contenenti il codice: (1) \texttt{create\_table.sql}, (2) \texttt{constraint.sql}.}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
 
