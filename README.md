@@ -18,7 +18,7 @@ Il database deve essere in grado di:
 ## Requisiti Tecnici
 
 - **Linguaggio di Programmazione**: SQL
-- **Database Management System (DBMS)**: Oracle APEX 21.2
+- **Database Management System (DBMS)**: Oracle APEX 22.2.0
 
 ## Autori
 
