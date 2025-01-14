@@ -1,4 +1,4 @@
-# Basi di Dati - Progetto
+# ArtemisCartesio - Progetto Basi di Dati @UniNa
 
 ![Instagram Unfollowers Screenshot](/Media/Screenshot_App/home.png)
 
