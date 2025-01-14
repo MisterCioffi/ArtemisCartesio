@@ -46,29 +46,60 @@ EXECUTE AssegnareSensoreAMissione(p_Sensore_ID => 11, p_Missione_ID => 1);
 
 --ESEMPIO_2
 EXECUTE AssegnareSensoreAMissione(p_Sensore_ID => 30, p_Missione_ID => 5);
---Errore: il sensore con ID 30 non esiste.
+--OUTPUT--> Errore: il sensore con ID 30 non esiste.
 
 -- INSERIRE UN MEMBRO NELLA TABELLA COINVOLGIMENTI RELATIVAMENTE AD UN INTERVENTO
 CREATE OR REPLACE PROCEDURE InserireMembroInCoinvolgimento(
     p_Membro_ID IN NUMBER,
     p_Intervento_ID IN NUMBER
 ) AS
+    v_count_membro NUMBER;
+    v_count_intervento NUMBER;
+    v_count_coinvolgimento NUMBER;
 BEGIN
-    -- Inserisce il membro nell'intervento in corso
-    INSERT INTO COINVOLGIMENTI (Membro, Intervento)
-    VALUES (p_Membro_ID, p_Intervento_ID);
+    -- Verifica se il membro esiste nel database
+    SELECT COUNT(*)
+    INTO v_count_membro
+    FROM MEMBRI
+    WHERE ID = p_Membro_ID;
     
-    DBMS_OUTPUT.PUT_LINE('Membro con ID ' || p_Membro_ID || ' aggiunto all''intervento con ID ' || p_Intervento_ID);
-EXCEPTION
-    WHEN DUP_VAL_ON_INDEX THEN
-        DBMS_OUTPUT.PUT_LINE('Errore: il membro con ID ' || p_Membro_ID || ' è già coinvolto nell''intervento con ID ' || p_Intervento_ID);
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Errore imprevisto: ' || SQLERRM);
-END InserireMembroInCoinvolgimento;
---FUNZIONA, ESEMPIO SOTTO
+    IF v_count_membro = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Errore: il membro con ID ' || p_Membro_ID || ' non esiste nel database.');
+    ELSE
+        -- Verifica se l'intervento esiste nel database
+        SELECT COUNT(*)
+        INTO v_count_intervento
+        FROM INTERVENTI
+        WHERE ID = p_Intervento_ID;
+        
+        IF v_count_intervento = 0 THEN
+            DBMS_OUTPUT.PUT_LINE('Errore: l''intervento con ID ' || p_Intervento_ID || ' non esiste nel database.');
+        ELSE
+            -- Verifica se il membro è già coinvolto nell'intervento
+            SELECT COUNT(*)
+            INTO v_count_coinvolgimento
+            FROM COINVOLGIMENTI
+            WHERE Membro = p_Membro_ID AND Intervento = p_Intervento_ID;
+            
+            IF v_count_coinvolgimento > 0 THEN
+                DBMS_OUTPUT.PUT_LINE('Errore: il membro con ID ' || p_Membro_ID || ' è già coinvolto nell''intervento con ID ' || p_Intervento_ID);
+            ELSE
+                -- Inserisce il membro nell'intervento se non è già coinvolto
+                INSERT INTO COINVOLGIMENTI (Membro, Intervento)
+                VALUES (p_Membro_ID, p_Intervento_ID);
+                
+                DBMS_OUTPUT.PUT_LINE('Membro con ID ' || p_Membro_ID || ' aggiunto all''intervento con ID ' || p_Intervento_ID);
+            END IF;
+        END IF;
+    END IF;
+END;
+
+--ESEMPIO_1
 EXECUTE InserireMembroInCoinvolgimento(p_Membro_ID => 15, p_Intervento_ID => 10);
 
-
+--ESEMPIO_2
+EXECUTE InserireMembroInCoinvolgimento(p_Membro_ID => 1, p_Intervento_ID => 1);
+--OUTPUT --> Errore: il membro con ID 1 è già coinvolto nell'intervento con ID 1
 
 -- PROCEDURA PER AGGIORNARE LO STATO OPERATIVO DI UN SENSORE
 CREATE OR REPLACE PROCEDURE AggiornareStatoSensore(
