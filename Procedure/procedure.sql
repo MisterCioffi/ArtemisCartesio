@@ -3,16 +3,50 @@ CREATE OR REPLACE PROCEDURE AssegnareSensoreAMissione(
     p_Sensore_ID IN NUMBER,
     p_Missione_ID IN NUMBER
 ) AS
+    v_count_sensore NUMBER;
+    v_count_missione NUMBER;
 BEGIN
-    INSERT INTO UTILIZZO_SENSORI (Sensore, Missione)
-    VALUES (p_Sensore_ID, p_Missione_ID);
+    -- Incrementa il valore di v_count_sensore se esso è presente nel database
+    SELECT COUNT(*)
+    INTO v_count_sensore
+    FROM SENSORI
+    WHERE ID = p_Sensore_ID;
     
-    DBMS_OUTPUT.PUT_LINE('Sensore ' || p_Sensore_ID || ' assegnato alla missione ' || p_Missione_ID);
+    -- -- Incrementa il valore di v_count_missione se esso è presente nel database
+    SELECT COUNT(*)
+    INTO v_count_missione
+    FROM MISSIONI
+    WHERE ID = p_Missione_ID;
+    
+    -- Verifica se essi sono presenti o meno nel databse altrimenti si genera errore
+    IF v_count_sensore = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Errore: il sensore con ID ' || p_Sensore_ID || ' non esiste.');
+    ELSIF v_count_missione = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Errore: la missione con ID ' || p_Missione_ID || ' non esiste.');
+    ELSE
+        -- Verifica se il sensore è già assegnato alla missione
+        SELECT COUNT(*)
+        INTO v_count_sensore
+        FROM UTILIZZO_SENSORI
+        WHERE Sensore = p_Sensore_ID AND Missione = p_Missione_ID;
+        
+        IF v_count_sensore = 0 THEN
+            -- Se il sensore non è già assegnato, inserisci
+            INSERT INTO UTILIZZO_SENSORI (Sensore, Missione)
+            VALUES (p_Sensore_ID, p_Missione_ID);
+            
+            DBMS_OUTPUT.PUT_LINE('Sensore ' || p_Sensore_ID || ' assegnato alla missione ' || p_Missione_ID);
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('Il sensore ' || p_Sensore_ID || ' è già assegnato alla missione ' || p_Missione_ID);
+        END IF;
+    END IF;
 END;
---FUNZIONA, ESEMPIO SOTTO:
+--ESEMPIO_1
 EXECUTE AssegnareSensoreAMissione(p_Sensore_ID => 11, p_Missione_ID => 1);
 
-
+--ESEMPIO_2
+EXECUTE AssegnareSensoreAMissione(p_Sensore_ID => 30, p_Missione_ID => 5);
+--Errore: il sensore con ID 30 non esiste.
 
 -- INSERIRE UN MEMBRO NELLA TABELLA COINVOLGIMENTI RELATIVAMENTE AD UN INTERVENTO
 CREATE OR REPLACE PROCEDURE InserireMembroInCoinvolgimento(
