@@ -176,7 +176,7 @@ BEGIN
 
     -- Verifica per tutti i sensori se la data dell'ultimo controllo è più di 30 giorni fa
     FOR sensore_rec IN (SELECT ID, Data_Ultimo_Controllo FROM SENSORI) LOOP
-        -- Controlla se la data dell'ultimo controllo è più di 30 giorni fa o NULL
+        -- Controlla se la data dell'ultimo controllo è più di 30 giorni fa oppure se è NULL
         IF sensore_rec.Data_Ultimo_Controllo IS NULL OR sensore_rec.Data_Ultimo_Controllo < (SYSDATE - 30) THEN
             -- Assegna il prossimo membro disponibile in modo ciclico
             v_membro_index := MOD(v_membro_index, v_tot_membri) + 1;
