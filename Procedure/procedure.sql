@@ -43,6 +43,7 @@ BEGIN
 END;
 --ESEMPIO_1
 EXECUTE AssegnareSensoreAMissione(p_Sensore_ID => 11, p_Missione_ID => 1);
+--OUTPUT-->Sensore 11 assegnato alla missione 1
 
 --ESEMPIO_2
 EXECUTE AssegnareSensoreAMissione(p_Sensore_ID => 30, p_Missione_ID => 5);
