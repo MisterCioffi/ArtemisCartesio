@@ -28,7 +28,7 @@ BEGIN
     
     -- Se il valore è <= 0 e il sensore non è di tipo 'Temperatura', solleva un errore
     IF :NEW.Valore <= 0 AND v_tipo_sensor != 'Temperatura' THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Il valore rilevato aggiunto è minore o uguale a 0. Deve essere maggiore di 0 per sensori diversi da Temperatura.');
+        RAISE_APPLICATION_ERROR(-20001, 'Il valore rilevato aggiunto è minore o uguale a 0. Deve essere maggiore di 0 per sensori diversi di Temperatura.');
     END IF;
 END;
 
