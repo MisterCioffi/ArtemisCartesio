@@ -1,5 +1,7 @@
 # Basi di Dati - Progetto
 
+![Instagram Unfollowers Screenshot](/Media/Screenshot_App/home.png)
+
 ## Descrizione del Progetto
 
 Questo progetto è stato sviluppato come parte del corso di Basi di Dati tenuto dal docente Vincenzo Moscato nell'a.a 2024/2025 presso l'Università degli Studi di Napoli Federico II . L'obiettivo principale è quello di creare un database relazionale che soddisfi i requisiti specificati nella traccia dell'elaborato.
