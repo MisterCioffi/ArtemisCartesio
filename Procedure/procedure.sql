@@ -168,9 +168,16 @@ BEGIN
     END LOOP;
     CLOSE membri_cursor;
 
+    -- Verifica la presenza di manutentori, se non ci sono esce
+    IF v_tot_membri = 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Nessun manutentore disponibile.');
+        RETURN;
+    END IF;
+
     -- Verifica per tutti i sensori se la data dell'ultimo controllo è più di 30 giorni fa
     FOR sensore_rec IN (SELECT ID, Data_Ultimo_Controllo FROM SENSORI) LOOP
-        IF sensore_rec.Data_Ultimo_Controllo < (SYSDATE - 30) THEN
+        -- Controlla se la data dell'ultimo controllo è più di 30 giorni fa o NULL
+        IF sensore_rec.Data_Ultimo_Controllo IS NULL OR sensore_rec.Data_Ultimo_Controllo < (SYSDATE - 30) THEN
             -- Assegna il prossimo membro disponibile in modo ciclico
             v_membro_index := MOD(v_membro_index, v_tot_membri) + 1;
             v_membro_id := membri_table(v_membro_index).ID;
@@ -186,5 +193,8 @@ BEGIN
         END IF;
     END LOOP;
 END;
+
+--ESEMPIO 
+EXECUTE controlla_manutenzione_sensori;
 
 
