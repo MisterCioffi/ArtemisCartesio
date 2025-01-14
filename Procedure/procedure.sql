@@ -12,7 +12,7 @@ BEGIN
     FROM SENSORI
     WHERE ID = p_Sensore_ID;
     
-    -- -- Incrementa il valore di v_count_missione se esso è presente nel database
+    -- Incrementa il valore di v_count_missione se esso è presente nel database
     SELECT COUNT(*)
     INTO v_count_missione
     FROM MISSIONI
