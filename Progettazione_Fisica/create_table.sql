@@ -2,7 +2,7 @@
 CREATE TABLE MISSIONI (
     ID INT,
     Obiettivo VARCHAR2(255) NOT NULL,
-    Data_Inizio DATE NOT NULL, --NOT NULL o no ?
+    Data_Inizio DATE NOT NULL, 
     Data_Fine DATE,
     Stato VARCHAR2(50) NOT NULL
 );
