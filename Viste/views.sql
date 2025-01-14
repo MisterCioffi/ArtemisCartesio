@@ -21,10 +21,11 @@ SELECT
     M.ID AS ID_MISSIONE, 
     M.OBIETTIVO AS OBIETTIVO_MISSIONE
 FROM 
-    (UTILIZZO_ROBOT UR 
-    JOIN ROBOT R ON UR.ROBOT = R.ID) 
-    JOIN MISSIONI M ON UR.MISSIONE = M.ID;
-
+    UTILIZZO_ROBOT UR
+JOIN 
+    ROBOT R ON UR.ROBOT = R.ID
+JOIN 
+    MISSIONI M ON UR.MISSIONE = M.ID;
 
 -- View per la visualizzazione dei sensori (tipo, stato operativo) e dei membri (nome, cognome) che effettuano operazioni (tipo, data) su di essi
 CREATE VIEW SENSORI_MISSIONI AS
