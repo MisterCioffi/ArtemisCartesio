@@ -107,15 +107,44 @@ CREATE OR REPLACE PROCEDURE AggiornareStatoSensore(
     p_Sensore_ID IN NUMBER,
     p_Nuovo_Stato IN VARCHAR2
 ) AS
+    v_count_sensore NUMBER;
+    v_stato_valido BOOLEAN := FALSE;
 BEGIN
-    UPDATE SENSORI
-    SET Stato_Operativo = p_Nuovo_Stato
+    -- Verifica se il sensore esiste nel database
+    SELECT COUNT(*)
+    INTO v_count_sensore
+    FROM SENSORI
     WHERE ID = p_Sensore_ID;
-    
-    DBMS_OUTPUT.PUT_LINE('Stato del sensore ' || p_Sensore_ID || ' aggiornato a ' || p_Nuovo_Stato);
+
+    IF v_count_sensore = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Errore: il sensore con ID ' || p_Sensore_ID || ' non esiste nel database.');
+    ELSE
+        -- Controllo se il nuovo stato è valido
+        IF p_Nuovo_Stato IN ('Attivo', 'Standby', 'Manutenzione', 'Malfunzionante') THEN
+            v_stato_valido := TRUE;
+        END IF;
+
+        IF v_stato_valido = FALSE THEN
+            DBMS_OUTPUT.PUT_LINE('Errore: lo stato ' || p_Nuovo_Stato || ' non è valido.');
+        ELSE
+            -- Se il sensore esiste e lo stato è valido, aggiorna lo stato
+            UPDATE SENSORI
+            SET Stato_Operativo = p_Nuovo_Stato
+            WHERE ID = p_Sensore_ID;
+            
+            DBMS_OUTPUT.PUT_LINE('Stato del sensore ' || p_Sensore_ID || ' aggiornato a ' || p_Nuovo_Stato);
+        END IF;
+    END IF;
 END;
---FUNZIONA, ESEMPIO SOTTO:
+
+--ESEMPIO_1
 EXECUTE AggiornareStatoSensore(p_Sensore_ID => 5, p_Nuovo_Stato => 'Manutenzione');
+--OUTPUT --> Stato del sensore 5 aggiornato a Manutenzione.
+
+--ESEMPIO_2 
+EXECUTE AggiornareStatoSensore(p_Sensore_ID => 1, p_Nuovo_Stato => 'Sospeso');
+--OUTPUT --> Errore: lo stato Sospeso non è valido.
+
 
 
 --PROCEDURA CHE ESEGUE UNA OPERAZIONE DI MANUTENZIONE SE LA DATA DELL'ULTIMO CONTROLLO E' MAGGIORE DI 30 GIORNI
