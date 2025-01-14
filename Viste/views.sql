@@ -37,10 +37,11 @@ SELECT
     O.OPERAZIONE AS TIPO_OPERAZIONE,
     O.DATA
 FROM 
-    (OPERAZIONI O
-    JOIN MEMBRI M ON O.MEMBRO = M.ID)
-	JOIN SENSORI S ON O.SENSORE = S.ID;
-
+    OPERAZIONI O
+JOIN 
+    MEMBRI M ON O.MEMBRO = M.ID
+JOIN 
+    SENSORI S ON O.SENSORE = S.ID;
 
 -- View per la visualizzazione delle anomalie rilevate per ciascun sensore
 CREATE VIEW ANOMALIE_SENSORI AS
