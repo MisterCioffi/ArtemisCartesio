@@ -8,7 +8,7 @@ SELECT
 FROM 
     (PARTECIPAZIONI P 
     JOIN MEMBRI M ON P.MEMBRO = M.ID) 
-    JOIN MISSIONI MI ON P.MISSIONe = MI.ID;
+    JOIN MISSIONI MI ON P.MISSIONE = MI.ID;
 
 
 -- View per la visualizzazione dei robot (tipo) e delle missioni a cui partecipano (obiettivo)
