@@ -1,7 +1,5 @@
--- Questo script SQL crea il ruolo "MembroEquipaggio" e assegna i permessi di sola lettura (SELECT) su diverse tabelle del database.
 -- Il ruolo "MembroEquipaggio" è pensato per gli utenti che necessitano di accedere ai dati relativi a missioni, membri, sensori, robot, anomalie, rilevazioni, report, utilizzo di robot e sensori, coinvolgimenti, operazioni e partecipazioni.
 -- Questo ruolo è utile per garantire che i membri dell'equipaggio possano consultare le informazioni necessarie senza avere permessi di modifica.
--- Creazione del ruolo MembroEquipaggio
 CREATE ROLE MembroEquipaggio;
 
 -- Assegnazione dei permessi al ruolo MembroEquipaggio
@@ -18,11 +16,9 @@ GRANT SELECT ON COINVOLGIMENTI TO MembroEquipaggio;
 GRANT SELECT ON OPERAZIONI TO MembroEquipaggio;
 GRANT SELECT ON PARTECIPAZIONI TO MembroEquipaggio;
 
--- Questo script SQL crea il ruolo "UfficialeDiBordo" e assegna i permessi necessari per operare su diverse tabelle del database.
 -- Il ruolo "UfficialeDiBordo" ha i permessi di SELECT, INSERT, UPDATE e DELETE su tutte le tabelle elencate.
 -- Le tabelle su cui il ruolo ha permessi includono: MISSIONI, MEMBRI, SENSORI, ROBOT, ANOMALIE, RILEVAZIONI, REPORT, UTILIZZO_ROBOT, UTILIZZO_SENSORI, COINVOLGIMENTI, OPERAZIONI e PARTECIPAZIONI.
 -- Questo ruolo è pensato per un utente che necessita di accesso completo per gestire e operare su tutte le informazioni relative alle missioni e ai loro componenti.
--- Creazione del ruolo 
 CREATE ROLE UfficialeDiBordo;
 
 -- Assegnazione dei permessi al ruolo UfficialeDiBordo
