@@ -1,4 +1,3 @@
-
 -- Trigger per aggiornare lo stato di un sensore in "Malfunzionante" in caso di anomalia
 CREATE OR REPLACE TRIGGER aggiorna_stato_sensore
 AFTER INSERT ON ANOMALIE
