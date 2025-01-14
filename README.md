@@ -33,4 +33,4 @@ Il documento finale dell'elaborato può essere trovato [qui](/Elaborato_Basi_di_
 
 ## Licenza
 
-Questo progetto è distribuito sotto la licenza [NomeLicenza]. Vedi il file `LICENSE` per ulteriori dettagli.
+Questo progetto è distribuito sotto la licenza [Creative Commons Zero v1.0 Universal](LICENSE).
