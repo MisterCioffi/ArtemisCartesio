@@ -1,4 +1,4 @@
--- PROCEDURA PER INSERIRE UN SENSORE IN UNA MISSIONE
+-- N1 Per assegnare un sensore ad una missione
 CREATE OR REPLACE PROCEDURE AssegnareSensoreAMissione(
     p_Sensore_ID IN NUMBER,
     p_Missione_ID IN NUMBER
@@ -41,15 +41,18 @@ BEGIN
         END IF;
     END IF;
 END;
---ESEMPIO_1
-EXECUTE AssegnareSensoreAMissione(p_Sensore_ID => 11, p_Missione_ID => 1);
---OUTPUT-->Sensore 11 assegnato alla missione 1
 
---ESEMPIO_2
-EXECUTE AssegnareSensoreAMissione(p_Sensore_ID => 30, p_Missione_ID => 5);
---OUTPUT--> Errore: il sensore con ID 30 non esiste.
+-- ESEMPIO 1
+-- EXECUTE AssegnareSensoreAMissione(11, 1);
+-- OUTPUT --> Sensore 11 assegnato alla missione 1
 
--- INSERIRE UN MEMBRO NELLA TABELLA COINVOLGIMENTI RELATIVAMENTE AD UN INTERVENTO
+-- ESEMPIO 2
+-- EXECUTE AssegnareSensoreAMissione(30, 5);
+-- OUTPUT --> Errore: il sensore con ID 30 non esiste.
+
+------------------------------------------------------------------------------------------------
+
+-- N2 Per inserire un membro nella tabella coinvolgimenti relativamente ad un intervento
 CREATE OR REPLACE PROCEDURE InserireMembroInCoinvolgimento(
     p_Membro_ID IN NUMBER,
     p_Intervento_ID IN NUMBER
@@ -95,14 +98,17 @@ BEGIN
     END IF;
 END;
 
---ESEMPIO_1
-EXECUTE InserireMembroInCoinvolgimento(p_Membro_ID => 15, p_Intervento_ID => 10);
+-- ESEMPIO 1
+-- EXECUTE InserireMembroInCoinvolgimento(15, 10);
+-- OUTPUT --> Membro con ID 15 aggiunto all'intervento con ID 10
 
---ESEMPIO_2
-EXECUTE InserireMembroInCoinvolgimento(p_Membro_ID => 1, p_Intervento_ID => 1);
---OUTPUT --> Errore: il membro con ID 1 è già coinvolto nell'intervento con ID 1
+-- ESEMPIO_2
+-- EXECUTE InserireMembroInCoinvolgimento(1, 1);
+-- OUTPUT --> Errore: il membro con ID 1 è già coinvolto nell'intervento con ID 1
 
--- PROCEDURA PER AGGIORNARE LO STATO OPERATIVO DI UN SENSORE
+------------------------------------------------------------------------------------------------
+
+-- Per aggiornare lo stato operativo di un sensore
 CREATE OR REPLACE PROCEDURE AggiornareStatoSensore(
     p_Sensore_ID IN NUMBER,
     p_Nuovo_Stato IN VARCHAR2
@@ -137,18 +143,19 @@ BEGIN
     END IF;
 END;
 
---ESEMPIO_1
-EXECUTE AggiornareStatoSensore(p_Sensore_ID => 5, p_Nuovo_Stato => 'Manutenzione');
---OUTPUT --> Stato del sensore 5 aggiornato a Manutenzione.
+-- ESEMPIO 1
+-- EXECUTE AggiornareStatoSensore(5, 'Manutenzione');
+-- OUTPUT --> Stato del sensore 5 aggiornato a Manutenzione.
 
---ESEMPIO_2 
-EXECUTE AggiornareStatoSensore(p_Sensore_ID => 1, p_Nuovo_Stato => 'Sospeso');
---OUTPUT --> Errore: lo stato Sospeso non è valido.
+-- ESEMPIO 2 
+-- EXECUTE AggiornareStatoSensore(1, 'Sospeso');
+-- OUTPUT --> Errore: lo stato Sospeso non è valido.
+
+------------------------------------------------------------------------------------------------
 
 
-
---PROCEDURA CHE ESEGUE UNA OPERAZIONE DI MANUTENZIONE SE LA DATA DELL'ULTIMO CONTROLLO E' MAGGIORE DI 30 GIORNI
-CREATE OR REPLACE PROCEDURE controlla_manutenzione_sensori AS
+-- Procedura che esegue una operazione di manutenzione se la data dell'ultimo controllo è maggiore di 30 giorni
+CREATE OR REPLACE PROCEDURE ControllaManutenzioneSensori AS
     CURSOR membri_cursor IS
         SELECT ID
         FROM MEMBRI
@@ -194,7 +201,7 @@ BEGIN
     END LOOP;
 END;
 
---ESEMPIO 
-EXECUTE controlla_manutenzione_sensori;
+-- ESEMPIO 
+-- EXECUTE ControllaManutenzioneSensori;
 
 
