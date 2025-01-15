@@ -56,7 +56,7 @@ END;
 
 ------------------------------------------------------------------------------------------------------------------
 -- N4 Trigger che impedisce l'inserimento di una rilevazione se il sensore si trova in uno stato malfunzionante
-CREATE OR REPLACE TRIGGER trg_block_malfunzionante_rilevazioni
+CREATE OR REPLACE TRIGGER block_malfunzionante_rilevazioni
 BEFORE INSERT ON RILEVAZIONI
 FOR EACH ROW
 DECLARE
