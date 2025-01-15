@@ -1,8 +1,7 @@
--- View per la visualizzazione dei membri (nome, cognome) e delle missioni a cui partecipano (obiettivo, stato)
+-- N1 View per la visualizzazione dei membri (nome, cognome) e delle missioni a cui partecipano (obiettivo, stato)
 CREATE VIEW MEMBRI_MISSIONI AS
 SELECT 
-    M.NOME, 
-    M.COGNOME, 
+    CONCAT(M.NOME, CONCAT(' ', M.COGNOME)) AS NOME_COMPLETO,
     MI.OBIETTIVO AS OBIETTIVO_MISSIONE, 
     MI.ID AS ID_MISSIONE,
     MI.STATO AS STATO_MISSIONE
@@ -13,7 +12,7 @@ JOIN
 JOIN 
     MISSIONI MI ON P.MISSIONE = MI.ID;
 
--- View per la visualizzazione dei robot (tipo) e delle missioni a cui partecipano (obiettivo)
+-- N2 View per la visualizzazione dei robot (tipo) e delle missioni a cui partecipano (obiettivo)
 CREATE VIEW ROBOT_MISSIONI AS
 SELECT 
     R.ID AS ID_ROBOT, 
@@ -27,11 +26,10 @@ JOIN
 JOIN 
     MISSIONI M ON UR.MISSIONE = M.ID;
 
--- View per la visualizzazione dei sensori (tipo, stato operativo) e dei membri (nome, cognome) che effettuano operazioni (tipo, data) su di essi
+-- N3 View per la visualizzazione dei sensori (tipo, stato operativo) e dei membri (nome, cognome) che effettuano operazioni (tipo, data) su di essi
 CREATE VIEW SENSORI_MISSIONI AS
 SELECT
-    M.NOME,
-    M.COGNOME,
+    CONCAT(M.NOME, CONCAT(' ', M.COGNOME)) AS NOME_COMPLETO,
     S.TIPO AS TIPO_SENSORE,
     S.STATO_OPERATIVO AS STATO_SENSORE,
     O.OPERAZIONE AS TIPO_OPERAZIONE,
@@ -43,7 +41,7 @@ JOIN
 JOIN 
     SENSORI S ON O.SENSORE = S.ID;
 
--- View per la visualizzazione delle anomalie rilevate per ciascun sensore
+-- N4 View per la visualizzazione delle anomalie rilevate per ciascun sensore
 CREATE VIEW ANOMALIE_SENSORI AS
 SELECT
     S.ID AS ID_SENSORE,
@@ -59,7 +57,7 @@ FROM
 JOIN 
     SENSORI S ON A.SENSORE = S.ID;
 
--- view per vedere il numero di missione a cui un membro partecipa
+-- N5 View per vedere il numero di missione a cui un membro partecipa
 CREATE VIEW PARTECIPAZIONI_MEMBRI AS
 SELECT
     M.ID AS ID_MEMBRO,
@@ -76,7 +74,7 @@ GROUP BY
 ORDER BY
     M.ID ASC;
 
--- view per vedere i report di ogni missione
+-- N6 View per vedere i report di ogni missione
 CREATE VIEW ANDAMENTO_MISSIONI AS
 SELECT
     M.ID AS ID_MISSIONE,
