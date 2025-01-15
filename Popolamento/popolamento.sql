@@ -168,8 +168,6 @@ INSERT INTO UTILIZZO_ROBOT (Robot, Missione) VALUES (3, 7);
 INSERT INTO UTILIZZO_ROBOT (Robot, Missione) VALUES (1, 8);
 INSERT INTO UTILIZZO_ROBOT (Robot, Missione) VALUES (2, 6);
 INSERT INTO UTILIZZO_ROBOT (Robot, Missione) VALUES (3, 5);
---///////////////////////////////////////////////////////////////
---DA AGGIUNGERE
 INSERT INTO UTILIZZO_ROBOT (Robot, Missione) VALUES (4, 1);
 INSERT INTO UTILIZZO_ROBOT (Robot, Missione) VALUES (5, 2);
 INSERT INTO UTILIZZO_ROBOT (Robot, Missione) VALUES (6, 3);
@@ -195,7 +193,6 @@ INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (3, TO_DATE
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (4, TO_DATE('2024-09-10', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-09-10 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Alta', 'Errore di calibrazione', 7);
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (5, TO_DATE('2024-08-01', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-08-01 09:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Media', 'Malfunzionamento', 9);
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (6, TO_DATE('2024-07-15', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-07-15 14:45:00', 'YYYY-MM-DD HH24:MI:SS'), 'Critica', 'Problemi di connessione', 11);
---DA AGGIUNGERE
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (7, TO_DATE('2024-12-12', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-12-12 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Media', 'Errore di calibrazione', 1);
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (8, TO_DATE('2024-11-18', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-11-18 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Alta', 'Problemi di connessione', 2);
 INSERT INTO ANOMALIE (ID, Data, Ora, Livello, Causa, Sensore) VALUES (9, TO_DATE('2024-10-30', 'YYYY-MM-DD'), TO_TIMESTAMP('2024-10-30 12:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Critica', 'Sensore non risponde', 3);
