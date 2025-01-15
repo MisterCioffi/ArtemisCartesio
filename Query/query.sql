@@ -8,7 +8,7 @@ FROM
 JOIN 
     SENSORI S ON A.SENSORE = S.ID
 WHERE 
-    A.Livello = 'Critica';
+    A.Livello = 'Critica'
 ORDER BY 
     A.ID ASC;
 
