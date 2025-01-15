@@ -291,11 +291,8 @@ INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (6, 6);
 INSERT INTO COINVOLGIMENTI (Membro, Intervento) VALUES (7, 7);
 
 -- Popolamento RISOLUZIONI
-INSERT INTO RISOLUZIONI (Anomalia, Intervento, Esito_Intervento, Data_Intervento) VALUES (1, 1, 'Sostituzione sensore', TO_DATE('2024-12-01', 'YYYY-MM-DD'));
-INSERT INTO RISOLUZIONI (Anomalia, Intervento, Esito_Intervento, Data_Intervento) VALUES (3, 3, 'Ricalibrazione sensore', TO_DATE('2024-10-20', 'YYYY-MM-DD'));
-INSERT INTO RISOLUZIONI (Anomalia, Intervento, Esito_Intervento, Data_Intervento) VALUES (6, 6, 'Ricalibrazione sensore', TO_DATE('2024-07-15', 'YYYY-MM-DD'));
-INSERT INTO RISOLUZIONI (Anomalia, Intervento, Esito_Intervento, Data_Intervento) VALUES (4, 4, 'Sostituzione sensore', TO_DATE('2024-09-10', 'YYYY-MM-DD'));
-INSERT INTO RISOLUZIONI (Anomalia, Intervento, Esito_Intervento, Data_Intervento) VALUES (2, 2, 'Riparazione connessione', TO_DATE('2024-11-15', 'YYYY-MM-DD'));
-
-
-
+INSERT INTO RISOLUZIONI (Anomalia_ID, Anomalia_Sensore, Intervento, Esito_Intervento, Data_Intervento) VALUES (1, 1, 1, 'Sostituzione sensore', TO_DATE('2024-12-01', 'YYYY-MM-DD'));
+INSERT INTO RISOLUZIONI (Anomalia_ID, Anomalia_Sensore, Intervento, Esito_Intervento, Data_Intervento) VALUES (3, 5, 3, 'Ricalibrazione sensore', TO_DATE('2024-10-20', 'YYYY-MM-DD'));
+INSERT INTO RISOLUZIONI (Anomalia_ID, Anomalia_Sensore, Intervento, Esito_Intervento, Data_Intervento) VALUES (6, 11, 6, 'Ricalibrazione sensore', TO_DATE('2024-07-15', 'YYYY-MM-DD'));
+INSERT INTO RISOLUZIONI (Anomalia_ID, Anomalia_Sensore, Intervento, Esito_Intervento, Data_Intervento) VALUES (4, 7, 4, 'Sostituzione sensore', TO_DATE('2024-09-10', 'YYYY-MM-DD'));
+INSERT INTO RISOLUZIONI (Anomalia_ID, Anomalia_Sensore, Intervento, Esito_Intervento, Data_Intervento) VALUES (2, 3, 2, 'Riparazione connessione', TO_DATE('2024-11-15', 'YYYY-MM-DD'));
