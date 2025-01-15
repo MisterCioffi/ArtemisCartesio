@@ -4,7 +4,7 @@
 
 ## Descrizione del Progetto
 
-Questo progetto è stato sviluppato come parte del corso di Basi di Dati tenuto dal docente Vincenzo Moscato nell'a.a 2024/2025 presso l'Università degli Studi di Napoli Federico II . L'obiettivo principale è quello di creare un database relazionale che soddisfi i requisiti specificati nella traccia dell'elaborato.
+Questo progetto è stato sviluppato come parte del corso di Basi di Dati tenuto dal docente Vincenzo Moscato nell'a.a 2024/2025 presso l'Università degli Studi di Napoli Federico II. L'obiettivo principale è quello di creare un database relazionale che soddisfi i requisiti specificati nella traccia dell'elaborato.
 
 ## Traccia dell'Elaborato
 
@@ -19,7 +19,7 @@ Il database deve essere in grado di:
 
 ## Requisiti Tecnici
 
-- **Linguaggio di Programmazione**: SQL
+- **Linguaggio di Programmazione**: SQL, PL/SQL
 - **Database Management System (DBMS)**: Oracle APEX 22.2.0
 
 ## Autori
