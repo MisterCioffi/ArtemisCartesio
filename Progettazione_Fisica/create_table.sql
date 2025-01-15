@@ -55,7 +55,7 @@ CREATE TABLE RISOLUZIONI (
     Anomalia_Sensore INT,
     Intervento INT,
     Esito_Intervento VARCHAR2(255),
-    Data_Intervento DATE,
+    Data_Intervento DATE NOT NULL,
     UNIQUE(Intervento)
 );
 
