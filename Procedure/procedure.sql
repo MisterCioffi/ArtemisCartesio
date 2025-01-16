@@ -1,4 +1,4 @@
--- N1 Per assegnare un sensore ad una missione
+-- N1 Procedura per assegnare un sensore ad una missione
 CREATE OR REPLACE PROCEDURE AssegnareSensoreAMissione(
     p_Sensore_ID IN NUMBER,
     p_Missione_ID IN NUMBER
@@ -52,7 +52,7 @@ END;
 
 ------------------------------------------------------------------------------------------------
 
--- N2 Per inserire un membro nella tabella coinvolgimenti relativamente ad un intervento
+-- N2 Procedura per inserire un membro nella tabella coinvolgimenti relativamente ad un intervento
 CREATE OR REPLACE PROCEDURE InserireMembroInCoinvolgimento(
     p_Membro_ID IN NUMBER,
     p_Intervento_ID IN NUMBER
@@ -102,13 +102,13 @@ END;
 -- EXECUTE InserireMembroInCoinvolgimento(15, 10);
 -- OUTPUT --> Membro con ID 15 aggiunto all'intervento con ID 10
 
--- ESEMPIO_2
+-- ESEMPIO 2
 -- EXECUTE InserireMembroInCoinvolgimento(1, 1);
 -- OUTPUT --> Errore: il membro con ID 1 è già coinvolto nell'intervento con ID 1
 
 ------------------------------------------------------------------------------------------------
 
--- Per aggiornare lo stato operativo di un sensore
+-- N3 Procedura per aggiornare lo stato operativo di un sensore
 CREATE OR REPLACE PROCEDURE AggiornareStatoSensore(
     p_Sensore_ID IN NUMBER,
     p_Nuovo_Stato IN VARCHAR2
@@ -154,7 +154,7 @@ END;
 ------------------------------------------------------------------------------------------------
 
 
--- Procedura che esegue una operazione di manutenzione se la data dell'ultimo controllo è maggiore di 30 giorni
+-- N4 Procedura che esegue una operazione di manutenzione se la data dell'ultimo controllo è maggiore di 30 giorni
 CREATE OR REPLACE PROCEDURE ControllaManutenzioneSensori AS
     CURSOR membri_cursor IS
         SELECT ID
