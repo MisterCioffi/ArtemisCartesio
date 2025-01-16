@@ -34,4 +34,4 @@ Il documento finale dell'elaborato può essere trovato [qui](/ArtemisCartesio_Ci
 
 Questo progetto è distribuito sotto la licenza [Creative Commons Zero v1.0 Universal](LICENSE).
 
-![Rover](/Media/rover.png)
+![Rover](/Media/rover.jpg)
