@@ -1,6 +1,6 @@
 # ArtemisCartesio - Progetto Basi di Dati @UniNa
 
-![Home screenshot](/Media/Screenshot_App/home.png)
+![Home screenshot](/Media/Screenshot_App/banner.png)
 
 ## Descrizione del Progetto
 
